@@ -31,13 +31,13 @@ class TrainingsOverViewActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.select_training_activity)
+        setContentView(R.layout.trainings_overview_activity)
 
         supportActionBar?.title = getString(R.string.actionbar_title_trainings_overview)
 
         val xoiButton = findViewById<Button>(R.id.xoiButton)
         xoiButton.setOnClickListener {
-            val intent = Intent(this, TrainingActivity::class.java)
+            val intent = Intent(this, XOITrainingsActivity::class.java)
             if (dataHolder.shouldShowXOIOverviewHint()) {
                 showInformationDialog(getString(R.string.trainings_overview_xoi_hint_message), intent)
                 dataHolder.xOIOverviewHintShown()
@@ -56,7 +56,7 @@ class TrainingsOverViewActivity: AppCompatActivity() {
 
         val xxButton = findViewById<Button>(R.id.dartsToXButton)
         xxButton.setOnClickListener {
-            val intent = Intent(this, XXTrainingActivity::class.java)
+            val intent = Intent(this, XXTrainingsActivity::class.java)
             startActivity(intent)
             LogEventsHelper(this).logButtonTap("trainings_overview_xx")
         }
@@ -105,7 +105,7 @@ class TrainingsOverViewActivity: AppCompatActivity() {
         val inflater = this.layoutInflater
         val dialogHintBuilder = AlertDialog.Builder(
             this)
-        val hintDialogView = inflater.inflate(R.layout.dialog_hint, null)
+        val hintDialogView = inflater.inflate(R.layout.neutral_dialog, null)
         val hintTitleView = hintDialogView.findViewById<TextView>(R.id.hintDialogTitle)
         hintTitleView.text = getString(R.string.trainings_overview_xoi_hint_title)
 

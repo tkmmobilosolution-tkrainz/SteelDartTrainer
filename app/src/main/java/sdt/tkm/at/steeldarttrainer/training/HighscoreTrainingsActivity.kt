@@ -87,7 +87,7 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.training_activity)
+        setContentView(R.layout.xoi_hs_trainings_activity)
 
         dataholder = DataHolder(this.applicationContext)
         supportActionBar?.title = getString(R.string.actionbar_title_hs_training)
@@ -182,7 +182,7 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
                 val inflater = this.layoutInflater
                 val dialogHintBuilder = AlertDialog.Builder(
                     this)
-                val finishDialogView = inflater.inflate(R.layout.dialog_replay, null)
+                val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
                 val replayButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
                 val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
 
@@ -312,7 +312,7 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
             val inflater = this.layoutInflater
             val dialogHintBuilder = AlertDialog.Builder(
                 this)
-            val finishDialogView = inflater.inflate(R.layout.dialog_replay, null)
+            val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
 
             val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
             dialogText.text = this.getString(R.string.dialog_finish_training_text)
