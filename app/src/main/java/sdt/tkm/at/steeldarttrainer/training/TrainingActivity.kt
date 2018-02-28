@@ -34,19 +34,26 @@ import java.util.Locale
  */
 class TrainingActivity : AppCompatActivity() {
 
-    var currentThrow: Int = 0
-    var dartMultiplier: Int = 1
-    var doubleButton: Button? = null
-    var trippleButton: Button? = null
-    var missButton: Button? = null
-    var nextThrowButton: Button? = null
-    var resetButton: Button? = null
-    var scoreView: TextView? = null
-    var dartView: TextView? = null
-    var roundView: TextView? = null
-    var firstDart: TextView? = null
-    var secondDart: TextView? = null
-    var thirdDart: TextView? = null
+    private lateinit var doubleButton: Button
+    private lateinit var trippleButton: Button
+    private lateinit var missButton: Button
+    private lateinit var nextThrowButton: Button
+    private lateinit var resetButton: Button
+
+    private lateinit var scoreView: TextView
+    private lateinit var dartView: TextView
+    private lateinit var roundView: TextView
+    private lateinit var firstDart: TextView
+    private lateinit var secondDart: TextView
+    private lateinit var thirdDart: TextView
+
+    private lateinit var gridAdapter: GridAdapter
+    private lateinit var gridView: GridView
+
+    private lateinit var dataholder: DataHolder
+
+    private lateinit var intersitalAd: InterstitialAd
+    private lateinit var bannerAdView: AdView
 
     var dartAmount: Int = 0
     var previousDartAmount: Int = 0
@@ -63,8 +70,8 @@ class TrainingActivity : AppCompatActivity() {
     var hundretFourtyPlus = 0
     var hundretEigthy = 0
 
-    var gridAdapter: GridAdapter? = null
-    var gridView: GridView? = null
+    var currentThrow: Int = 0
+    var dartMultiplier: Int = 1
 
     var dartResultArrayList: ArrayList<Int> = ArrayList()
     var threeDatrArrayList: ArrayList<Int> = ArrayList()
@@ -72,12 +79,9 @@ class TrainingActivity : AppCompatActivity() {
     var hasNoScore = false
     var dialogShown = false
 
-    private lateinit var bannerAdView: AdView
     private val className = "xoi_training"
 
     private var gameCount: Int = 0
-    private lateinit var dataholder: DataHolder
-    private lateinit var intersitalAd: InterstitialAd
 
     var score: Int = -1
     var previousScore = score
@@ -93,8 +97,8 @@ class TrainingActivity : AppCompatActivity() {
 
         gridView = findViewById<GridView>(R.id.gridView)
         gridAdapter = GridAdapter(this)
-        gridView!!.adapter = gridAdapter
-        gridView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        gridView.adapter = gridAdapter
+        gridView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 
             if (throwCount <= 2 && !hasNoScore) {
                 val dart: Dart = when (position) {
@@ -118,30 +122,30 @@ class TrainingActivity : AppCompatActivity() {
         scoreView = findViewById(R.id.score)
 
         doubleButton = findViewById<Button>(R.id.doubleButton)
-        doubleButton!!.setOnClickListener {
-            setMultiplierButton(doubleButton!!)
-            dartMultiplier = if (doubleButton!!.isSelected) 2 else 1
+        doubleButton.setOnClickListener {
+            setMultiplierButton(doubleButton)
+            dartMultiplier = if (doubleButton.isSelected) 2 else 1
         }
 
         trippleButton = findViewById<Button>(R.id.trippleButton)
-        trippleButton!!.setOnClickListener {
-            setMultiplierButton(trippleButton!!)
-            dartMultiplier = if (trippleButton!!.isSelected) 3 else 1
+        trippleButton.setOnClickListener {
+            setMultiplierButton(trippleButton)
+            dartMultiplier = if (trippleButton.isSelected) 3 else 1
         }
 
         missButton = findViewById(R.id.missButton)
-        missButton!!.setOnClickListener {
+        missButton.setOnClickListener {
             if (throwCount <= 2 && !hasNoScore) {
                 dartThrown(Dart(0, 1), false)
             }
         }
 
         nextThrowButton = findViewById(R.id.nextThrowButton)
-        nextThrowButton!!.setOnClickListener {
+        nextThrowButton.setOnClickListener {
 
             if (hasNoScore) {
                 score = previousScore
-                scoreView!!.text = score.toString()
+                scoreView.text = score.toString()
                 dartAmount = previousDartAmount
             } else {
                 previousScore = score
@@ -167,21 +171,21 @@ class TrainingActivity : AppCompatActivity() {
             dartsCount = 0
             throwCount = 0
             defaultDarts()
-            doubleButton!!.isSelected = false
-            trippleButton!!.isSelected = false
+            doubleButton.isSelected = false
+            trippleButton.isSelected = false
             hasNoScore = false
         }
 
         resetButton = findViewById(R.id.resetButton)
-        resetButton!!.setOnClickListener {
+        resetButton.setOnClickListener {
             score = previousScore
             dartAmount = previousDartAmount
 
-            scoreView!!.text = score.toString()
-            dartView!!.text = "Darts: " + dartAmount
+            scoreView.text = score.toString()
+            dartView.text = "Darts: " + dartAmount
             throwCount = 0
-            doubleButton!!.isSelected = false
-            trippleButton!!.isSelected = false
+            doubleButton.isSelected = false
+            trippleButton.isSelected = false
             defaultDarts()
         }
 
@@ -316,9 +320,9 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun defaultDarts() {
-        firstDart!!.text = "-"
-        secondDart!!.text = "-"
-        thirdDart!!.text = "-"
+        firstDart.text = "-"
+        secondDart.text = "-"
+        thirdDart.text = "-"
     }
 
     private fun speech() {
@@ -392,7 +396,7 @@ class TrainingActivity : AppCompatActivity() {
         }
 
         currentDart(result)
-        scoreView!!.text = score.toString()
+        scoreView.text = score.toString()
         resetThrow()
         return returnValue
     }
@@ -401,10 +405,10 @@ class TrainingActivity : AppCompatActivity() {
     private fun setMultiplierButton(button: Button) {
 
         button.isSelected = !button.isSelected
-        if (button == doubleButton!!) {
-            trippleButton!!.isSelected = false
-        } else if (button == trippleButton!!) {
-            doubleButton!!.isSelected = false
+        if (button == doubleButton) {
+            trippleButton.isSelected = false
+        } else if (button == trippleButton) {
+            doubleButton.isSelected = false
         }
     }
 
@@ -416,19 +420,19 @@ class TrainingActivity : AppCompatActivity() {
 
     private fun increaseRound() {
         round += 1
-        roundView!!.text = "${getString(R.string.general_round)}: $round"
+        roundView.text = "${getString(R.string.general_round)}: $round"
         throwCount = 0
     }
 
     private fun increaseDartAmount(value: Int) {
         dartAmount += value
-        dartView!!.text = "Darts: " + dartAmount
+        dartView.text = "Darts: " + dartAmount
     }
 
     private fun resetThrow() {
-        doubleButton!!.isSelected = false
-        trippleButton!!.isSelected = false
-        gridView!!.adapter = gridAdapter
+        doubleButton.isSelected = false
+        trippleButton.isSelected = false
+        gridView.adapter = gridAdapter
         dartMultiplier = 1
         currentThrow = 0
     }
@@ -448,10 +452,10 @@ class TrainingActivity : AppCompatActivity() {
     private fun newLeg() {
         dartAmount = 0
         previousDartAmount = dartAmount
-        dartView!!.text = "Darts: " + dartAmount
+        dartView.text = "Darts: " + dartAmount
 
         round = 1
-        roundView!!.text = "${getString(R.string.general_round)}: $round"
+        roundView.text = "${getString(R.string.general_round)}: $round"
 
         heighestThreeDart = 0
         checkoutTries = 0
@@ -465,7 +469,7 @@ class TrainingActivity : AppCompatActivity() {
         threeDatrArrayList.clear()
 
         previousScore = score
-        scoreView!!.text = score.toString()
+        scoreView.text = score.toString()
 
         defaultDarts()
         dataholder.increaseGameCount()
@@ -644,11 +648,11 @@ class TrainingActivity : AppCompatActivity() {
 
         val dartString = dartToString(dart)
         if (throwCount == 1) {
-            firstDart!!.text = dartString
+            firstDart.text = dartString
         } else if (throwCount == 2) {
-            secondDart!!.text = dartString
+            secondDart.text = dartString
         } else if (throwCount == 3) {
-            thirdDart!!.text = dartString
+            thirdDart.text = dartString
         }
     }
 
