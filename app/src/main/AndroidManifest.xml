@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="sdt.tkm.at.steeldarttrainer">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="SDT"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".base.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".training.TrainingActivity"/>
+        <activity android:name=".training.TrainingsOverViewActivity"/>
+        <activity android:name=".statistics.StatisticsActivity"/>
+        <activity android:name=".training.HighscoreTrainingsActivity"/>
+        <activity android:name=".training.XXTrainingActivity"/>
+    </application>
+
+</manifest>

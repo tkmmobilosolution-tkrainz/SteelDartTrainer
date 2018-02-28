@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "161763933759",
+    "firebase_url": "https://steel-dart-scoreboard.firebaseio.com",
+    "project_id": "steel-dart-scoreboard",
+    "storage_bucket": "steel-dart-scoreboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161763933759:android:50f9da771b571328",
+        "android_client_info": {
+          "package_name": "sdt.tkm.at.steeldarttrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161763933759-3m53pdn5sbc382hhdbgdij5ush293p22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjqhGw55b_LUBPkI8bvpkh_zBPmK5GvLw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

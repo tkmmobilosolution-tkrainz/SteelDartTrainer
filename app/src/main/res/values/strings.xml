@@ -1,0 +1,67 @@
+<resources>
+    <string name="general_current_darts">Current Darts</string>
+    <string name="general_round">Round</string>
+    <string name="general_reset">Reset</string>
+    <string name="general_miss">Miss</string>
+    <string name="general_next">Next</string>
+    <string name="general_exercises">Exercises</string>
+    <string name="general_statistics">Statistics</string>
+    <string name="general_no_score">No score</string>
+
+    <string name="actionbar_title_main">Home</string>
+    <string name="actionbar_title_trainings_overview">Sessions</string>
+    <string name="actionbar_title_xoi_statistics">X01 Statistics</string>
+    <string name="actionbar_title_hs_statistics">Highscore Statistics</string>
+    <string name="actionbar_title_xx_statistics">99 Dart Statistics</string>
+    <string name="actionbar_title_xoi_training">X01 Session</string>
+    <string name="actionbar_title_hs_training">Highscore Session</string>
+    <string name="actionbar_title_xx_training">99 Dart Session</string>
+
+    <string name="excercise_dart_to_X">99 Darts to X</string>
+    <string name="excercise_xoi">501</string>
+    <string name="excercise_highscore">Highscore</string>
+
+    <string name="dialog_finish_training_text">If you are finishing the current training, no data will be saved for this training. Finish anyway?</string>
+    <string name="dialog_finish_training_finish">Finish</string>
+    <string name="dialog_finish_training_close">Continue playing</string>
+
+    <string name="dialog_new_training_text">You have successfully completed this training session. Do you want to start a new session?</string>
+    <string name="dialog_new_training_new">New session</string>
+    <string name="dialog_new_training_close">Close</string>
+
+    <string name="statistics_no_data">There is no data for this exercise. To view a statistic, you must finish at least one unit of this exercise.</string>
+    <string name="statistics_darts_to_x">99 Darts</string>
+    <string name="statistics_hint_dialog_title">Statistics information</string>
+    <string name="statistics_hint_dialog_button_text">OK</string>
+
+    <string name="statistics_ppd">PPD - Points per dart\nShows all time average points you scored per dart.</string>
+    <string name="statistics_pptd">PPTD - Points per three darts\nShows all time average points you scored with three darts.</string>
+    <string name="statistics_cor">COR % - Checkout rate\nShows all time checkout rate in percentage.</string>
+    <string name="statistics_dart_xoi">Darts\nAll time thrown darts in X01 exercises.</string>
+    <string name="statistics_sixty_plus">60+\nShows all time three dart score count, between 60 and 100 points</string>
+    <string name="statistics_hundret_plus">100+\nShows all time three dart score count, between 101 and 140 points</string>
+    <string name="statistics_hundretfourty_plus">140+\nShows all time three dart score count, between 141 and 177 points.</string>
+    <string name="statistics_hundret_eighty">180\nShows all time 180´s</string>
+
+    <string name="statistics_avg_score">Avg. Score - Average Highscore result\nShows the average result for all Highscore excercises.</string>
+    <string name="statistics_dart_hs">Darts\nAll time thrown darts in Highscore exercises.</string>
+
+    <string name="statistics_hits">Hits - Average hits count\nShows the all time average hit count</string>
+    <string name="statistics_hits_percentage">Hits % - Hit rate\nShows all time hit rate in percentage.</string>
+    <string name="statistics_score">Score - Average score\nShows the all time average score.</string>
+    <string name="statistics_single">Single - Single count\nShows the all time single hit score.</string>
+    <string name="statistics_double">Score - Double count\nShows the all time double hit score.</string>
+    <string name="statistics_triple">Score - Triple cout\nShows the all time triple hit score.</string>
+
+    <string name="trainings_overview_xoi_hint_title">Hint</string>
+    <string name="trainings_overview_xoi_hint_message">In the current version, the game mode is limited to X01 single-in double-out.</string>
+    <string name="trainings_overview_xoi_hint_button_text">Understood</string>
+
+    <string name="trainings_overview_xx_hint_message">In the current version, statistics are not yet differentiated by target numbers. That is why unfortunately no selection of the target is available yet.</string>
+
+    <string name="xx_chooser_button_title">Choose this target</string>
+    <string name="xx_chooser_title">Choose the target for the exercise</string>
+
+    <string name="xoi_chooser_title">Choose your start value for this exercise</string>
+    <string name="xoi_chooser_button_title">Choose this start value</string>
+</resources>

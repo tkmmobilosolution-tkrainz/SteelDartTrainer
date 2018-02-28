@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:id="@+id/segmentedControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/xoiStatsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/training_button_background"
+            android:textColor="@drawable/black_button_text_color"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="@string/excercise_xoi" />
+
+        <Button
+            android:id="@+id/highscoreStasButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/training_button_background"
+            android:textColor="@drawable/black_button_text_color"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="@string/excercise_highscore" />
+
+        <Button
+            android:id="@+id/ninetynineStatsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/training_button_background"
+            android:textColor="@drawable/black_button_text_color"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="@string/statistics_darts_to_x" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/statistics_info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/segmentedControl"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_menu_help" />
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/statsBanner"
+        android:layout_below="@+id/statistics_info_button"
+        android:layout_marginBottom="10dp"/>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/statsBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_id">
+    </com.google.android.gms.ads.AdView>
+</RelativeLayout>

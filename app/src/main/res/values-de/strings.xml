@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_current_darts">Aktuelle Darts</string>
+    <string name="general_round">Runde</string>
+    <string name="general_reset">Rückgängig</string>
+    <string name="general_miss">Verfehlt</string>
+    <string name="general_next">OK</string>
+    <string name="general_exercises">Übungen</string>
+    <string name="general_statistics">Statistiken</string>
+    <string name="general_no_score">Überworfen</string>
+
+    <string name="actionbar_title_main">Übersicht</string>
+    <string name="actionbar_title_trainings_overview">Übungen</string>
+    <string name="actionbar_title_xoi_statistics">X01 Statistik</string>
+    <string name="actionbar_title_hs_statistics">Highscore Statistik</string>
+    <string name="actionbar_title_xx_statistics">99 Dart Statistik</string>
+    <string name="actionbar_title_xoi_training">X01 Training</string>
+    <string name="actionbar_title_hs_training">Highscore Training</string>
+    <string name="actionbar_title_xx_training">99 Dart Training</string>
+
+    <string name="excercise_dart_to_X">99 Darts auf X</string>
+    <string name="excercise_xoi">501</string>
+    <string name="excercise_highscore">Highscore</string>
+
+    <string name="dialog_finish_training_text">Wenn du das Training beendest, werden keine Daten für dieses Training gespeichert. Trotzdem beenden?</string>
+    <string name="dialog_finish_training_finish">Beenden</string>
+    <string name="dialog_finish_training_close">Weiter spielen</string>
+
+    <string name="dialog_new_training_text">Du hast diese Trainingseinheit erfolgreich beendet. Willst du eine neue Einheit beginnen?</string>
+    <string name="dialog_new_training_new">Neu Einheit</string>
+    <string name="dialog_new_training_close">Schließen</string>
+
+    <string name="statistics_no_data">Für diese Übung sind keine Daten vorhanden. Um eine Statistik anzeigen zu können, musst du mindestens eine Einheit dieser Übung beenden.</string>
+    <string name="statistics_darts_to_x">99 Darts</string>
+
+    <string name="statistics_ppd">PPD - Punkte pro Dart\nZeigt den Durchschnittswert je Dart</string>
+    <string name="statistics_pptd">PPTD - Punkte pro drei Darts\nZeigt den Durchschnittswert je drei geworfener Dart</string>
+    <string name="statistics_cor">COR % - Checkout Quote\nZeigt den Checkout Durchschnittswert in %</string>
+    <string name="statistics_dart_xoi">Darts\nZeigt die Anzahl jemals geworfener Darts in X01 Spielen</string>
+    <string name="statistics_sixty_plus">60+\nDrei Dart Punkte zwischen 60 und 100</string>
+    <string name="statistics_hundret_plus">100+\nDrei Dart Punkte zwischen 101 und 140</string>
+    <string name="statistics_hundretfourty_plus">140+\nDrei Dart Punkte zwischen 140 und 177</string>
+    <string name="statistics_hundret_eighty">180\nZeigt alle je geworfenen 180er</string>
+
+    <string name="statistics_avg_score">Avg. Score - Durschnitts Hisghscore Wert\nZeigt den Durchschnittswert für alle je gespielten Highscore Spielen.</string>
+    <string name="statistics_dart_hs">Darts\nZeigt die Anzahl jemals geworfener Darts in Highscore Spielen</string>
+
+    <string name="statistics_hits">Hits - Treffer Durchschnitt\nZeigt die durchschnittliche Trefferanzahl</string>
+    <string name="statistics_hits_percentage">Hits % - Treffer Quote\nZeigt die durchschnittliche Trefferanzahl in %</string>
+    <string name="statistics_score">Score - Durchschnitts Ergebnis\nZeigt das Duschschnittsergebnis für alle 99 Darts Spiele</string>
+    <string name="statistics_single">Single - Single Anzahl\nZeigt die Anzahl aller Single Treffer.</string>
+    <string name="statistics_double">Score - Double Anzahl\nZeigt die Anzahl aller Double Treffer.</string>
+    <string name="statistics_triple">Score - Triple Anzahl\nZeigt die Anzahl aller Triple Treffer.</string>
+
+    <string name="trainings_overview_xoi_hint_title">Hinweis</string>
+    <string name="trainings_overview_xoi_hint_message">In der aktuellen Version ist der Spielmodus auf X01 Single-In Double-Out begrenzt.</string>
+    <string name="trainings_overview_xoi_hint_button_text">Verstanden</string>
+
+    <string name="trainings_overview_xx_hint_message">In der aktuellen Verison wird die Statistik noch nicht nach Zahlen unterschieden. Deswegen ist leider noch keine Auswahl des Zieles verfügbar.</string>
+
+    <string name="xx_chooser_button_title">Dieses Ziel wählen</string>
+    <string name="xx_chooser_title">Wähle das Ziel für diese Übung</string>
+
+    <string name="xoi_chooser_title">Wähle den Startwert für die Übung</string>
+    <string name="xoi_chooser_button_title">Diesen Startwert wählen</string>
+</resources>

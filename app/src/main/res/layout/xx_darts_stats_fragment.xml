@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/black">
+    <LinearLayout
+        android:id="@+id/xxStatsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/xxHitAvaregaeStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Hits"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/xxHitAvaregaeStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/xxHitAvaregaeStatsText"
+                    android:text="22,55"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/xxHitPercentageStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:layout_alignParentTop="true"
+                    android:text="Hits %"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/xxHitPercentageStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/xxHitPercentageStatsText"
+                    android:text="22,55"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/corLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/xxScoreStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:layout_alignParentTop="true"
+                    android:text="Score"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/xxScoreStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/xxScoreStatsText"
+                    android:text="20,51"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/singleCountStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/singleCountStatsText"
+                    android:text="10"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+
+                <TextView
+                    android:id="@+id/singleCountStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Singles"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/doubleCountStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/doubleCountStatsText"
+                    android:text="10"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+
+                <TextView
+                    android:id="@+id/doubleCountStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Doubles"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/training_button_background"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tripleCountStats"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tripleCountStatsText"
+                    android:text="10"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp" />
+
+                <TextView
+                    android:id="@+id/tripleCountStatsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Triples"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/statsInfoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/xxStatsLayout"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="@string/statistics_no_data"/>
+</RelativeLayout>
