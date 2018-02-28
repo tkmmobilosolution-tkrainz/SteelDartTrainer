@@ -14,10 +14,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
-import android.R.attr.gravity
-import android.widget.LinearLayout
-
-
 
 /**
  * [Add class description here]
@@ -164,7 +160,7 @@ class StatisticsActivity : AppCompatActivity() {
         val inflater = this.layoutInflater
         val dialogHintBuilder = AlertDialog.Builder(
             this)
-        val hintDialogView = inflater.inflate(R.layout.dialog_hint, null)
+        val hintDialogView = inflater.inflate(R.layout.neutral_dialog, null)
         val hintTitleView = hintDialogView.findViewById<TextView>(R.id.hintDialogTitle)
         hintTitleView.text = getString(R.string.statistics_hint_dialog_title)
 

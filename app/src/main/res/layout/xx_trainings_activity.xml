@@ -233,7 +233,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="Single"
             android:textColor="@drawable/black_button_text_color" />
 
@@ -246,7 +246,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="Double"
             android:textColor="@drawable/black_button_text_color" />
 
@@ -259,7 +259,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="Triple"
             android:textColor="@drawable/black_button_text_color" />
     </LinearLayout>
@@ -281,7 +281,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="@string/general_reset"
             android:textColor="@drawable/black_button_text_color" />
 
@@ -294,7 +294,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="@string/general_miss"
             android:textColor="@drawable/black_button_text_color" />
 
@@ -307,7 +307,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:text="@string/general_next"
             android:textColor="@drawable/black_button_text_color" />
     </LinearLayout>

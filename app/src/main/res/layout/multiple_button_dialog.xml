@@ -4,7 +4,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/training_button_background">
+    android:background="@drawable/black_button_background">
 
     <TextView
         android:id="@+id/dialogText"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
             android:text="@string/dialog_new_training_new" />
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:background="@drawable/training_button_background"
+            android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
             android:text="@string/dialog_new_training_close" />
     </LinearLayout>

@@ -23,7 +23,7 @@ import sdt.tkm.at.steeldarttrainer.models.XXTraining
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class XXTrainingActivity() : AppCompatActivity() {
+class XXTrainingsActivity() : AppCompatActivity() {
 
     private lateinit var singleButton: Button
     private lateinit var doubleButton: Button
@@ -75,7 +75,7 @@ class XXTrainingActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.xx_darts_activity)
+        setContentView(R.layout.xx_trainings_activity)
 
         supportActionBar?.title = getString(R.string.actionbar_title_xx_training)
 
@@ -155,7 +155,7 @@ class XXTrainingActivity() : AppCompatActivity() {
                 val inflater = this.layoutInflater
                 val dialogHintBuilder = AlertDialog.Builder(
                     this)
-                val finishDialogView = inflater.inflate(R.layout.dialog_replay, null)
+                val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
                 val replayButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
                 val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
 
@@ -195,8 +195,6 @@ class XXTrainingActivity() : AppCompatActivity() {
         tripleView = findViewById(R.id.xxTripleAmount)
 
         setupView()
-        checkIntersital()
-        dataholder.increaseGameCount()
     }
 
     override fun onResume() {
@@ -211,17 +209,17 @@ class XXTrainingActivity() : AppCompatActivity() {
 
         bannerAdView.adListener = object: AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XXTrainingActivity).logBannerLoaded(className)
+                LogEventsHelper(this@XXTrainingsActivity).logBannerLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XXTrainingActivity).logBannerFailed(className, errorCode)
+                LogEventsHelper(this@XXTrainingsActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XXTrainingActivity).logBannerOpened(className)
+                LogEventsHelper(this@XXTrainingsActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -241,16 +239,16 @@ class XXTrainingActivity() : AppCompatActivity() {
         intersitalAd.loadAd(AdRequest.Builder().build())
         intersitalAd.adListener = object: AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XXTrainingActivity).logIntersitalLoaded(className)
+                LogEventsHelper(this@XXTrainingsActivity).logIntersitalLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                LogEventsHelper(this@XXTrainingActivity).logIntersitalFailed(className, errorCode)
+                LogEventsHelper(this@XXTrainingsActivity).logIntersitalFailed(className, errorCode)
                 intersitalAd.loadAd(AdRequest.Builder().build())
             }
 
             override fun onAdOpened() {
-                LogEventsHelper(this@XXTrainingActivity).logIntersitalOpened(className)
+                LogEventsHelper(this@XXTrainingsActivity).logIntersitalOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -265,6 +263,7 @@ class XXTrainingActivity() : AppCompatActivity() {
 
     private fun checkIntersital() {
 
+        dataholder.increaseGameCount()
         gameCount = dataholder.getGameCount()
         if (gameCount % 4 == 0 && intersitalAd.isLoaded) {
             intersitalAd.show()
@@ -278,7 +277,7 @@ class XXTrainingActivity() : AppCompatActivity() {
             val inflater = this.layoutInflater
             val dialogHintBuilder = AlertDialog.Builder(
                 this)
-            val finishDialogView = inflater.inflate(R.layout.dialog_replay, null)
+            val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
 
             val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
             dialogText.text = this.getString(R.string.dialog_finish_training_text)
@@ -313,7 +312,6 @@ class XXTrainingActivity() : AppCompatActivity() {
     }
 
     private fun newLeg() {
-        showChooserDialog()
         score = 0
         previousScore = score
 
@@ -333,7 +331,6 @@ class XXTrainingActivity() : AppCompatActivity() {
         previousTripleCount = tripleCount
 
         setupView()
-        dataholder.increaseGameCount()
         checkIntersital()
     }
 
@@ -419,7 +416,7 @@ class XXTrainingActivity() : AppCompatActivity() {
         val inflater = this.layoutInflater
         val dialogHintBuilder = AlertDialog.Builder(
             this)
-        val chooserDialogView = inflater.inflate(R.layout.xx_chooser_dialog, null)
+        val chooserDialogView = inflater.inflate(R.layout.chooser_dialog, null)
 
         val targetTitle = chooserDialogView.findViewById<TextView>(R.id.xxChooserTitle)
         targetTitle.text = getString(R.string.xx_chooser_title)
@@ -451,9 +448,10 @@ class XXTrainingActivity() : AppCompatActivity() {
                 6 -> xxTarget = 25
             }
 
+            LogEventsHelper(this).logButtonTap("chooser_dialog")
             chooserDialog.dismiss()
             dialogShown = false
-            LogEventsHelper(this).logButtonTap("xx_chooser_dialog")
+            newLeg()
         }
 
         chooserDialog.setCancelable(false)

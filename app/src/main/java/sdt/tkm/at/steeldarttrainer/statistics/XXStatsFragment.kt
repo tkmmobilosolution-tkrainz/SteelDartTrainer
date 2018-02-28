@@ -62,7 +62,7 @@ class XXStatsFragmentFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.xx_darts_stats_fragment, container, false)
+        return inflater.inflate(R.layout.xx_stats_fragment, container, false)
     }
 
     private fun hitsText(list: ArrayList<XXTraining>): Double {
