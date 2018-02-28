@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="sdt.tkm.at.steeldarttrainer.base.MainActivity">
+    tools:context="sdt.tkm.at.steeldarttrainer.base.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

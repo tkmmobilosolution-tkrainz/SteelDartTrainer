@@ -8,18 +8,18 @@
         android:label="SDT"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.MainActivity">
+        <activity android:name=".base.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".training.TrainingActivity"/>
+        <activity android:name=".training.XOITrainingsActivity"/>
         <activity android:name=".training.TrainingsOverViewActivity"/>
         <activity android:name=".statistics.StatisticsActivity"/>
         <activity android:name=".training.HighscoreTrainingsActivity"/>
-        <activity android:name=".training.XXTrainingActivity"/>
+        <activity android:name=".training.XXTrainingsActivity"/>
     </application>
 
 </manifest>

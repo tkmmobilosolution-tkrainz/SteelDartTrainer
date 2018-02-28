@@ -12,14 +12,14 @@ import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewActivity
 import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var bannerAdView: AdView
     private val className = "home"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
         MobileAds.initialize(this, getString(R.string.admob_id))
 
@@ -49,17 +49,17 @@ class MainActivity : AppCompatActivity() {
 
         bannerAdView.adListener = object: AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@MainActivity).logBannerLoaded(className)
+                LogEventsHelper(this@HomeActivity).logBannerLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@MainActivity).logBannerFailed(className, errorCode)
+                LogEventsHelper(this@HomeActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@MainActivity).logBannerOpened(className)
+                LogEventsHelper(this@HomeActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
