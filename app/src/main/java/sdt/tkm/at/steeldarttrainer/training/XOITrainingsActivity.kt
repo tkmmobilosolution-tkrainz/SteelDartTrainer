@@ -82,7 +82,7 @@ class XOITrainingsActivity : AppCompatActivity() {
     private val className = "xoi_training"
 
     private var gameCount: Int = 0
-
+    private var startAmount = -1
     var score: Int = -1
     var previousScore = score
 
@@ -477,7 +477,7 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun checkedOut() {
-        val training = XOITraining(501, dartAmount, heighestThreeDart, checkoutTries, sixtyPlus,
+        val training = XOITraining(startAmount, dartAmount, heighestThreeDart, checkoutTries, sixtyPlus,
             hundretPlus, hundretFourtyPlus, hundretEigthy)
         dataholder.addXOITraining(training)
 
@@ -707,7 +707,7 @@ class XOITrainingsActivity : AppCompatActivity() {
         chooserButton.setOnClickListener {
 
             score = xoiArray[pickerValue].toInt()
-
+            startAmount = score
             chooserDialog.dismiss()
             dialogShown = false
             LogEventsHelper(this).logButtonTap("chooser_dialog")
