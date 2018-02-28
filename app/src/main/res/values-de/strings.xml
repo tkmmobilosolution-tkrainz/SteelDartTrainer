@@ -32,6 +32,8 @@
 
     <string name="statistics_no_data">Für diese Übung sind keine Daten vorhanden. Um eine Statistik anzeigen zu können, musst du mindestens eine Einheit dieser Übung beenden.</string>
     <string name="statistics_darts_to_x">99 Darts</string>
+    <string name="statistics_hint_dialog_title">Statistik Information</string>
+    <string name="statistics_hint_dialog_button_text">OK</string>
 
     <string name="statistics_ppd">PPD - Punkte pro Dart\nZeigt den Durchschnittswert je Dart</string>
     <string name="statistics_pptd">PPTD - Punkte pro drei Darts\nZeigt den Durchschnittswert je drei geworfener Dart</string>
