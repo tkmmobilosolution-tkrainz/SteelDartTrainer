@@ -228,7 +228,6 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
 
         defaultDarts()
         checkIntersital()
-        dataholder.increaseGameCount()
     }
 
     override fun onResume() {
@@ -238,6 +237,7 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
 
     private fun checkIntersital() {
 
+        dataholder.increaseGameCount()
         gameCount = dataholder.getGameCount()
         if (gameCount % 4 == 0) {
             if (intersitalAd.isLoaded) {

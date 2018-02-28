@@ -82,7 +82,7 @@ class XOITrainingsActivity : AppCompatActivity() {
     private val className = "xoi_training"
 
     private var gameCount: Int = 0
-
+    private var startAmount = -1
     var score: Int = -1
     var previousScore = score
 
@@ -193,8 +193,6 @@ class XOITrainingsActivity : AppCompatActivity() {
         secondDart = findViewById(R.id.secondDart)
         thirdDart = findViewById(R.id.thirdDart)
 
-        dataholder.increaseGameCount()
-
         showChooserDialog()
 
         /**
@@ -271,7 +269,7 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun checkIntersital() {
-
+        dataholder.increaseGameCount()
         gameCount = dataholder.getGameCount()
         if (gameCount % 4 == 0 && intersitalAd.isLoaded) {
             intersitalAd.show()
@@ -472,12 +470,11 @@ class XOITrainingsActivity : AppCompatActivity() {
         scoreView.text = score.toString()
 
         defaultDarts()
-        dataholder.increaseGameCount()
         checkIntersital()
     }
 
     private fun checkedOut() {
-        val training = XOITraining(501, dartAmount, heighestThreeDart, checkoutTries, sixtyPlus,
+        val training = XOITraining(startAmount, dartAmount, heighestThreeDart, checkoutTries, sixtyPlus,
             hundretPlus, hundretFourtyPlus, hundretEigthy)
         dataholder.addXOITraining(training)
 
@@ -707,7 +704,7 @@ class XOITrainingsActivity : AppCompatActivity() {
         chooserButton.setOnClickListener {
 
             score = xoiArray[pickerValue].toInt()
-
+            startAmount = score
             chooserDialog.dismiss()
             dialogShown = false
             LogEventsHelper(this).logButtonTap("chooser_dialog")

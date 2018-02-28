@@ -195,8 +195,6 @@ class XXTrainingsActivity() : AppCompatActivity() {
         tripleView = findViewById(R.id.xxTripleAmount)
 
         setupView()
-        checkIntersital()
-        dataholder.increaseGameCount()
     }
 
     override fun onResume() {
@@ -265,6 +263,7 @@ class XXTrainingsActivity() : AppCompatActivity() {
 
     private fun checkIntersital() {
 
+        dataholder.increaseGameCount()
         gameCount = dataholder.getGameCount()
         if (gameCount % 4 == 0 && intersitalAd.isLoaded) {
             intersitalAd.show()
@@ -313,7 +312,6 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun newLeg() {
-        showChooserDialog()
         score = 0
         previousScore = score
 
@@ -333,7 +331,6 @@ class XXTrainingsActivity() : AppCompatActivity() {
         previousTripleCount = tripleCount
 
         setupView()
-        dataholder.increaseGameCount()
         checkIntersital()
     }
 
@@ -451,9 +448,10 @@ class XXTrainingsActivity() : AppCompatActivity() {
                 6 -> xxTarget = 25
             }
 
+            LogEventsHelper(this).logButtonTap("chooser_dialog")
             chooserDialog.dismiss()
             dialogShown = false
-            LogEventsHelper(this).logButtonTap("chooser_dialog")
+            newLeg()
         }
 
         chooserDialog.setCancelable(false)
