@@ -193,8 +193,6 @@ class XOITrainingsActivity : AppCompatActivity() {
         secondDart = findViewById(R.id.secondDart)
         thirdDart = findViewById(R.id.thirdDart)
 
-        dataholder.increaseGameCount()
-
         showChooserDialog()
 
         /**
@@ -271,7 +269,7 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun checkIntersital() {
-
+        dataholder.increaseGameCount()
         gameCount = dataholder.getGameCount()
         if (gameCount % 4 == 0 && intersitalAd.isLoaded) {
             intersitalAd.show()
@@ -472,7 +470,6 @@ class XOITrainingsActivity : AppCompatActivity() {
         scoreView.text = score.toString()
 
         defaultDarts()
-        dataholder.increaseGameCount()
         checkIntersital()
     }
 
