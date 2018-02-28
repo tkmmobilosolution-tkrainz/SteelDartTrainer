@@ -34,19 +34,26 @@ import java.util.Locale
  */
 class TrainingActivity : AppCompatActivity() {
 
-    var currentThrow: Int = 0
-    var dartMultiplier: Int = 1
     private lateinit var doubleButton: Button
     private lateinit var trippleButton: Button
     private lateinit var missButton: Button
     private lateinit var nextThrowButton: Button
     private lateinit var resetButton: Button
+
     private lateinit var scoreView: TextView
     private lateinit var dartView: TextView
     private lateinit var roundView: TextView
     private lateinit var firstDart: TextView
     private lateinit var secondDart: TextView
     private lateinit var thirdDart: TextView
+
+    private lateinit var gridAdapter: GridAdapter
+    private lateinit var gridView: GridView
+
+    private lateinit var dataholder: DataHolder
+
+    private lateinit var intersitalAd: InterstitialAd
+    private lateinit var bannerAdView: AdView
 
     var dartAmount: Int = 0
     var previousDartAmount: Int = 0
@@ -63,8 +70,8 @@ class TrainingActivity : AppCompatActivity() {
     var hundretFourtyPlus = 0
     var hundretEigthy = 0
 
-    private lateinit var gridAdapter: GridAdapter
-    private lateinit var gridView: GridView
+    var currentThrow: Int = 0
+    var dartMultiplier: Int = 1
 
     var dartResultArrayList: ArrayList<Int> = ArrayList()
     var threeDatrArrayList: ArrayList<Int> = ArrayList()
@@ -72,12 +79,9 @@ class TrainingActivity : AppCompatActivity() {
     var hasNoScore = false
     var dialogShown = false
 
-    private lateinit var bannerAdView: AdView
     private val className = "xoi_training"
 
     private var gameCount: Int = 0
-    private lateinit var dataholder: DataHolder
-    private lateinit var intersitalAd: InterstitialAd
 
     var score: Int = -1
     var previousScore = score
