@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:background="@android:color/black">
     <LinearLayout
         android:id="@+id/xxStatsLayout"
@@ -21,7 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -50,7 +53,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -81,7 +88,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -122,7 +133,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -151,7 +164,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -180,7 +197,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/black_button_background"
                 android:gravity="center">
 
@@ -211,13 +232,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
         android:layout_below="@id/xxStatsLayout"
         android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
         android:gravity="center"
-        android:text="@string/statistics_no_data"/>
+        android:text="@string/statistics_no_data"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/xx_graph"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"/>
 </RelativeLayout>
