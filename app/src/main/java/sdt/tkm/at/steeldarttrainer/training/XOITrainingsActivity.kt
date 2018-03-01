@@ -20,6 +20,7 @@ import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.GridAdapter
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.animateValue
 import sdt.tkm.at.steeldarttrainer.models.Dart
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import java.util.Locale
@@ -144,8 +145,9 @@ class XOITrainingsActivity : AppCompatActivity() {
         nextThrowButton.setOnClickListener {
 
             if (hasNoScore) {
+
+                animateValue(score, previousScore, scoreView)
                 score = previousScore
-                scoreView.text = score.toString()
                 dartAmount = previousDartAmount
             } else {
                 previousScore = score
@@ -178,10 +180,11 @@ class XOITrainingsActivity : AppCompatActivity() {
 
         resetButton = findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
+
+            animateValue(score, previousScore, scoreView)
             score = previousScore
             dartAmount = previousDartAmount
 
-            scoreView.text = score.toString()
             dartView.text = "Darts: " + dartAmount
             throwCount = 0
             doubleButton.isSelected = false
@@ -364,6 +367,7 @@ class XOITrainingsActivity : AppCompatActivity() {
             checkoutTries += 1
             checkAmount(dartsCount)
             checkHeighestThreeDart(dartsCount)
+            animateValue(score, 0, scoreView)
             score = 0
             dartsCount = 0
             throwCount = 0
@@ -390,11 +394,11 @@ class XOITrainingsActivity : AppCompatActivity() {
                 checkoutTries += 1
             }
 
+            animateValue(score, score - res, scoreView)
             score -= res
         }
 
         currentDart(result)
-        scoreView.text = score.toString()
         resetThrow()
         return returnValue
     }
@@ -466,8 +470,8 @@ class XOITrainingsActivity : AppCompatActivity() {
         dartResultArrayList.clear()
         threeDatrArrayList.clear()
 
+        animateValue(0, startAmount, scoreView)
         previousScore = score
-        scoreView.text = score.toString()
 
         defaultDarts()
         checkIntersital()

@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.4"
                 android:layout_gravity="center"
-                android:text="501"
+                android:text="0"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="60sp" />

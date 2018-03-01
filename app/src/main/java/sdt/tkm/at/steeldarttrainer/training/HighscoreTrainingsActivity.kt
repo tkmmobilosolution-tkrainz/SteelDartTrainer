@@ -19,6 +19,8 @@ import sdt.tkm.at.steeldarttrainer.base.GridAdapter
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 import sdt.tkm.at.steeldarttrainer.models.Dart
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
+import android.animation.ValueAnimator
+import sdt.tkm.at.steeldarttrainer.base.animateValue
 
 /**
  * [Add class description here]
@@ -211,10 +213,10 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
 
         resetButton = findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
+            animateValue(score, previousScore, scoreView)
             score = previousScore
             dartAmount = previousDartAmount
 
-            scoreView.text = score.toString()
             dartView.text = "Dart: " + dartAmount
             throwCount = 0
             doubleButton.isSelected = false
@@ -357,6 +359,11 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
         dartsCount += res
         throwCount += 1
         increaseDartAmount(1)
+
+        if (res > 0) {
+            animateValue(score, score + res, scoreView)
+        }
+
         score += res
         currentDart(result)
         scoreView.text = score.toString()
@@ -430,9 +437,9 @@ class HighscoreTrainingsActivity : AppCompatActivity() {
         dartResultArrayList.clear()
         threeDatrArrayList.clear()
 
+        animateValue(score, START_SCORE, scoreView)
         score = START_SCORE
         previousScore = score
-        scoreView.text = score.toString()
 
         dartsCount = 0
         throwCount = 0
