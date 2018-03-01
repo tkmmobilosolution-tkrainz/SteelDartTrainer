@@ -64,4 +64,7 @@
 
     <string name="xoi_chooser_title">Choose your start value for this exercise</string>
     <string name="xoi_chooser_button_title">Choose this start value</string>
+
+    <string name="statistics_graph_ppd">Points per dart</string>
+    <string name="statistics_graph_hits">Hits per game</string>
 </resources>

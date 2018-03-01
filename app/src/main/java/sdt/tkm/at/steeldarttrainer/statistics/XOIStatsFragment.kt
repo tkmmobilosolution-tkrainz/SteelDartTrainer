@@ -1,14 +1,20 @@
 package sdt.tkm.at.steeldarttrainer.statistics
 
 import android.app.Fragment
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import sdt.tkm.at.steeldarttrainer.base.DataHolder
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.base.DataHolder
+import sdt.tkm.at.steeldarttrainer.base.animateDoubleValue
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import java.math.BigDecimal
 
@@ -22,54 +28,111 @@ import java.math.BigDecimal
  */
 class XOIStatsFragment : Fragment() {
 
+    private lateinit var graph: GraphView
+    private lateinit var ppd: TextView
+    private lateinit var pptd: TextView
+    private lateinit var cor: TextView
+    private lateinit var darts: TextView
+    private lateinit var sixtyPlus: TextView
+    private lateinit var hundretPlus: TextView
+    private lateinit var hundretFourtyPlus: TextView
+    private lateinit var hundretEighty: TextView
+
+    private lateinit var statsinfoTextView: TextView
+    private lateinit var layout: LinearLayout
+
+    private lateinit var xoiTrainingsList: ArrayList<XOITraining>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val ppd = view.findViewById<TextView>(R.id.ppdAmount)
-        val pptd = view.findViewById<TextView>(R.id.pptdAmount)
-        val cor = view.findViewById<TextView>(R.id.checkoutAmount)
-        val darts = view.findViewById<TextView>(R.id.darts)
-
-        val sixtyPlus = view.findViewById<TextView>(R.id.sixtyPlus)
-        val hundretPlus = view.findViewById<TextView>(R.id.hundretPlus)
-        val hundretFourtyPlus = view.findViewById<TextView>(R.id.hundretFourtyPlus)
-        val hundretEighty = view.findViewById<TextView>(R.id.hundretEighty)
-
-        val statsinfoTextView = view.findViewById<TextView>(R.id.xoiStatsInfoTextView)
-        val layout = view.findViewById<LinearLayout>(R.id.xoiStatsLayout)
-
-        val xoiTrainingsList = DataHolder(this.activity.applicationContext).getXOITrainingsList()
+        xoiTrainingsList = DataHolder(this.activity.applicationContext).getXOITrainingsList()
 
         if (xoiTrainingsList.isEmpty()) {
             layout.visibility = View.GONE
-
             if (activity is StatisticsActivity) {
                 val currentActivity = activity as StatisticsActivity
                 currentActivity.shouldShowInfoButton(false)
             }
-
         } else {
-
             if (activity is StatisticsActivity) {
                 val currentActivity = activity as StatisticsActivity
                 currentActivity.shouldShowInfoButton(true)
             }
             statsinfoTextView.visibility = View.GONE
-
-            ppd.text = averagePPD(xoiTrainingsList).toString()
-            pptd.text = averagePPTD(xoiTrainingsList).toString()
-            cor.text = avareageCOR(xoiTrainingsList).toString()
-            darts.text = countDarts(xoiTrainingsList).toString()
-            sixtyPlus.text = countSixties(xoiTrainingsList).toString()
-            hundretPlus.text = countHundretPlus(xoiTrainingsList).toString()
-            hundretFourtyPlus.text = countHundretFourtyPlus(xoiTrainingsList).toString()
-            hundretEighty.text = countHundretEighty(xoiTrainingsList).toString()
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
 
         val view = inflater.inflate(R.layout.xoi_stats_fragment, container, false)
+        ppd = view.findViewById<TextView>(R.id.ppdAmount)
+        pptd = view.findViewById<TextView>(R.id.pptdAmount)
+        cor = view.findViewById<TextView>(R.id.checkoutAmount)
+        darts = view.findViewById<TextView>(R.id.darts)
+
+        sixtyPlus = view.findViewById<TextView>(R.id.sixtyPlus)
+        hundretPlus = view.findViewById<TextView>(R.id.hundretPlus)
+        hundretFourtyPlus = view.findViewById<TextView>(R.id.hundretFourtyPlus)
+        hundretEighty = view.findViewById<TextView>(R.id.hundretEighty)
+
+        statsinfoTextView = view.findViewById<TextView>(R.id.xoiStatsInfoTextView)
+        layout = view.findViewById<LinearLayout>(R.id.xoiStatsLayout)
+
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!xoiTrainingsList.isEmpty()) {
+            animateDoubleValue(0.0, averagePPD(xoiTrainingsList), ppd)
+            animateDoubleValue(0.0, averagePPTD(xoiTrainingsList), pptd)
+            animateDoubleValue(0.0, avareageCOR(xoiTrainingsList), cor)
+            animateIntegerValue(0, countDarts(xoiTrainingsList), darts)
+
+            animateIntegerValue(0, countSixties(xoiTrainingsList), sixtyPlus)
+            animateIntegerValue(0, countHundretPlus(xoiTrainingsList), hundretPlus)
+            animateIntegerValue(0, countHundretFourtyPlus(xoiTrainingsList), hundretFourtyPlus)
+            animateIntegerValue(0, countHundretEighty(xoiTrainingsList), hundretEighty)
+
+            if (xoiTrainingsList.size > 1) {
+                var ppds = ArrayList<Double>()
+                for (item in xoiTrainingsList) {
+                    ppds.add(item.ppdAvarage())
+                }
+
+                val minPPD = getMinValue(ppds)
+                val maxPPD = getMaxValue(ppds)
+
+                graph = view.findViewById(R.id.xoi_graph) as GraphView
+                drawGraph(minPPD, maxPPD, dataPointsPPD(xoiTrainingsList), getString(R.string.statistics_graph_ppd))
+            }
+        }
+    }
+
+    private fun drawGraph(minY: Double, maxY: Double, dataPoints: Array<DataPoint>, title: String) {
+        graph.title = title
+        graph.titleTextSize = 40F
+        graph.titleColor = Color.WHITE
+        graph.gridLabelRenderer.gridColor = Color.WHITE
+        graph.gridLabelRenderer.horizontalLabelsColor = Color.WHITE
+        graph.gridLabelRenderer.verticalLabelsColor = Color.WHITE
+
+        graph.viewport.setMinY(minY - 5.0)
+        graph.viewport.setMaxY(maxY + 5.0)
+        graph.viewport.isYAxisBoundsManual = true
+        graph.viewport.setMinX(1.0)
+        graph.viewport.setMaxX(dataPoints.size.toDouble())
+        graph.viewport.isXAxisBoundsManual = true
+        graph.gridLabelRenderer.numHorizontalLabels = if (dataPoints.size <= 6) dataPoints.size else 6
+
+        val series = LineGraphSeries<DataPoint>(dataPoints)
+        series.setColor(Color.WHITE)
+        series.setDrawDataPoints(true)
+        series.setDataPointsRadius(8F)
+        series.isDrawBackground = true
+        series.setThickness(6)
+        graph.addSeries(series)
     }
 
     private fun averagePPD(list: ArrayList<XOITraining>): Double {
@@ -141,4 +204,46 @@ class XOIStatsFragment : Fragment() {
         }
         return value
     }
+
+    private fun dataPointsPPD(list: ArrayList<XOITraining>): Array<DataPoint> {
+
+        var ppd = 0.0
+        var datapoints = ArrayList<DataPoint>()
+        for (index in 0 until list.size) {
+            ppd = list.get(index).ppdAvarage()
+            val value = BigDecimal(ppd).setScale(2, BigDecimal.ROUND_HALF_UP).toDouble()
+
+            val dataPoint = DataPoint(index.toDouble() + 1, value)
+            datapoints.add(dataPoint)
+        }
+
+        return toArray(datapoints)
+    }
+
+    private fun getMaxValue(list: ArrayList<Double>): Double {
+        var maxValue = 0.0
+        for (value in list) {
+            if (value > maxValue) {
+                maxValue = value
+            }
+        }
+
+        return maxValue
+    }
+
+    private fun getMinValue(list: ArrayList<Double>): Double {
+        var minValue = 61.0
+        for (value in list) {
+            if (value < minValue) {
+                minValue = value
+            }
+        }
+
+        return minValue
+    }
+
+    inline fun <reified T> toArray(list: List<*>): Array<T> {
+        return (list as List<T>).toTypedArray()
+    }
+
 }

@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:tint="@android:color/white"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/segmentedControl"
@@ -61,7 +61,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/statsBanner"
         android:layout_below="@+id/statistics_info_button"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="0dp"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
