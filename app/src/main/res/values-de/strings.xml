@@ -65,4 +65,7 @@
 
     <string name="xoi_chooser_title">Wähle den Startwert für die Übung</string>
     <string name="xoi_chooser_button_title">Diesen Startwert wählen</string>
+
+    <string name="statistics_graph_ppd">Punkte je Dart</string>
+    <string name="statistics_graph_hits">Treffer pro Spiel</string>
 </resources>

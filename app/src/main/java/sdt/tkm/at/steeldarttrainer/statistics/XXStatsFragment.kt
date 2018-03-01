@@ -100,7 +100,7 @@ class XXStatsFragmentFragment : Fragment() {
                 val maxPPD = getMaxValue(hitsArray)
 
                 graph = view.findViewById(R.id.xx_graph) as GraphView
-                drawGraph(minPPD, maxPPD, dataPointsHits(xxList), "Hits")
+                drawGraph(minPPD, maxPPD, dataPointsHits(xxList), getString(R.string.statistics_graph_hits))
             }
         }
     }

@@ -106,7 +106,7 @@ class HighscoreStatsFragment: Fragment() {
                 val maxPPD = getMaxValue(ppds)
 
                 graph = view.findViewById(R.id.xoi_graph) as GraphView
-                drawGraph(minPPD, maxPPD, dataPointsPPD(hsTrainingsList), "Points per Darts")
+                drawGraph(minPPD, maxPPD, dataPointsPPD(hsTrainingsList), getString(R.string.statistics_graph_ppd))
             }
         }
     }

@@ -105,7 +105,7 @@ class XOIStatsFragment : Fragment() {
                 val maxPPD = getMaxValue(ppds)
 
                 graph = view.findViewById(R.id.xoi_graph) as GraphView
-                drawGraph(minPPD, maxPPD, dataPointsPPD(xoiTrainingsList), "Points per Darts")
+                drawGraph(minPPD, maxPPD, dataPointsPPD(xoiTrainingsList), getString(R.string.statistics_graph_ppd))
             }
         }
     }
