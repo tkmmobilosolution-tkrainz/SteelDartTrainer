@@ -13,6 +13,7 @@ import com.shawnlin.numberpicker.NumberPicker
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.animateValue
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 
 /**
@@ -101,8 +102,8 @@ class XXTrainingsActivity() : AppCompatActivity() {
 
         resetButton = findViewById(R.id.xxResetButton)
         resetButton.setOnClickListener {
+            animateValue(score, previousScore, scoreView)
             score = previousScore
-            scoreView.text = score.toString()
 
             singleCount = previousSingleCount
             doubleCount = previousDoubleCount
@@ -312,6 +313,8 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun newLeg() {
+
+        animateValue(score, 0, scoreView)
         score = 0
         previousScore = score
 
@@ -339,8 +342,8 @@ class XXTrainingsActivity() : AppCompatActivity() {
             dartsThrowCount += 1
             dartAmount += 1
             setDartViewText(dartAmount)
+            animateValue(score, score + value, scoreView)
             score += value
-            scoreView.text = score.toString()
             setCurrentDart(value)
             setCountViews(value)
         }
@@ -384,7 +387,6 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun setupView() {
-        scoreView.text = "0"
         setDartViewText(0)
         roundView.text = "${getString(R.string.general_round)}: $roundAmount"
         singleView.text = "0"

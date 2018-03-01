@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.base.animateDoubleValue
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import java.math.BigDecimal
 
@@ -54,14 +56,16 @@ class XOIStatsFragment : Fragment() {
             }
             statsinfoTextView.visibility = View.GONE
 
-            ppd.text = averagePPD(xoiTrainingsList).toString()
-            pptd.text = averagePPTD(xoiTrainingsList).toString()
-            cor.text = avareageCOR(xoiTrainingsList).toString()
-            darts.text = countDarts(xoiTrainingsList).toString()
-            sixtyPlus.text = countSixties(xoiTrainingsList).toString()
-            hundretPlus.text = countHundretPlus(xoiTrainingsList).toString()
-            hundretFourtyPlus.text = countHundretFourtyPlus(xoiTrainingsList).toString()
-            hundretEighty.text = countHundretEighty(xoiTrainingsList).toString()
+
+            animateDoubleValue(0.0, averagePPD(xoiTrainingsList), ppd)
+            animateDoubleValue(0.0, averagePPTD(xoiTrainingsList), pptd)
+            animateDoubleValue(0.0, avareageCOR(xoiTrainingsList), cor)
+            animateIntegerValue(0, countDarts(xoiTrainingsList), darts)
+
+            animateIntegerValue(0, countSixties(xoiTrainingsList), sixtyPlus)
+            animateIntegerValue(0, countHundretPlus(xoiTrainingsList), hundretPlus)
+            animateIntegerValue(0, countHundretFourtyPlus(xoiTrainingsList), hundretFourtyPlus)
+            animateIntegerValue(0, countHundretEighty(xoiTrainingsList), hundretEighty)
         }
 
         super.onViewCreated(view, savedInstanceState)

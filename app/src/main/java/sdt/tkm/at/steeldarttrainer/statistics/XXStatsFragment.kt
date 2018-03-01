@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
+import sdt.tkm.at.steeldarttrainer.base.animateDoubleValue
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 import java.math.BigDecimal
 
@@ -49,13 +51,14 @@ class XXStatsFragmentFragment : Fragment() {
                 currentActivity.shouldShowInfoButton(true)
             }
 
-            hits.text = hitsText(xxList).toString()
-            hitsPercentage.text = hitsPercentageText(xxList).toString()
-            score.text = scoreText(xxList).toString()
 
-            single.text = singleAmount(xxList).toString()
-            double.text = doubleAmount(xxList).toString()
-            triple.text = tripleAmount(xxList).toString()
+            animateDoubleValue(0.0, hitsText(xxList), hits)
+            animateDoubleValue(0.0, hitsPercentageText(xxList), hitsPercentage)
+            animateDoubleValue(0.0, scoreText(xxList), score)
+
+            animateIntegerValue(0, singleAmount(xxList), single)
+            animateIntegerValue(0, doubleAmount(xxList), double)
+            animateIntegerValue(0, tripleAmount(xxList), triple)
         }
 
         super.onViewCreated(view, savedInstanceState)

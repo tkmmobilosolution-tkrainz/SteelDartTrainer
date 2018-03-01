@@ -10,6 +10,9 @@ import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
 import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.base.animateDoubleValue
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
+import sdt.tkm.at.steeldarttrainer.base.animateValue
 import java.math.BigDecimal
 
 /**
@@ -53,14 +56,15 @@ class HighscoreStatsFragment: Fragment() {
                 currentActivity.shouldShowInfoButton(true)
             }
 
-            ppd.text = averagePPD(hsTrainingsList).toString()
-            pptd.text = averagePPTD(hsTrainingsList).toString()
-            cor.text = averageHS(hsTrainingsList).toString()
-            darts.text = countDarts(hsTrainingsList).toString()
-            sixtyPlus.text = countSixties(hsTrainingsList).toString()
-            hundretPlus.text = countHundretPlus(hsTrainingsList).toString()
-            hundretFourtyPlus.text = countHundretFourtyPlus(hsTrainingsList).toString()
-            hundretEighty.text = countHundretEighty(hsTrainingsList).toString()
+            animateDoubleValue(0.0, averagePPD(hsTrainingsList), ppd)
+            animateDoubleValue(0.0, averagePPTD(hsTrainingsList), pptd)
+            animateDoubleValue(0.0, averageHS(hsTrainingsList), cor)
+            animateIntegerValue(0, countDarts(hsTrainingsList), darts)
+
+            animateIntegerValue(0, countSixties(hsTrainingsList), sixtyPlus)
+            animateIntegerValue(0, countHundretPlus(hsTrainingsList), hundretPlus)
+            animateIntegerValue(0, countHundretFourtyPlus(hsTrainingsList), hundretFourtyPlus)
+            animateIntegerValue(0, countHundretEighty(hsTrainingsList), hundretEighty)
         }
 
         super.onViewCreated(view, savedInstanceState)
