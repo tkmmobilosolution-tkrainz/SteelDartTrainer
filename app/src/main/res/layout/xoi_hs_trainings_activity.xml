@@ -14,7 +14,7 @@
             android:id="@+id/roundLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:weightSum="2">
 
             <TextView
@@ -38,7 +38,7 @@
                 android:text="X01"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="60sp" />
+                android:textSize="48sp" />
 
             <TextView
                 android:id="@+id/roundCount"
@@ -56,7 +56,7 @@
             android:id="@+id/scoreDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/roundLayout"
             android:background="@android:color/white" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/theseDarts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_below="@+id/scoreDivider"
@@ -120,7 +120,7 @@
             android:id="@+id/lastDartsDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/dartAmountLayout"
             android:background="@android:color/white" />
     </RelativeLayout>
@@ -137,7 +137,7 @@
         <Button
             android:id="@+id/doubleButton"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
@@ -149,7 +149,7 @@
         <Button
             android:id="@+id/trippleButton"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
@@ -161,7 +161,7 @@
         <Button
             android:id="@+id/missButton"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
@@ -189,6 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/confirmLayout"
+        android:background="@android:color/black"
         android:layout_centerHorizontal="true"
         android:numColumns="7"
         android:stretchMode="columnWidth" />
@@ -204,7 +205,7 @@
         <Button
             android:id="@+id/resetButton"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
@@ -217,7 +218,7 @@
         <Button
             android:id="@+id/nextThrowButton"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/black_button_background"
             android:textColor="@drawable/black_button_text_color"
@@ -232,7 +233,7 @@
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/trainingBanner"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"

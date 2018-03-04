@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import sdt.tkm.at.steeldarttrainer.BuildConfig
 
 /**
  * [Add class description here]
@@ -16,8 +17,10 @@ import com.google.firebase.analytics.FirebaseAnalytics
 class LogEventsHelper(val context: Context = Application().applicationContext) {
 
     private fun logEvent(name: String, bundle: Bundle) {
-        val analytics = FirebaseAnalytics.getInstance(context)
-        analytics.logEvent(name, bundle)
+        if (!BuildConfig.DEBUG) {
+            val analytics = FirebaseAnalytics.getInstance(context)
+            analytics.logEvent(name, bundle)
+        }
     }
 
     fun logBannerOpened(className: String) {

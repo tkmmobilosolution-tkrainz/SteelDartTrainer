@@ -36,7 +36,6 @@ class GridAdapter(val context: Context) : BaseAdapter() {
 
         textView.text = text
 
-        view.setBackgroundColor(Color.WHITE)
         return view
     }
 

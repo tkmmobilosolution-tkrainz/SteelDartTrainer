@@ -53,11 +53,11 @@ class XOIStatsFragment : Fragment() {
                 currentActivity.shouldShowInfoButton(false)
             }
         } else {
+            statsinfoTextView.visibility = View.GONE
             if (activity is StatisticsActivity) {
                 val currentActivity = activity as StatisticsActivity
                 currentActivity.shouldShowInfoButton(true)
             }
-            statsinfoTextView.visibility = View.GONE
         }
         super.onViewCreated(view, savedInstanceState)
     }

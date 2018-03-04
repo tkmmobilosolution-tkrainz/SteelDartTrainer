@@ -8,18 +8,31 @@
         android:label="SDT"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.HomeActivity">
+        <activity android:name=".base.HomeActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".training.XOITrainingsActivity"/>
-        <activity android:name=".training.TrainingsOverViewActivity"/>
-        <activity android:name=".statistics.StatisticsActivity"/>
-        <activity android:name=".training.HighscoreTrainingsActivity"/>
-        <activity android:name=".training.XXTrainingsActivity"/>
+        <activity android:name=".training.XOITrainingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".training.TrainingsOverViewActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".statistics.StatisticsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".training.HighscoreTrainingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".training.XXTrainingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
     </application>
 
 </manifest>
