@@ -23,7 +23,7 @@
 
     <string name="dialog_finish_training_text">If you are finishing the current training, no data will be saved for this training. Finish anyway?</string>
     <string name="dialog_finish_training_finish">Finish</string>
-    <string name="dialog_finish_training_close">Continue playing</string>
+    <string name="dialog_finish_training_close">Continue</string>
 
     <string name="dialog_new_training_text">You have successfully completed this training session. Do you want to start a new session?</string>
     <string name="dialog_new_training_new">New session</string>
