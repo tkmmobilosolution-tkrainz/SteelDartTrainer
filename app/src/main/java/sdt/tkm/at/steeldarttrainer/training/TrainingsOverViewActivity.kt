@@ -1,9 +1,14 @@
 package sdt.tkm.at.steeldarttrainer.training
 
+import android.app.Fragment
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.gms.ads.AdListener
@@ -12,6 +17,8 @@ import com.google.android.gms.ads.AdView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.NeutralDialogFragment
+import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
 
 /**
  * [Add class description here]
@@ -21,67 +28,73 @@ import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class TrainingsOverViewActivity: AppCompatActivity() {
+class TrainingsOverViewActivity : Fragment() {
 
     private lateinit var bannerAdView: AdView
+    private lateinit var appContext: Context
+
     private val className = "trainings_overview"
-    private val dataHolder = DataHolder(this)
+    private lateinit var dataHolder: DataHolder
 
-    private var dialogShown = false
+    private lateinit var oververviewActivity: OverviewActivity
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.trainings_overview_activity)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
 
-        supportActionBar?.title = getString(R.string.actionbar_title_trainings_overview)
+        oververviewActivity = activity as OverviewActivity
 
-        val xoiButton = findViewById<Button>(R.id.xoiButton)
+        appContext = activity.applicationContext
+        dataHolder = DataHolder(appContext)
+        val view = inflater.inflate(R.layout.trainings_overview_activity, container, false)
+
+        bannerAdView = view.findViewById(R.id.trainingsOverviewBanner)
+
+        val xoiButton = view.findViewById<Button>(R.id.xoiButton)
         xoiButton.setOnClickListener {
-            val intent = Intent(this, XOITrainingsActivity::class.java)
+            val intent = Intent(appContext, XOITrainingsActivity::class.java)
             if (dataHolder.shouldShowXOIOverviewHint()) {
                 showInformationDialog(getString(R.string.trainings_overview_xoi_hint_message), intent)
                 dataHolder.xOIOverviewHintShown()
             } else {
                 startActivity(intent)
             }
-            LogEventsHelper(this).logButtonTap("trainings_overview_xoi")
+            LogEventsHelper(appContext).logButtonTap("trainings_overview_xoi")
         }
 
-        val hsButton = findViewById<Button>(R.id.highscoreButton)
+        val hsButton = view.findViewById<Button>(R.id.highscoreButton)
         hsButton.setOnClickListener {
-            val intent = Intent(this, HighscoreTrainingsActivity::class.java)
-            startActivity(intent)
-            LogEventsHelper(this).logButtonTap("trainings_overview_hs")
+            replaceFragment(HighscoreTrainingsActivity())
+            LogEventsHelper(appContext).logButtonTap("trainings_overview_hs")
         }
 
-        val xxButton = findViewById<Button>(R.id.dartsToXButton)
+        val xxButton = view.findViewById<Button>(R.id.dartsToXButton)
         xxButton.setOnClickListener {
-            val intent = Intent(this, XXTrainingsActivity::class.java)
+            val intent = Intent(activity.applicationContext, XXTrainingsActivity::class.java)
             startActivity(intent)
-            LogEventsHelper(this).logButtonTap("trainings_overview_xx")
+            LogEventsHelper(appContext).logButtonTap("trainings_overview_xx")
         }
+
+        return view
     }
 
     override fun onResume() {
         super.onResume()
 
-        bannerAdView = findViewById(R.id.trainingsOverviewBanner)
         val adRequest = AdRequest.Builder().build()
         bannerAdView.loadAd(adRequest)
 
-        bannerAdView.adListener = object: AdListener() {
+        bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@TrainingsOverViewActivity).logBannerLoaded(className)
+                LogEventsHelper(appContext).logBannerLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@TrainingsOverViewActivity).logBannerFailed(className, errorCode)
+                LogEventsHelper(appContext).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@TrainingsOverViewActivity).logBannerOpened(className)
+                LogEventsHelper(appContext).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -95,37 +108,32 @@ class TrainingsOverViewActivity: AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        if (!dialogShown) {
-            super.onBackPressed()
+    private fun showInformationDialog(message: String, intent: Intent) {
+        val neutralDialog = NeutralDialogFragment.Companion.newNeutralDialog(
+            getString(R.string.trainings_overview_xoi_hint_title),
+            message,
+            getString(R.string.trainings_overview_xoi_hint_button_text)
+        )
+
+        neutralDialog.listener = object :  NeutralDialogFragment.NeutralListener {
+            override fun buttonClicked() {
+                oververviewActivity.isDialogShown = false
+                startActivity(intent)
+                LogEventsHelper(appContext).logButtonTap("trainings_overview_dialog")
+                neutralDialog.dismiss()
+            }
         }
+
+        neutralDialog.show(fragmentManager, null)
+
+        oververviewActivity.isDialogShown = true
     }
 
-    private fun showInformationDialog(message: String, intent: Intent) {
-        val inflater = this.layoutInflater
-        val dialogHintBuilder = AlertDialog.Builder(
-            this)
-        val hintDialogView = inflater.inflate(R.layout.neutral_dialog, null)
-        val hintTitleView = hintDialogView.findViewById<TextView>(R.id.hintDialogTitle)
-        hintTitleView.text = getString(R.string.trainings_overview_xoi_hint_title)
-
-        val hintMessageView = hintDialogView.findViewById<TextView>(R.id.hintDialogMessage)
-        hintMessageView.text = message
-
-        val okButton = hintDialogView.findViewById<Button>(R.id.hintDialogButton)
-        okButton.text = getString(R.string.trainings_overview_xoi_hint_button_text)
-        dialogHintBuilder.setView(hintDialogView)
-        val hintDialog = dialogHintBuilder.create()
-
-        okButton.setOnClickListener {
-            dialogShown = false
-            startActivity(intent)
-            LogEventsHelper(this).logButtonTap("trainings_overview_dialog")
-            hintDialog.dismiss()
-        }
-
-        hintDialog.setCancelable(false)
-        hintDialog.setCanceledOnTouchOutside(false)
-        hintDialog.show()
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = fragmentManager.beginTransaction()
+        transaction.add(R.id.content_frame, fragment)
+        transaction.addToBackStack(null)
+        transaction.commitAllowingStateLoss()
+        oververviewActivity.showUpButton(true)
     }
 }

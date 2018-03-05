@@ -8,7 +8,7 @@
         android:label="SDT"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.HomeActivity"
+        <activity android:name=".base.OverviewActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 

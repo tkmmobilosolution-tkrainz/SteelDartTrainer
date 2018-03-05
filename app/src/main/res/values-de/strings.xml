@@ -68,4 +68,7 @@
 
     <string name="statistics_graph_ppd">Punkte je Dart</string>
     <string name="statistics_graph_hits">Treffer pro Spiel</string>
+
+    <string name="navigation_drawer_open">Navigation Drawer öffnen</string>
+    <string name="navigation_drawer_close">Navigation Drawer schließen</string>
 </resources>

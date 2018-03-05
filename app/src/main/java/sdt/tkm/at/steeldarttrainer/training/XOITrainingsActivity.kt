@@ -91,6 +91,7 @@ class XOITrainingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.xoi_hs_trainings_activity)
 
+        supportActionBar?.show()
         supportActionBar?.title = getString(R.string.actionbar_title_xoi_training)
 
         dataholder = DataHolder(this.applicationContext)
