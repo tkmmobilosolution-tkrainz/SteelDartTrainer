@@ -227,7 +227,9 @@ class XOITrainingsFragment : Fragment() {
 
         bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(oververviewActivity).logBannerLoaded(className)
+                if (oververviewActivity != null) {
+                    LogEventsHelper(oververviewActivity).logBannerLoaded(className)
+                }
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {

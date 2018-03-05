@@ -28,7 +28,6 @@ import sdt.tkm.at.steeldarttrainer.dialog.NeutralDialogFragment
 class TrainingsOverViewFragment : Fragment() {
 
     private lateinit var bannerAdView: AdView
-    private lateinit var appContext: Context
 
     private val className = "trainings_overview"
     private lateinit var dataHolder: DataHolder
@@ -39,34 +38,33 @@ class TrainingsOverViewFragment : Fragment() {
 
         oververviewActivity = activity as OverviewActivity
 
-        appContext = activity.applicationContext
-        dataHolder = DataHolder(appContext)
+        dataHolder = DataHolder(oververviewActivity)
         val view = inflater.inflate(R.layout.trainings_overview_activity, container, false)
 
         bannerAdView = view.findViewById(R.id.trainingsOverviewBanner)
 
         val xoiButton = view.findViewById<Button>(R.id.xoiButton)
         xoiButton.setOnClickListener {
-            val intent = Intent(appContext, XOITrainingsFragment::class.java)
+            val intent = Intent(oververviewActivity, XOITrainingsFragment::class.java)
             if (dataHolder.shouldShowXOIOverviewHint()) {
                 showInformationDialog(getString(R.string.trainings_overview_xoi_hint_message), intent)
                 dataHolder.xOIOverviewHintShown()
             } else {
                 replaceFragment(XOITrainingsFragment())
             }
-            LogEventsHelper(appContext).logButtonTap("trainings_overview_xoi")
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xoi")
         }
 
         val hsButton = view.findViewById<Button>(R.id.highscoreButton)
         hsButton.setOnClickListener {
             replaceFragment(HighscoreTrainingsFragment())
-            LogEventsHelper(appContext).logButtonTap("trainings_overview_hs")
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_hs")
         }
 
         val xxButton = view.findViewById<Button>(R.id.dartsToXButton)
         xxButton.setOnClickListener {
             replaceFragment(XXTrainingsFragment())
-            LogEventsHelper(appContext).logButtonTap("trainings_overview_xx")
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xx")
         }
 
         return view
@@ -80,17 +78,19 @@ class TrainingsOverViewFragment : Fragment() {
 
         bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(appContext).logBannerLoaded(className)
+                if (oververviewActivity != null) {
+                    LogEventsHelper(oververviewActivity).logBannerLoaded(className)
+                }
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(appContext).logBannerFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(appContext).logBannerOpened(className)
+                LogEventsHelper(oververviewActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -115,7 +115,7 @@ class TrainingsOverViewFragment : Fragment() {
             override fun buttonClicked() {
                 oververviewActivity.isDialogShown = false
                 startActivity(intent)
-                LogEventsHelper(appContext).logButtonTap("trainings_overview_dialog")
+                LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_dialog")
                 neutralDialog.dismiss()
             }
         }

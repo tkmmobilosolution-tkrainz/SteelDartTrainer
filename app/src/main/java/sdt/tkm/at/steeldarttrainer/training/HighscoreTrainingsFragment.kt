@@ -21,6 +21,7 @@ import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.GridAdapter
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
 import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.Dart
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
@@ -90,17 +91,21 @@ class HighscoreTrainingsFragment : Fragment() {
         private const val START_SCORE = 0
     }
 
+    private lateinit var oververviewActivity: OverviewActivity
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.xoi_hs_trainings_activity, container, false)
 
-        dataholder = DataHolder(activity)
+        oververviewActivity = activity as OverviewActivity
+
+        dataholder = DataHolder(oververviewActivity)
 
         initIntersital()
 
         bannerAdView = view.findViewById(R.id.trainingBanner)
 
         gridView = view.findViewById<GridView>(R.id.gridView)
-        gridAdapter = GridAdapter(activity)
+        gridAdapter = GridAdapter(oververviewActivity)
         gridView.adapter = gridAdapter
         gridView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 
@@ -242,18 +247,6 @@ class HighscoreTrainingsFragment : Fragment() {
         initBanner()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
-            android.R.id.home -> {
-                // this takes the user 'back', as if they pressed the left-facing triangle icon on the main android toolbar.
-                // if this doesn't work as desired, another possibility is to call `finish()` here.
-                activity.onBackPressed()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun checkIntersital() {
 
         dataholder.increaseGameCount()
@@ -271,19 +264,19 @@ class HighscoreTrainingsFragment : Fragment() {
 
         bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                if (activity != null) {
-                    LogEventsHelper(activity).logBannerLoaded(className)
+                if (oververviewActivity != null) {
+                    LogEventsHelper(oververviewActivity).logBannerLoaded(className)
                 }
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(activity).logBannerFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(activity).logBannerOpened(className)
+                LogEventsHelper(oververviewActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -298,21 +291,23 @@ class HighscoreTrainingsFragment : Fragment() {
     }
 
     private fun initIntersital() {
-        intersitalAd = InterstitialAd(activity)
+        intersitalAd = InterstitialAd(oververviewActivity)
         intersitalAd.adUnitId = getString(R.string.interistal_id)
         intersitalAd.loadAd(AdRequest.Builder().build())
         intersitalAd.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(activity).logIntersitalLoaded(className)
+                if (oververviewActivity != null) {
+                    LogEventsHelper(oververviewActivity).logIntersitalLoaded(className)
+                }
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                LogEventsHelper(activity).logIntersitalFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logIntersitalFailed(className, errorCode)
                 intersitalAd.loadAd(AdRequest.Builder().build())
             }
 
             override fun onAdOpened() {
-                LogEventsHelper(activity).logIntersitalOpened(className)
+                LogEventsHelper(oververviewActivity).logIntersitalOpened(className)
             }
 
             override fun onAdLeftApplication() {

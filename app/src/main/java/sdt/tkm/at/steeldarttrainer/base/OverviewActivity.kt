@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
 
 /**
@@ -78,6 +79,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             replaceFragment(OverviewFragment())
         } else if (id == R.id.nav_exercises) {
             replaceFragment(TrainingsOverViewFragment())
+        } else if (id == R.id.nav_statistics) {
+            replaceFragment(StatisticsActivity())
         }
 
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
@@ -88,7 +91,6 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun replaceFragment(fragment: Fragment) {
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.content_frame, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
         showUpButton(false)
     }

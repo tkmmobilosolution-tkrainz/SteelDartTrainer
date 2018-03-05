@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.jjoe64.graphview.GraphView
@@ -13,6 +14,7 @@ import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
+import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
 import sdt.tkm.at.steeldarttrainer.base.animateDoubleValue
 import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
@@ -49,16 +51,16 @@ class HighscoreStatsFragment: Fragment() {
 
         if (hsTrainingsList.isEmpty()) {
             layout.visibility = View.GONE
-            if (activity is StatisticsActivity) {
-                val currentActivity = activity as StatisticsActivity
-                currentActivity.shouldShowInfoButton(false)
-            }
+            /** if (activity is StatisticsActivity) {
+            val currentActivity = activity as StatisticsActivity
+            currentActivity.shouldShowInfoButton(false)
+            }*/
         } else {
-            if (activity is StatisticsActivity) {
-                val currentActivity = activity as StatisticsActivity
-                currentActivity.shouldShowInfoButton(true)
-            }
             statsinfoTextView.visibility = View.GONE
+            /**if (activity is StatisticsActivity) {
+            val currentActivity = activity as StatisticsActivity
+            currentActivity.shouldShowInfoButton(true)
+            }*/
         }
         super.onViewCreated(view, savedInstanceState)
     }
