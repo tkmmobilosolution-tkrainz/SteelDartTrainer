@@ -65,8 +65,7 @@ class TrainingsOverViewFragment : Fragment() {
 
         val xxButton = view.findViewById<Button>(R.id.dartsToXButton)
         xxButton.setOnClickListener {
-            val intent = Intent(activity.applicationContext, XXTrainingsActivity::class.java)
-            startActivity(intent)
+            replaceFragment(XXTrainingsFragment())
             LogEventsHelper(appContext).logButtonTap("trainings_overview_xx")
         }
 

@@ -57,12 +57,15 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             drawer.closeDrawer(GravityCompat.START)
         }
 
-        val count = fragmentManager.backStackEntryCount
+        var count = fragmentManager.backStackEntryCount
 
         if (count != 0 && !isDialogShown) {
             fragmentManager.popBackStack()
 
+            count -= 1
             if (count > 2) {
+                showUpButton(true)
+            } else {
                 showUpButton(false)
             }
         }

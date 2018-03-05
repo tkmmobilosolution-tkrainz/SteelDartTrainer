@@ -1,8 +1,12 @@
 package sdt.tkm.at.steeldarttrainer.training
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.gms.ads.AdListener
@@ -13,7 +17,10 @@ import com.shawnlin.numberpicker.NumberPicker
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.base.animateValue
+import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 
 /**
@@ -24,7 +31,7 @@ import sdt.tkm.at.steeldarttrainer.models.XXTraining
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class XXTrainingsActivity() : AppCompatActivity() {
+class XXTrainingsFragment() : Fragment() {
 
     private lateinit var singleButton: Button
     private lateinit var doubleButton: Button
@@ -74,35 +81,37 @@ class XXTrainingsActivity() : AppCompatActivity() {
     private lateinit var dataholder: DataHolder
     private lateinit var intersitalAd: InterstitialAd
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.xx_trainings_activity)
+    private lateinit var oververviewActivity: OverviewActivity
 
-        supportActionBar?.title = getString(R.string.actionbar_title_xx_training)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.xx_trainings_activity, container, false)
 
+        oververviewActivity = activity as OverviewActivity
         showChooserDialog()
 
-        dataholder = DataHolder(this.applicationContext)
+        dataholder = DataHolder(oververviewActivity)
         initIntersital()
 
-        singleButton = findViewById(R.id.xxSingleButton)
+        bannerAdView = view.findViewById(R.id.xxBanner)
+
+        singleButton = view.findViewById(R.id.xxSingleButton)
         singleButton.setOnClickListener {
             xxDartCount(1)
         }
 
-        doubleButton = findViewById(R.id.xxDoubleButton)
+        doubleButton = view.findViewById(R.id.xxDoubleButton)
         doubleButton.setOnClickListener {
             xxDartCount(2)
         }
 
-        tripleButton = findViewById(R.id.xxTripleButton)
+        tripleButton = view.findViewById(R.id.xxTripleButton)
         tripleButton.setOnClickListener {
             xxDartCount(3)
         }
 
-        resetButton = findViewById(R.id.xxResetButton)
+        resetButton = view.findViewById(R.id.xxResetButton)
         resetButton.setOnClickListener {
-            animateValue(score, previousScore, scoreView)
+            animateIntegerValue(score, previousScore, scoreView)
             score = previousScore
 
             singleCount = previousSingleCount
@@ -118,12 +127,12 @@ class XXTrainingsActivity() : AppCompatActivity() {
             resetDartViews()
         }
 
-        missButton = findViewById(R.id.xxMissButton)
+        missButton = view.findViewById(R.id.xxMissButton)
         missButton.setOnClickListener {
             xxDartCount(0)
         }
 
-        nextButton = findViewById(R.id.xxNextButton)
+        nextButton = view.findViewById(R.id.xxNextButton)
         nextButton.setOnClickListener {
 
             if (dartsThrowCount == 1) {
@@ -152,10 +161,10 @@ class XXTrainingsActivity() : AppCompatActivity() {
                 val training = XXTraining(xxTarget, score, singleCount, doubleCount, tripleCount)
                 dataholder.addXXTraining(training)
 
-                dialogShown = true
-                val inflater = this.layoutInflater
+                oververviewActivity.isDialogShown = true
+                val inflater = oververviewActivity.layoutInflater
                 val dialogHintBuilder = AlertDialog.Builder(
-                    this)
+                    oververviewActivity)
                 val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
                 val replayButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
                 val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
@@ -166,15 +175,15 @@ class XXTrainingsActivity() : AppCompatActivity() {
                 replayButton.setOnClickListener {
                     showChooserDialog()
                     finishDialog.dismiss()
-                    LogEventsHelper(this).logButtonTap("xoi_new_dialog_new")
-                    dialogShown = false
+                    LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_new")
+                    oververviewActivity.isDialogShown = false
                 }
 
                 closeButton.setOnClickListener {
                     finishDialog.dismiss()
-                    onBackPressed()
-                    LogEventsHelper(this).logButtonTap("xx_new_dialog_close")
-                    dialogShown = false
+                    fragmentManager.popBackStack()
+                    LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
+                    oververviewActivity.isDialogShown = false
                 }
 
                 finishDialog.setCancelable(false)
@@ -183,19 +192,21 @@ class XXTrainingsActivity() : AppCompatActivity() {
             }
         }
 
-        scoreView = findViewById(R.id.xxScore)
-        roundView = findViewById(R.id.xxRoundCount)
-        dartView = findViewById(R.id.xxDartCount)
+        scoreView = view.findViewById(R.id.xxScore)
+        roundView = view.findViewById(R.id.xxRoundCount)
+        dartView = view.findViewById(R.id.xxDartCount)
 
-        firstDartView = findViewById(R.id.xxFirstDart)
-        secondDartView = findViewById(R.id.xxSecondDart)
-        thirdDartView = findViewById(R.id.xxThirdDart)
+        firstDartView = view.findViewById(R.id.xxFirstDart)
+        secondDartView = view.findViewById(R.id.xxSecondDart)
+        thirdDartView = view.findViewById(R.id.xxThirdDart)
 
-        singleView = findViewById(R.id.xxSingleAmount)
-        doubleView = findViewById(R.id.xxDoubleAmount)
-        tripleView = findViewById(R.id.xxTripleAmount)
+        singleView = view.findViewById(R.id.xxSingleAmount)
+        doubleView = view.findViewById(R.id.xxDoubleAmount)
+        tripleView = view.findViewById(R.id.xxTripleAmount)
 
         setupView()
+
+        return view
     }
 
     override fun onResume() {
@@ -204,23 +215,22 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun initBanner() {
-        bannerAdView = findViewById(R.id.xxBanner)
         val adRequest = AdRequest.Builder().build()
         bannerAdView.loadAd(adRequest)
 
         bannerAdView.adListener = object: AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XXTrainingsActivity).logBannerLoaded(className)
+                LogEventsHelper(oververviewActivity).logBannerLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XXTrainingsActivity).logBannerFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XXTrainingsActivity).logBannerOpened(className)
+                LogEventsHelper(oververviewActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -235,21 +245,21 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun initIntersital() {
-        intersitalAd = InterstitialAd(this)
+        intersitalAd = InterstitialAd(oververviewActivity)
         intersitalAd.adUnitId = getString(R.string.interistal_id)
         intersitalAd.loadAd(AdRequest.Builder().build())
         intersitalAd.adListener = object: AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XXTrainingsActivity).logIntersitalLoaded(className)
+                LogEventsHelper(oververviewActivity).logIntersitalLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                LogEventsHelper(this@XXTrainingsActivity).logIntersitalFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logIntersitalFailed(className, errorCode)
                 intersitalAd.loadAd(AdRequest.Builder().build())
             }
 
             override fun onAdOpened() {
-                LogEventsHelper(this@XXTrainingsActivity).logIntersitalOpened(className)
+                LogEventsHelper(oververviewActivity).logIntersitalOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -271,11 +281,11 @@ class XXTrainingsActivity() : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    /** override fun onBackPressed() {
 
         if (!dialogShown) {
             dialogShown = true
-            val inflater = this.layoutInflater
+            val inflater = oververviewActivity.layoutInflater
             val dialogHintBuilder = AlertDialog.Builder(
                 this)
             val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
@@ -293,13 +303,13 @@ class XXTrainingsActivity() : AppCompatActivity() {
             exitButton.setOnClickListener {
                 finishDialog.dismiss()
                 dialogShown = false
-                LogEventsHelper(this).logButtonTap("xx_finish_dialog_close")
+                LogEventsHelper(oververviewActivity).logButtonTap("xx_finish_dialog_close")
                 super.onBackPressed()
             }
 
             closeButton.setOnClickListener {
                 finishDialog.dismiss()
-                LogEventsHelper(this).logButtonTap("xx_finish_dialog_continue")
+                LogEventsHelper(oververviewActivity).logButtonTap("xx_finish_dialog_continue")
                 dialogShown = false
             }
 
@@ -310,11 +320,11 @@ class XXTrainingsActivity() : AppCompatActivity() {
         }
 
         super.onBackPressed()
-    }
+    } */
 
     private fun newLeg() {
 
-        animateValue(score, 0, scoreView)
+        animateIntegerValue(score, 0, scoreView)
         score = 0
         previousScore = score
 
@@ -342,7 +352,7 @@ class XXTrainingsActivity() : AppCompatActivity() {
             dartsThrowCount += 1
             dartAmount += 1
             setDartViewText(dartAmount)
-            animateValue(score, score + value, scoreView)
+            animateIntegerValue(score, score + value, scoreView)
             score += value
             setCurrentDart(value)
             setCountViews(value)
@@ -413,51 +423,35 @@ class XXTrainingsActivity() : AppCompatActivity() {
     }
 
     private fun showChooserDialog() {
-        var pickerValue = 1
-        dialogShown = true
-        val inflater = this.layoutInflater
-        val dialogHintBuilder = AlertDialog.Builder(
-            this)
-        val chooserDialogView = inflater.inflate(R.layout.chooser_dialog, null)
 
-        val targetTitle = chooserDialogView.findViewById<TextView>(R.id.xxChooserTitle)
-        targetTitle.text = getString(R.string.xx_chooser_title)
+        val xxArray = arrayOf("15", "16", "17", "18", "19", "20", "Bull")
+        val pickerDialog = PickerDialogFragment.Companion.newPickerDialog(
+            getString(R.string.xx_chooser_title),
+            xxArray,
+            getString(R.string.xx_chooser_title)
+        )
 
-        val targetPicker = chooserDialogView.findViewById<NumberPicker>(R.id.xxChooserPicker)
-        targetPicker.minValue = 0
-        targetPicker.maxValue = 6
-        targetPicker.displayedValues = arrayOf("15", "16", "17", "18", "19", "20", "Bull")
+        pickerDialog.listener = object : PickerDialogFragment.PickerDialogListener {
+            override fun buttonClicked(value: Int) {
+                when (value) {
+                    0 -> xxTarget = 15
+                    1 -> xxTarget = 16
+                    2 -> xxTarget = 17
+                    3 -> xxTarget = 18
+                    4 -> xxTarget = 19
+                    5 -> xxTarget = 20
+                    6 -> xxTarget = 25
+                }
 
-        targetPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-            pickerValue = newVal
-        }
-
-        val chooserButton = chooserDialogView.findViewById<Button>(R.id.xxChooserButton)
-        chooserButton.text = this.getString(R.string.xx_chooser_button_title)
-
-        dialogHintBuilder.setView(chooserDialogView)
-        val chooserDialog = dialogHintBuilder.create()
-
-        chooserButton.setOnClickListener {
-
-            when (pickerValue) {
-                0 -> xxTarget = 15
-                1 -> xxTarget = 16
-                2 -> xxTarget = 17
-                3 -> xxTarget = 18
-                4 -> xxTarget = 19
-                5 -> xxTarget = 20
-                6 -> xxTarget = 25
+                LogEventsHelper(oververviewActivity).logButtonTap("chooser_dialog")
+                pickerDialog.dismiss()
+                oververviewActivity.isDialogShown = false
+                newLeg()
             }
 
-            LogEventsHelper(this).logButtonTap("chooser_dialog")
-            chooserDialog.dismiss()
-            dialogShown = false
-            newLeg()
         }
 
-        chooserDialog.setCancelable(false)
-        chooserDialog.setCanceledOnTouchOutside(false)
-        chooserDialog.show()
+        pickerDialog.show(fragmentManager, null)
+        oververviewActivity.isDialogShown = true
     }
 }
