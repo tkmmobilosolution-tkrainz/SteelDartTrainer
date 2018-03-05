@@ -4,21 +4,18 @@ import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
-import sdt.tkm.at.steeldarttrainer.base.NeutralDialogFragment
 import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
+import sdt.tkm.at.steeldarttrainer.dialog.NeutralDialogFragment
 
 /**
  * [Add class description here]
@@ -28,7 +25,7 @@ import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class TrainingsOverViewActivity : Fragment() {
+class TrainingsOverViewFragment : Fragment() {
 
     private lateinit var bannerAdView: AdView
     private lateinit var appContext: Context
@@ -50,19 +47,19 @@ class TrainingsOverViewActivity : Fragment() {
 
         val xoiButton = view.findViewById<Button>(R.id.xoiButton)
         xoiButton.setOnClickListener {
-            val intent = Intent(appContext, XOITrainingsActivity::class.java)
+            val intent = Intent(appContext, XOITrainingsFragment::class.java)
             if (dataHolder.shouldShowXOIOverviewHint()) {
                 showInformationDialog(getString(R.string.trainings_overview_xoi_hint_message), intent)
                 dataHolder.xOIOverviewHintShown()
             } else {
-                startActivity(intent)
+                replaceFragment(XOITrainingsFragment())
             }
             LogEventsHelper(appContext).logButtonTap("trainings_overview_xoi")
         }
 
         val hsButton = view.findViewById<Button>(R.id.highscoreButton)
         hsButton.setOnClickListener {
-            replaceFragment(HighscoreTrainingsActivity())
+            replaceFragment(HighscoreTrainingsFragment())
             LogEventsHelper(appContext).logButtonTap("trainings_overview_hs")
         }
 
@@ -115,7 +112,7 @@ class TrainingsOverViewActivity : Fragment() {
             getString(R.string.trainings_overview_xoi_hint_button_text)
         )
 
-        neutralDialog.listener = object :  NeutralDialogFragment.NeutralListener {
+        neutralDialog.listener = object : NeutralDialogFragment.NeutralListener {
             override fun buttonClicked() {
                 oververviewActivity.isDialogShown = false
                 startActivity(intent)

@@ -1,4 +1,4 @@
-package sdt.tkm.at.steeldarttrainer.base
+package sdt.tkm.at.steeldarttrainer.dialog
 
 import android.app.Dialog
 import android.app.DialogFragment
@@ -10,7 +10,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.R.id.hintDialogTitle
 
 /**
  * [Add class description here]
@@ -31,16 +30,11 @@ class NeutralDialogFragment: DialogFragment() {
     var buttonTitleString: String? = null
         private set
 
-
-    /**
-     * Defines actions to happen if views are pressed.
-     */
     var listener: NeutralListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //get properties from arguments Bundle which has been assigned on creation
         val arguments = arguments
 
         message = arguments?.getString(ARG_MESSAGE)
@@ -58,6 +52,7 @@ class NeutralDialogFragment: DialogFragment() {
 
         return dialog
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.neutral_dialog, container)
 

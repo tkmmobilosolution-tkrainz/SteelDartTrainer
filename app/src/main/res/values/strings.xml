@@ -7,6 +7,7 @@
     <string name="general_exercises">Exercises</string>
     <string name="general_statistics">Statistics</string>
     <string name="general_no_score">No score</string>
+    <string name="general_hint">Hint</string>
 
     <string name="actionbar_title_main">Home</string>
     <string name="actionbar_title_trainings_overview">Sessions</string>
@@ -25,6 +26,7 @@
     <string name="dialog_finish_training_finish">Finish</string>
     <string name="dialog_finish_training_close">Continue</string>
 
+    <string name="dialog_new_training_title">Ready for another one?</string>
     <string name="dialog_new_training_text">You have successfully completed this training session. Do you want to start a new session?</string>
     <string name="dialog_new_training_new">New session</string>
     <string name="dialog_new_training_close">Close</string>

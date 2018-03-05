@@ -18,16 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".training.XOITrainingsActivity"
+        <activity android:name=".training.XOITrainingsFragment"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".training.TrainingsOverViewActivity"
+        <activity android:name=".training.TrainingsOverViewFragment"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".statistics.StatisticsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".training.HighscoreTrainingsActivity"
+        <activity android:name=".training.HighscoreTrainingsFragment"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".training.XXTrainingsActivity"

@@ -3,7 +3,6 @@ package sdt.tkm.at.steeldarttrainer.base
 import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.FragmentActivity
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
@@ -13,7 +12,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewActivity
+import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
 
 /**
  * [Add class description here]
@@ -75,7 +74,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         if (id == R.id.nav_home) {
             replaceFragment(OverviewFragment())
         } else if (id == R.id.nav_exercises) {
-            replaceFragment(TrainingsOverViewActivity())
+            replaceFragment(TrainingsOverViewFragment())
         }
 
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout

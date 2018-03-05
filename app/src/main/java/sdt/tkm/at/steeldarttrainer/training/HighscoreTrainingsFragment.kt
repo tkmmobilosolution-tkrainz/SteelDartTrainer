@@ -1,9 +1,13 @@
 package sdt.tkm.at.steeldarttrainer.training
 
 import android.annotation.SuppressLint
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.GridView
@@ -17,15 +21,9 @@ import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.GridAdapter
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.models.Dart
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
-import android.animation.ValueAnimator
-import android.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import sdt.tkm.at.steeldarttrainer.base.animateValue
 
 /**
  * [Add class description here]
@@ -35,21 +33,21 @@ import sdt.tkm.at.steeldarttrainer.base.animateValue
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class HighscoreTrainingsActivity : Fragment() {
-    
+class HighscoreTrainingsFragment : Fragment() {
+
     private lateinit var doubleButton: Button
     private lateinit var trippleButton: Button
     private lateinit var missButton: Button
     private lateinit var nextThrowButton: Button
     private lateinit var resetButton: Button
-    
+
     private lateinit var scoreView: TextView
     private lateinit var dartView: TextView
     private lateinit var roundView: TextView
     private lateinit var firstDart: TextView
     private lateinit var secondDart: TextView
     private lateinit var thirdDart: TextView
-    
+
     private lateinit var gridAdapter: GridAdapter
     private lateinit var gridView: GridView
 
@@ -60,7 +58,7 @@ class HighscoreTrainingsActivity : Fragment() {
 
     var currentThrow: Int = 0
     var dartMultiplier: Int = 1
-    
+
     var dartAmount: Int = 0
     var previousDartAmount: Int = 0
 
@@ -78,7 +76,7 @@ class HighscoreTrainingsActivity : Fragment() {
 
     var score: Int = START_SCORE
     var previousScore = score
-    
+
     var dartResultArrayList: ArrayList<Int> = ArrayList()
     var threeDatrArrayList: ArrayList<Int> = ArrayList()
 
@@ -205,7 +203,7 @@ class HighscoreTrainingsActivity : Fragment() {
 
                 closeButton.setOnClickListener {
                     finishDialog.dismiss()
-                    //onBackPressed()
+                    fragmentManager.popBackStack()
                     LogEventsHelper(activity).logButtonTap("hs_new_dialog_close")
                     dialogShown = false
                 }
@@ -218,7 +216,7 @@ class HighscoreTrainingsActivity : Fragment() {
 
         resetButton = view.findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
-            //animateValue(score, previousScore, scoreView)
+            animateIntegerValue(score, previousScore, scoreView)
             score = previousScore
             dartAmount = previousDartAmount
 
@@ -330,45 +328,45 @@ class HighscoreTrainingsActivity : Fragment() {
     /**
     override fun onBackPressed() {
 
-        if (!dialogShown) {
-            dialogShown = true
-            val inflater = activity.layoutInflater
-            val dialogHintBuilder = AlertDialog.Builder(
-                activity)
-            val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
+    if (!dialogShown) {
+    dialogShown = true
+    val inflater = activity.layoutInflater
+    val dialogHintBuilder = AlertDialog.Builder(
+    activity)
+    val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
 
-            val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
-            dialogText.text = this.getString(R.string.dialog_finish_training_text)
-            val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
-            exitButton.text = this.getString(R.string.dialog_finish_training_finish)
-            val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
-            closeButton.text = this.getString(R.string.dialog_finish_training_close)
+    val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
+    dialogText.text = this.getString(R.string.dialog_finish_training_text)
+    val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
+    exitButton.text = this.getString(R.string.dialog_finish_training_finish)
+    val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
+    closeButton.text = this.getString(R.string.dialog_finish_training_close)
 
-            dialogHintBuilder.setView(finishDialogView)
-            val finishDialog = dialogHintBuilder.create()
+    dialogHintBuilder.setView(finishDialogView)
+    val finishDialog = dialogHintBuilder.create()
 
-            exitButton.setOnClickListener {
-                finishDialog.dismiss()
-                dialogShown = false
-                LogEventsHelper(activity).logButtonTap("hs_finish_dialog_close")
-                //super.onBackPressed()
-            }
-
-            closeButton.setOnClickListener {
-                LogEventsHelper(this).logButtonTap("hs_finish_dialog_continue")
-                finishDialog.dismiss()
-                dialogShown = false
-            }
-
-            finishDialog.setCancelable(false)
-            finishDialog.setCanceledOnTouchOutside(false)
-            finishDialog.show()
-            return
-        }
-
-        super.onBackPressed()
+    exitButton.setOnClickListener {
+    finishDialog.dismiss()
+    dialogShown = false
+    LogEventsHelper(activity).logButtonTap("hs_finish_dialog_close")
+    //super.onBackPressed()
     }
-    */
+
+    closeButton.setOnClickListener {
+    LogEventsHelper(this).logButtonTap("hs_finish_dialog_continue")
+    finishDialog.dismiss()
+    dialogShown = false
+    }
+
+    finishDialog.setCancelable(false)
+    finishDialog.setCanceledOnTouchOutside(false)
+    finishDialog.show()
+    return
+    }
+
+    super.onBackPressed()
+    }
+     */
 
     private fun defaultDarts() {
         firstDart.text = "-"
@@ -383,7 +381,7 @@ class HighscoreTrainingsActivity : Fragment() {
         increaseDartAmount(1)
 
         if (res > 0) {
-            //animateValue(score, score + res, scoreView)
+            animateIntegerValue(score, score + res, scoreView)
         }
 
         score += res
@@ -459,7 +457,7 @@ class HighscoreTrainingsActivity : Fragment() {
         dartResultArrayList.clear()
         threeDatrArrayList.clear()
 
-        //animateValue(score, START_SCORE, scoreView)
+        animateIntegerValue(score, START_SCORE, scoreView)
         score = START_SCORE
         previousScore = score
 

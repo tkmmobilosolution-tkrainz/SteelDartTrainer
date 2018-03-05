@@ -8,6 +8,7 @@
     <string name="general_exercises">Übungen</string>
     <string name="general_statistics">Statistiken</string>
     <string name="general_no_score">Überworfen</string>
+    <string name="general_hint">Hinweis</string>
 
     <string name="actionbar_title_main">Übersicht</string>
     <string name="actionbar_title_trainings_overview">Übungen</string>
@@ -26,6 +27,7 @@
     <string name="dialog_finish_training_finish">Beenden</string>
     <string name="dialog_finish_training_close">Weiter spielen</string>
 
+    <string name="dialog_new_training_title">Bereit für eine weitere Runde?</string>
     <string name="dialog_new_training_text">Du hast diese Trainingseinheit erfolgreich beendet. Willst du eine neue Einheit beginnen?</string>
     <string name="dialog_new_training_new">Neu Einheit</string>
     <string name="dialog_new_training_close">Schließen</string>
