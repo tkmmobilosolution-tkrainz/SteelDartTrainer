@@ -85,6 +85,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             replaceFragment(StatisticsActivity())
         } else if (id == R.id.nav_rate) {
             this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sdt.tkm.at.steeldarttrainer")))
+        } else if (id == R.id.nav_tos) {
+            replaceFragment(PrivacyPolicyFragment())
         }
 
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
