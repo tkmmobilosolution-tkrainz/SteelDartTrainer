@@ -9,7 +9,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewActivity
+import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
 import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
         val trainingsOverview = findViewById<Button>(R.id.startTraining)
         trainingsOverview.setOnClickListener {
-            val intent = Intent(this, TrainingsOverViewActivity::class.java)
+            val intent = Intent(this, TrainingsOverViewFragment::class.java)
             startActivity(intent)
             LogEventsHelper(this).logButtonTap("trainings_overview")
         }

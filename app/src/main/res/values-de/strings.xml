@@ -8,6 +8,16 @@
     <string name="general_exercises">Übungen</string>
     <string name="general_statistics">Statistiken</string>
     <string name="general_no_score">Überworfen</string>
+    <string name="general_hint">Hinweis</string>
+
+    <string name="menu_title_general">Allgemein</string>
+    <string name="menu_title_training">Training</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_exercises">Übungen</string>
+    <string name="menu_item_statistics">Statistik</string>
+    <string name="menu_item_rate">Bewerte die App</string>
+    <string name="menu_item_privacy_policy">Datenschutz-Bestimmungen</string>
+    <string name="menu_item_imprint">Impressum</string>
 
     <string name="actionbar_title_main">Übersicht</string>
     <string name="actionbar_title_trainings_overview">Übungen</string>
@@ -26,6 +36,7 @@
     <string name="dialog_finish_training_finish">Beenden</string>
     <string name="dialog_finish_training_close">Weiter spielen</string>
 
+    <string name="dialog_new_training_title">Bereit für eine weitere Runde?</string>
     <string name="dialog_new_training_text">Du hast diese Trainingseinheit erfolgreich beendet. Willst du eine neue Einheit beginnen?</string>
     <string name="dialog_new_training_new">Neu Einheit</string>
     <string name="dialog_new_training_close">Schließen</string>
@@ -68,4 +79,38 @@
 
     <string name="statistics_graph_ppd">Punkte je Dart</string>
     <string name="statistics_graph_hits">Treffer pro Spiel</string>
+
+    <string name="navigation_drawer_open">Navigation Drawer öffnen</string>
+    <string name="navigation_drawer_close">Navigation Drawer schließen</string>
+
+    <string name="overview_facts_quadro_board">Wusstest du, dass es auch ein Dartboard mit Quadro Feldern gibt? Bei diesem Board gibt es einen weiteren Ring. Dieser zählt den vierfachen Wert.</string>
+    <string name="overview_facts_million_points">Martin Petrov, warf in 137,1 Stunden, aufgeteilt auf 6 Tage, insgesamt 1.000.001 Punkte.</string>
+    <string name="overview_facts_london_tournament">1937 wollten 300.000 Spieler, bei einem Stadt-Turnier in London teilnehmen.</string>
+    <string name="overview_facts_world_champoin">Phil Taylor hat bisher die meisten Weltmeistertitel gewinnen können. Er erlangt 16 Titel, davon 14 in der PDC und 2 in der BDO.</string>
+    <string name="overview_facts_fastest_hundret_eighty">Ricky Evans warf bis her die schnellste 180 im Live TV. Dafür brauchte er nur 2,13 Sekunden.</string>
+    <string name="overview_facts_dart_reglement">Ein Pfeil darf nicht länger als 30,5 Zentimeter sein. Das maximale Gewicht eines Pfeils darf 50 Gramm betragen.</string>
+
+    <string name="privacy_policy"><![CDATA[
+<h2>Datenschutzerklärung</h2>
+<p>Die Nutzung unserer Seite ist ohne eine Angabe von personenbezogenen Daten möglich. Für die Nutzung einzelner Services unserer Seite können sich hierfür abweichende Regelungen ergeben, die in diesem Falle nachstehend gesondert erläutert werden. Ihre personenbezogenen Daten (z.B. Name, Anschrift, E-Mail, Telefonnummer, u.ä.) werden von uns nur gemäß den Bestimmungen des deutschen Datenschutzrechts verarbeitet. Daten sind dann personenbezogen, wenn sie eindeutig einer bestimmten natürlichen Person zugeordnet werden können. Die rechtlichen Grundlagen des Datenschutzes finden Sie im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG). Nachstehende Regelungen informieren Sie insoweit über die Art, den Umfang und Zweck der Erhebung, die Nutzung und die Verarbeitung von personenbezogenen Daten durch den Anbieter</p>
+<p>Wir weisen darauf hin, dass die internetbasierte Datenübertragung Sicherheitslücken aufweist, ein lückenloser Schutz vor Zugriffen durch Dritte somit unmöglich ist.</p>
+
+<h3>Einsatz von Google-Analytics mit Anonymisierungsfunktion</h3>
+<p>Wir setzen auf unserer Seite Google-Analytics, einen Webanalysedienst der Firma Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043 USA, nachfolgend „Google“ ein. Google-Analytics verwendet sog. „Cookies“, Textdateien, die auf Ihrem Computer gespeichert werden und hierdurch eine Analyse der Benutzung der App durch Sie ermöglichen.</p>
+<p>Die durch diese Cookies erzeugten Informationen, beispielsweise Zeit, Ort und Häufigkeit Ihres Webseiten-Besuchs einschließlich Ihrer IP-Adresse, werden an Google in den USA übertragen und dort gespeichert.</p>
+<p>Wir verwenden in unserer App Google-Analytics mit einer IP-Anonymisierungsfunktion. Ihre IP-Adresse wird in diesem Fall von Google schon innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum gekürzt und dadurch anonymisiert.</p>
+<p>Google wird diese Informationen benutzen, um Ihre Nutzung unserer Seite auszuwerten, um Reports über die Appaktivitäten für uns zusammenzustellen und um weitere mit der Appnutzung und der Internetnutzung verbundene Dienstleistungen zu erbringen. Auch wird Google diese Informationen gegebenenfalls an Dritte übertragen, sofern dies gesetzlich vorgeschrieben oder soweit Dritte diese Daten im Auftrag von Google verarbeiten.</p>
+<p>Google wird, nach eigenen Angaben, in keinem Fall Ihre IP-Adresse mit anderen Daten von Google in Verbindung bringen. Sie können die Installation der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen unserer App vollumfänglich nutzen können.</p>
+<p>Des Weiteren bietet Google für die gängigsten Browser eine Deaktivierungsoption an, welche Ihnen mehr Kontrolle darüber gibt, welche Daten von Google erfasst und verarbeitet werden. Sollte Sie diese Option aktivieren, werden keine Informationen zum App-Besuch an Google Analytics übermittelt. Die Aktivierung verhindert aber nicht, dass Informationen an uns oder an andere von uns gegebenenfalls eingesetzte Webanalyse-Services übermittelt werden. Weitere Informationen zu der von Google bereitgestellten Deaktivierungsoption sowie zu der Aktivierung dieser Option, erhalten Sie über nachfolgenden Link: <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" rel="nofollow">https://tools.google.com/dlpage/gaoptout?hl=de</a></p>
+
+<h3>Einsatz von Google AdSense </h3>
+<p>Wir setzen in unserer App Google AdSense ein. Google AdSense ist ein Dienst der Firma Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043 USA, zum Einbinden von Werbeanzeigen. Google-AdSense verwendet sog. „Cookies“, somit Textdateien, die auf Ihrem Gerät gespeichert werden und eine Analyse der Benutzung unserer App ermöglichen. Weiter verwendet Google AdSense sogenannte Web Beacons. Durch diese Web Beacons ist es Google möglich, Informationen, wie zum Beispiel den Besucherfluss auf unserer Seite, auszuwerten. Diese Informationen werden neben Ihrer IP-Adresse und der Erfassung der angezeigten Werbeformate an Google in den USA übertragen, dort gespeichert und können von Google an Vertragspartner weiter gegeben werden. Google führt Ihre IP-Adresse jedoch nicht mit anderen von Ihnen gespeicherten Daten zusammen. Sie können die Installation der Cookies durch eine entsprechende Einstellung Ihres Browsers verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen unserer App vollumfänglich nutzen können.&nbsp;Mit der Nutzung unserer App<TextView
+        android:id="@+id/privacyPolicyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/white"/>
+         erklären Sie sich mit der Bearbeitung der über sie erhobenen Daten durch Google in der zuvor beschriebenen Art und Weise und zu dem zuvor benannten Zweck einverstanden.</p>
+]]>
+</string>
 </resources>

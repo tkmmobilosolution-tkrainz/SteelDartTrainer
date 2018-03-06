@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/menu_title_training">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:title="@string/menu_item_home" />
+            <item
+                android:id="@+id/nav_exercises"
+                android:title="@string/menu_item_exercises" />
+            <item
+                android:id="@+id/nav_statistics"
+                android:title="@string/menu_item_statistics" />
+        </menu>
+    </item>
+
+    <!--
+    <item android:title="Account">
+        <menu>
+
+            <item
+                android:id="@+id/nav_achievements"
+                android:title="Profile" />
+
+            <item
+                android:id="@+id/nav_profile"
+                android:title="Profile" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+-->
+    <item android:title="@string/menu_title_general">
+        <menu>
+
+            <item
+                android:id="@+id/nav_rate"
+                android:title="@string/menu_item_rate" />
+            <item
+                android:id="@+id/nav_tos"
+                android:title="@string/menu_item_privacy_policy" />
+            <!--
+            <item
+                android:id="@+id/nav_imprint"
+                android:title="@string/menu_item_imprint" />
+                -->
+        </menu>
+    </item>
+</menu>
