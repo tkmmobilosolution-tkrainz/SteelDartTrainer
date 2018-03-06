@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="General">
+    <item android:title="@string/menu_title_training">
         <menu>
             <item
                 android:id="@+id/nav_home"
-                android:title="HOME" />
+                android:title="@string/menu_item_home" />
             <item
                 android:id="@+id/nav_exercises"
-                android:title="Exercises" />
+                android:title="@string/menu_item_exercises" />
             <item
                 android:id="@+id/nav_statistics"
-                android:title="Statistics" />
+                android:title="@string/menu_item_statistics" />
         </menu>
     </item>
 
+    <!--
     <item android:title="Account">
         <menu>
 
@@ -31,15 +32,19 @@
         </menu>
     </item>
 
-    <item android:title="About">
+-->
+    <item android:title="@string/menu_title_general">
         <menu>
 
             <item
                 android:id="@+id/nav_rate"
-                android:title="Rate the app" />
+                android:title="@string/menu_item_rate" />
             <item
                 android:id="@+id/nav_tos"
-                android:title="Privacy Policy" />
+                android:title="@string/menu_item_privacy_policy" />
+            <item
+                android:id="@+id/nav_imprint"
+                android:title="@string/menu_item_imprint" />
         </menu>
     </item>
 </menu>

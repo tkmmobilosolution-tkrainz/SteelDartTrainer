@@ -10,6 +10,15 @@
     <string name="general_no_score">Überworfen</string>
     <string name="general_hint">Hinweis</string>
 
+    <string name="menu_title_general">Allgemein</string>
+    <string name="menu_title_training">Training</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_exercises">Übungen</string>
+    <string name="menu_item_statistics">Statistik</string>
+    <string name="menu_item_rate">Bewerte die App</string>
+    <string name="menu_item_privacy_policy">Datenschutz-Bestimmungen</string>
+    <string name="menu_item_imprint">Impressum</string>
+
     <string name="actionbar_title_main">Übersicht</string>
     <string name="actionbar_title_trainings_overview">Übungen</string>
     <string name="actionbar_title_xoi_statistics">X01 Statistik</string>
@@ -73,4 +82,11 @@
 
     <string name="navigation_drawer_open">Navigation Drawer öffnen</string>
     <string name="navigation_drawer_close">Navigation Drawer schließen</string>
+
+    <string name="overview_facts_quadro_board">Wusstest du, dass es auch ein Dartboard mit Quadro Feldern gibt? Bei diesem Board gibt es einen weiteren Ring. Dieser zählt den vierfachen Wert.</string>
+    <string name="overview_facts_million_points">Martin Petrov, warf in 137,1 Stunden, aufgeteilt auf 6 Tage, insgesamt 1.000.001 Punkte.</string>
+    <string name="overview_facts_london_tournament">1937 wollten 300.000 Spieler, bei einem Stadt-Turnier in London teilnehmen.</string>
+    <string name="overview_facts_world_champoin">Phil Taylor hat bisher die meisten Weltmeistertitel gewinnen können. Er erlangt 16 Titel, davon 14 in der PDC und 2 in der BDO.</string>
+    <string name="overview_facts_fastest_hundret_eighty">Ricky Evans warf bis her die schnellste 180 im Live TV. Dafür brauchte er nur 2,13 Sekunden.</string>
+    <string name="overview_facts_dart_reglement">Ein Pfeil darf nicht länger als 30,5 Zentimeter sein. Das maximale Gewicht eines Pfeils darf 50 Gramm betragen.</string>
 </resources>

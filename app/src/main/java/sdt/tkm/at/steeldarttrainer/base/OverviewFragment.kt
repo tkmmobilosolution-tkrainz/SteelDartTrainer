@@ -52,12 +52,12 @@ class OverviewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val strings = arrayOf("Wusstest du das es auch ein Dartboard mit Quadro Feldern gibt? Bei diesem Board gibt es einen weiteren Ring. Dieser zählt den vierfachen Wert.",
-            "Martin Petrov, warf in 137,1 Stunden, aufgeteilt auf 6 Tage, insgesamt 1.000.001 Punkte.",
-            "1937 wollten 300.000 Spieler, bei einem Stadt-Turnier in London teilnehmen.",
-            "Phil Taylor hat bisher die meisten Weltmeistertitel gewinnen können. Er erlangt 16 Titel, davon 14 in der PDC und 2 in der BDO.",
-            "Ricky Evans warf bis her die schnellste 180 im Live TV. Dafür brauchte er nur 2,13 Sekunden.",
-            "Ein Pfeil darf nicht länger als 30,5 Zentimeter sein. Das maximale Gewicht eines Pfeils darf 50 Gramm betragen."
+        val strings = arrayOf(getString(R.string.overview_facts_quadro_board),
+            getString(R.string.overview_facts_million_points),
+            getString(R.string.overview_facts_london_tournament),
+            getString(R.string.overview_facts_world_champoin),
+            getString(R.string.overview_facts_fastest_hundret_eighty),
+            getString(R.string.overview_facts_dart_reglement)
         )
         val interval = 7000L // 1 Second
         handler = Handler()

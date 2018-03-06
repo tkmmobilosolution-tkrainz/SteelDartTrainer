@@ -1,6 +1,8 @@
 package sdt.tkm.at.steeldarttrainer.base
 
 import android.app.Fragment
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -81,6 +83,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             replaceFragment(TrainingsOverViewFragment())
         } else if (id == R.id.nav_statistics) {
             replaceFragment(StatisticsActivity())
+        } else if (id == R.id.nav_rate) {
+            this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sdt.tkm.at.steeldarttrainer")))
         }
 
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout

@@ -9,6 +9,15 @@
     <string name="general_no_score">No score</string>
     <string name="general_hint">Hint</string>
 
+    <string name="menu_title_general">General</string>
+    <string name="menu_title_training">Training</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_exercises">Exercises</string>
+    <string name="menu_item_statistics">Statistics</string>
+    <string name="menu_item_rate">Rate the app</string>
+    <string name="menu_item_privacy_policy">Privacy Policy</string>
+    <string name="menu_item_imprint">Imprint</string>
+
     <string name="actionbar_title_main">Home</string>
     <string name="actionbar_title_trainings_overview">Sessions</string>
     <string name="actionbar_title_xoi_statistics">X01 Statistics</string>
@@ -72,4 +81,11 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="overview_facts_quadro_board">Did you know that there is also a dartboard with quadro fields? There is another ring on this board. This is four times the value.</string>
+    <string name="overview_facts_million_points">Martin Petrov, threw in 137.1 hours, divided into 6 days, a total of 1,000,001 points.</string>
+    <string name="overview_facts_london_tournament">In 1937, 300,000 players wanted to participate in a city tournament in London.</string>
+    <string name="overview_facts_world_champoin">Phil Taylor has won most World Championship titles so far. He earned 16 titles, 14 of them in the PDC and 2 in the BDO.</string>
+    <string name="overview_facts_fastest_hundret_eighty">Ricky Evans threw the fastest 180 on Live TV. For that he only needed 2.13 seconds.</string>
+    <string name="overview_facts_dart_reglement">An arrow must not be longer than 30.5 centimeters. The maximum weight of an arrow may be 50 grams.</string>
 </resources>
