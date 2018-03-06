@@ -227,7 +227,8 @@ class HighscoreStatsFragment: Fragment() {
         graph.gridLabelRenderer.horizontalLabelsColor = Color.WHITE
         graph.gridLabelRenderer.verticalLabelsColor = Color.WHITE
 
-        graph.viewport.setMinY(minY - 5.0)
+        val min = if (minY <= 4.9) 0.0 else minY - 5.0
+        graph.viewport.setMinY(min)
         graph.viewport.setMaxY(maxY + 5.0)
         graph.viewport.isYAxisBoundsManual = true
         graph.viewport.setMinX(1.0)

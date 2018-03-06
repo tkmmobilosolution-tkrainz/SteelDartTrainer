@@ -42,9 +42,11 @@
             <item
                 android:id="@+id/nav_tos"
                 android:title="@string/menu_item_privacy_policy" />
+            <!--
             <item
                 android:id="@+id/nav_imprint"
                 android:title="@string/menu_item_imprint" />
+                -->
         </menu>
     </item>
 </menu>

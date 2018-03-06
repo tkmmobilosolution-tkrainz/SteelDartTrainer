@@ -175,15 +175,15 @@ class XXTrainingsFragment() : Fragment() {
                 replayButton.setOnClickListener {
                     showChooserDialog()
                     finishDialog.dismiss()
-                    LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_new")
+                    LogEventsHelper(oververviewActivity).logButtonTap("xx_new_dialog_new")
                     oververviewActivity.isDialogShown = false
                 }
 
                 closeButton.setOnClickListener {
-                    finishDialog.dismiss()
-                    fragmentManager.popBackStack()
-                    LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
                     oververviewActivity.isDialogShown = false
+                    finishDialog.dismiss()
+                    LogEventsHelper(oververviewActivity).logButtonTap("xx_new_dialog_close")
+                    oververviewActivity.onBackPressed()
                 }
 
                 finishDialog.setCancelable(false)

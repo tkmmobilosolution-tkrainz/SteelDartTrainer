@@ -94,7 +94,7 @@ class XOITrainingsFragment : Fragment() {
     private lateinit var oververviewActivity: OverviewActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.xoi_hs_trainings_activity, container, false)
+        val view = inflater.inflate(R.layout.xoi_hs_trainings_activity, null, false)
 
         oververviewActivity = activity as OverviewActivity
 
@@ -526,10 +526,11 @@ class XOITrainingsFragment : Fragment() {
         }
 
         closeButton.setOnClickListener {
-            finishDialog.dismiss()
-            fragmentManager.popBackStack()
-            LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
             oververviewActivity.isDialogShown = false
+            finishDialog.dismiss()
+            LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
+            oververviewActivity.onBackPressed()
+
         }
 
         finishDialog.setCancelable(false)

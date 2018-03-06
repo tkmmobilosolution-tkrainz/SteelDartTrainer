@@ -129,7 +129,7 @@ class TrainingsOverViewFragment : Fragment() {
         val transaction = fragmentManager.beginTransaction()
         transaction.add(R.id.content_frame, fragment)
         transaction.addToBackStack(null)
-        transaction.commitAllowingStateLoss()
+        transaction.commit()
         oververviewActivity.showUpButton(true)
     }
 }

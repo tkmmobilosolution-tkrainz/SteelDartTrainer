@@ -82,7 +82,6 @@ class HighscoreTrainingsFragment : Fragment() {
     var threeDatrArrayList: ArrayList<Int> = ArrayList()
 
     var hasNoScore = false
-    var dialogShown = false
 
     private var gameCount: Int = 0
     private val className = "hs_training"
@@ -188,7 +187,7 @@ class HighscoreTrainingsFragment : Fragment() {
                 checkAmount(dartsCount)
                 checkedOut()
 
-                dialogShown = true
+                oververviewActivity.isDialogShown = false
                 val inflater = activity.layoutInflater
                 val dialogHintBuilder = AlertDialog.Builder(
                     activity)
@@ -200,17 +199,17 @@ class HighscoreTrainingsFragment : Fragment() {
                 val finishDialog = dialogHintBuilder.create()
 
                 replayButton.setOnClickListener {
-                    dialogShown = false
+                    oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
                     LogEventsHelper(activity).logButtonTap("hs_new_dialog_new")
                     newLeg()
                 }
 
                 closeButton.setOnClickListener {
+                    oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
-                    fragmentManager.popBackStack()
                     LogEventsHelper(activity).logButtonTap("hs_new_dialog_close")
-                    dialogShown = false
+                    oververviewActivity.onBackPressed()
                 }
 
                 finishDialog.setCancelable(false)
