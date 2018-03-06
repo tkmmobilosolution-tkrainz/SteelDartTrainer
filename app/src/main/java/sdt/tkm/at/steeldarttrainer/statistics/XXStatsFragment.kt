@@ -48,16 +48,16 @@ class XXStatsFragmentFragment : Fragment() {
 
         if (xxList.isEmpty()) {
             layout.visibility = View.GONE
-            if (activity is StatisticsActivity) {
-                val currentActivity = activity as StatisticsActivity
-                currentActivity.shouldShowInfoButton(false)
-            }
+            /** if (activity is StatisticsActivity) {
+            val currentActivity = activity as StatisticsActivity
+            currentActivity.shouldShowInfoButton(false)
+            }*/
         } else {
             statsinfoTextView.visibility = View.GONE
-            if (activity is StatisticsActivity) {
-                val currentActivity = activity as StatisticsActivity
-                currentActivity.shouldShowInfoButton(true)
-            }
+            /**if (activity is StatisticsActivity) {
+            val currentActivity = activity as StatisticsActivity
+            currentActivity.shouldShowInfoButton(true)
+            }*/
         }
 
         super.onViewCreated(view, savedInstanceState)

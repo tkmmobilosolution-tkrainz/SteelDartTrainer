@@ -1,11 +1,14 @@
 package sdt.tkm.at.steeldarttrainer.training
 
 import android.annotation.SuppressLint
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.GridView
@@ -15,12 +18,14 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
-import com.shawnlin.numberpicker.NumberPicker
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.GridAdapter
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
-import sdt.tkm.at.steeldarttrainer.base.animateValue
+import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
+import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
+import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment
+import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment.PickerDialogListener
 import sdt.tkm.at.steeldarttrainer.models.Dart
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import java.util.Locale
@@ -33,7 +38,7 @@ import java.util.Locale
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class XOITrainingsActivity : AppCompatActivity() {
+class XOITrainingsFragment : Fragment() {
 
     private lateinit var doubleButton: Button
     private lateinit var trippleButton: Button
@@ -78,7 +83,6 @@ class XOITrainingsActivity : AppCompatActivity() {
     var threeDatrArrayList: ArrayList<Int> = ArrayList()
 
     var hasNoScore = false
-    var dialogShown = false
 
     private val className = "xoi_training"
 
@@ -87,17 +91,20 @@ class XOITrainingsActivity : AppCompatActivity() {
     var score: Int = -1
     var previousScore = score
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.xoi_hs_trainings_activity)
+    private lateinit var oververviewActivity: OverviewActivity
 
-        supportActionBar?.title = getString(R.string.actionbar_title_xoi_training)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.xoi_hs_trainings_activity, null, false)
 
-        dataholder = DataHolder(this.applicationContext)
+        oververviewActivity = activity as OverviewActivity
+
+        bannerAdView = view.findViewById(R.id.trainingBanner)
+
+        dataholder = DataHolder(oververviewActivity)
         initIntersital()
 
-        gridView = findViewById<GridView>(R.id.gridView)
-        gridAdapter = GridAdapter(this)
+        gridView = view.findViewById<GridView>(R.id.gridView)
+        gridAdapter = GridAdapter(oververviewActivity)
         gridView.adapter = gridAdapter
         gridView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 
@@ -110,7 +117,7 @@ class XOITrainingsActivity : AppCompatActivity() {
                 }
 
                 if (dart.value == 25 && dart.multiplier == 3) {
-                    Toast.makeText(this, "Triple Bull not valid", Toast.LENGTH_LONG).show()
+                    Toast.makeText(oververviewActivity, "Triple Bull not valid", Toast.LENGTH_LONG).show()
                 } else {
                     currentThrow = throwCount
                     dartThrown(dart, false)
@@ -118,35 +125,35 @@ class XOITrainingsActivity : AppCompatActivity() {
             }
         }
 
-        dartView = findViewById(R.id.dartCount)
-        roundView = findViewById(R.id.roundCount)
-        scoreView = findViewById(R.id.score)
+        dartView = view.findViewById(R.id.dartCount)
+        roundView = view.findViewById(R.id.roundCount)
+        scoreView = view.findViewById(R.id.score)
 
-        doubleButton = findViewById<Button>(R.id.doubleButton)
+        doubleButton = view.findViewById<Button>(R.id.doubleButton)
         doubleButton.setOnClickListener {
             setMultiplierButton(doubleButton)
             dartMultiplier = if (doubleButton.isSelected) 2 else 1
         }
 
-        trippleButton = findViewById<Button>(R.id.trippleButton)
+        trippleButton = view.findViewById<Button>(R.id.trippleButton)
         trippleButton.setOnClickListener {
             setMultiplierButton(trippleButton)
             dartMultiplier = if (trippleButton.isSelected) 3 else 1
         }
 
-        missButton = findViewById(R.id.missButton)
+        missButton = view.findViewById(R.id.missButton)
         missButton.setOnClickListener {
             if (throwCount <= 2 && !hasNoScore) {
                 dartThrown(Dart(0, 1), false)
             }
         }
 
-        nextThrowButton = findViewById(R.id.nextThrowButton)
+        nextThrowButton = view.findViewById(R.id.nextThrowButton)
         nextThrowButton.setOnClickListener {
 
             if (hasNoScore) {
 
-                animateValue(score, previousScore, scoreView)
+                animateIntegerValue(score, previousScore, scoreView)
                 score = previousScore
                 dartAmount = previousDartAmount
             } else {
@@ -178,10 +185,10 @@ class XOITrainingsActivity : AppCompatActivity() {
             hasNoScore = false
         }
 
-        resetButton = findViewById(R.id.resetButton)
+        resetButton = view.findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
 
-            animateValue(score, previousScore, scoreView)
+            animateIntegerValue(score, previousScore, scoreView)
             score = previousScore
             dartAmount = previousDartAmount
 
@@ -192,9 +199,9 @@ class XOITrainingsActivity : AppCompatActivity() {
             defaultDarts()
         }
 
-        firstDart = findViewById(R.id.firstDart)
-        secondDart = findViewById(R.id.secondDart)
-        thirdDart = findViewById(R.id.thirdDart)
+        firstDart = view.findViewById(R.id.firstDart)
+        secondDart = view.findViewById(R.id.secondDart)
+        thirdDart = view.findViewById(R.id.thirdDart)
 
         showChooserDialog()
 
@@ -205,6 +212,8 @@ class XOITrainingsActivity : AppCompatActivity() {
         speech()
         }
          */
+
+        return view
     }
 
     override fun onResume() {
@@ -213,23 +222,24 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun initBanner() {
-        bannerAdView = findViewById(R.id.trainingBanner)
         val adRequest = AdRequest.Builder().build()
         bannerAdView.loadAd(adRequest)
 
         bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XOITrainingsActivity).logBannerLoaded(className)
+                if (oververviewActivity != null) {
+                    LogEventsHelper(oververviewActivity).logBannerLoaded(className)
+                }
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XOITrainingsActivity).logBannerFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
             override fun onAdOpened() {
                 bannerAdView.loadAd(adRequest)
-                LogEventsHelper(this@XOITrainingsActivity).logBannerOpened(className)
+                LogEventsHelper(oververviewActivity).logBannerOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -244,21 +254,21 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun initIntersital() {
-        intersitalAd = InterstitialAd(this)
+        intersitalAd = InterstitialAd(oververviewActivity)
         intersitalAd.adUnitId = getString(R.string.interistal_id)
         intersitalAd.loadAd(AdRequest.Builder().build())
         intersitalAd.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                LogEventsHelper(this@XOITrainingsActivity).logIntersitalLoaded(className)
+                LogEventsHelper(oververviewActivity).logIntersitalLoaded(className)
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                LogEventsHelper(this@XOITrainingsActivity).logIntersitalFailed(className, errorCode)
+                LogEventsHelper(oververviewActivity).logIntersitalFailed(className, errorCode)
                 intersitalAd.loadAd(AdRequest.Builder().build())
             }
 
             override fun onAdOpened() {
-                LogEventsHelper(this@XOITrainingsActivity).logIntersitalOpened(className)
+                LogEventsHelper(oververviewActivity).logIntersitalOpened(className)
             }
 
             override fun onAdLeftApplication() {
@@ -279,47 +289,43 @@ class XOITrainingsActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    /**
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.getItemId()) {
+    android.R.id.home -> {
+    if (!oververviewActivity.isDialogShown) {
+    oververviewActivity.isDialogShown = true
+    val chooserDialog = ChooserDialogFragment.Companion.newChooserDialog(
+    getString(R.string.general_hint),
+    getString(R.string.dialog_finish_training_text),
+    getString(R.string.dialog_finish_training_finish),
+    getString(R.string.dialog_finish_training_close)
+    )
 
-        if (!dialogShown) {
-            dialogShown = true
-            val inflater = this.layoutInflater
-            val dialogHintBuilder = AlertDialog.Builder(
-                this)
-            val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
-
-            val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
-            dialogText.text = this.getString(R.string.dialog_finish_training_text)
-            val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
-            exitButton.text = this.getString(R.string.dialog_finish_training_finish)
-            val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
-            closeButton.text = this.getString(R.string.dialog_finish_training_close)
-
-            dialogHintBuilder.setView(finishDialogView)
-            val finishDialog = dialogHintBuilder.create()
-
-            exitButton.setOnClickListener {
-                finishDialog.dismiss()
-                dialogShown = false
-                LogEventsHelper(this).logButtonTap("xoi_finish_dialog_close")
-                super.onBackPressed()
-            }
-
-            closeButton.setOnClickListener {
-                finishDialog.dismiss()
-                LogEventsHelper(this).logButtonTap("xoi_finish_dialog_continue")
-                dialogShown = false
-            }
-
-            finishDialog.setCancelable(false)
-            finishDialog.setCanceledOnTouchOutside(false)
-            finishDialog.show()
-            return
-        }
-
-        super.onBackPressed()
+    chooserDialog.listener = object : ChooserDialogFragment.ChooserDialogListener {
+    override fun positivButtonClicked() {
+    chooserDialog.dismiss()
+    oververviewActivity.isDialogShown = false
+    LogEventsHelper(oververviewActivity).logButtonTap("xoi_finish_dialog_close")
+    activity.onBackPressed()
     }
 
+    override fun negativeButtonClicked() {
+    chooserDialog.dismiss()
+    LogEventsHelper(oververviewActivity).logButtonTap("xoi_finish_dialog_continue")
+    oververviewActivity.isDialogShown = false
+    }
+
+    }
+    return true
+    }
+
+    return false
+    }
+    else -> return super.onOptionsItemSelected(item)
+    }
+    }
+     */
     private fun defaultDarts() {
         firstDart.text = "-"
         secondDart.text = "-"
@@ -367,7 +373,7 @@ class XOITrainingsActivity : AppCompatActivity() {
             checkoutTries += 1
             checkAmount(dartsCount)
             checkHeighestThreeDart(dartsCount)
-            animateValue(score, 0, scoreView)
+            animateIntegerValue(score, 0, scoreView)
             score = 0
             dartsCount = 0
             throwCount = 0
@@ -380,7 +386,7 @@ class XOITrainingsActivity : AppCompatActivity() {
                 checkoutTries += 1
             }
 
-            Toast.makeText(this, getString(R.string.general_no_score), Toast.LENGTH_SHORT).show()
+            Toast.makeText(oververviewActivity, getString(R.string.general_no_score), Toast.LENGTH_SHORT).show()
             if (throwCount == 1) {
                 increaseDartAmount(2)
             } else if (throwCount == 2) {
@@ -394,7 +400,7 @@ class XOITrainingsActivity : AppCompatActivity() {
                 checkoutTries += 1
             }
 
-            animateValue(score, score - res, scoreView)
+            animateIntegerValue(score, score - res, scoreView)
             score -= res
         }
 
@@ -470,7 +476,7 @@ class XOITrainingsActivity : AppCompatActivity() {
         dartResultArrayList.clear()
         threeDatrArrayList.clear()
 
-        animateValue(0, startAmount, scoreView)
+        animateIntegerValue(0, startAmount, scoreView)
         previousScore = score
 
         defaultDarts()
@@ -482,10 +488,29 @@ class XOITrainingsActivity : AppCompatActivity() {
             hundretPlus, hundretFourtyPlus, hundretEigthy)
         dataholder.addXOITraining(training)
 
-        dialogShown = true
-        val inflater = this.layoutInflater
+        oververviewActivity.isDialogShown = true
+        /**
+        val chooserDialog = ChooserDialogFragment.Companion.newChooserDialog(
+        getString(R.string.dialog_new_training_title),
+        getString(R.string.dialog_new_training_text),
+        getString(R.string.dialog_new_training_new),
+        getString(R.string.dialog_new_training_close)
+        )
+
+        chooserDialog.listener = object : ChooserDialogFragment.ChooserDialogListener {
+        override fun positivButtonClicked() {
+
+        }
+
+        override fun negativeButtonClicked() {
+
+        }
+
+        }
+         */
+        val inflater = oververviewActivity.layoutInflater
         val dialogHintBuilder = AlertDialog.Builder(
-            this)
+            oververviewActivity)
         val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
         val replayButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
         val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
@@ -496,17 +521,19 @@ class XOITrainingsActivity : AppCompatActivity() {
         replayButton.setOnClickListener {
             showChooserDialog()
             finishDialog.dismiss()
-            LogEventsHelper(this).logButtonTap("xoi_new_dialog_new")
-            dialogShown = false
+            LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_new")
+            oververviewActivity.isDialogShown = false
         }
 
         closeButton.setOnClickListener {
+            oververviewActivity.isDialogShown = false
             finishDialog.dismiss()
-            onBackPressed()
-            LogEventsHelper(this).logButtonTap("xoi_new_dialog_close")
-            dialogShown = false
+            LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
+            oververviewActivity.onBackPressed()
+
         }
 
+        finishDialog.setCancelable(false)
         finishDialog.setCanceledOnTouchOutside(false)
         finishDialog.show()
     }
@@ -679,44 +706,26 @@ class XOITrainingsActivity : AppCompatActivity() {
     }
 
     private fun showChooserDialog() {
-        var pickerValue = 1
-        dialogShown = true
-        val inflater = this.layoutInflater
-        val dialogHintBuilder = AlertDialog.Builder(
-            this)
-        val chooserDialogView = inflater.inflate(R.layout.chooser_dialog, null)
-
-        val targetTitle = chooserDialogView.findViewById<TextView>(R.id.xxChooserTitle)
-        targetTitle.text = getString(R.string.xoi_chooser_title)
-
-        val targetPicker = chooserDialogView.findViewById<NumberPicker>(R.id.xxChooserPicker)
-        targetPicker.minValue = 0
-        targetPicker.maxValue = 5
         val xoiArray = arrayOf("301", "501", "701", "801", "901", "1001")
-        targetPicker.displayedValues = xoiArray
+        val pickerDialog = PickerDialogFragment.Companion.newPickerDialog(
+            getString(R.string.trainings_overview_xoi_hint_title),
+            xoiArray,
+            getString(R.string.trainings_overview_xoi_hint_button_text)
+        )
 
-        targetPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-            pickerValue = newVal
+        pickerDialog.listener = object : PickerDialogListener {
+            override fun buttonClicked(value: Int) {
+                oververviewActivity.isDialogShown = false
+                score = xoiArray[value].toInt()
+                startAmount = score
+                newLeg()
+                LogEventsHelper(oververviewActivity).logButtonTap("chooser_dialog")
+                pickerDialog.dismiss()
+            }
+
         }
 
-        val chooserButton = chooserDialogView.findViewById<Button>(R.id.xxChooserButton)
-        chooserButton.text = this.getString(R.string.xoi_chooser_button_title)
-
-        dialogHintBuilder.setView(chooserDialogView)
-        val chooserDialog = dialogHintBuilder.create()
-
-        chooserButton.setOnClickListener {
-
-            score = xoiArray[pickerValue].toInt()
-            startAmount = score
-            chooserDialog.dismiss()
-            dialogShown = false
-            LogEventsHelper(this).logButtonTap("chooser_dialog")
-            newLeg()
-        }
-
-        chooserDialog.setCancelable(false)
-        chooserDialog.setCanceledOnTouchOutside(false)
-        chooserDialog.show()
+        pickerDialog.show(fragmentManager, null)
+        oververviewActivity.isDialogShown = true
     }
 }

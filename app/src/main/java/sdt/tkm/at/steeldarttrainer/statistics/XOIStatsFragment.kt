@@ -46,19 +46,21 @@ class XOIStatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         xoiTrainingsList = DataHolder(this.activity.applicationContext).getXOITrainingsList()
 
+
         if (xoiTrainingsList.isEmpty()) {
             layout.visibility = View.GONE
-            if (activity is StatisticsActivity) {
+           /** if (activity is StatisticsActivity) {
                 val currentActivity = activity as StatisticsActivity
                 currentActivity.shouldShowInfoButton(false)
-            }
+            }*/
         } else {
             statsinfoTextView.visibility = View.GONE
-            if (activity is StatisticsActivity) {
+            /**if (activity is StatisticsActivity) {
                 val currentActivity = activity as StatisticsActivity
                 currentActivity.shouldShowInfoButton(true)
-            }
+            }*/
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 

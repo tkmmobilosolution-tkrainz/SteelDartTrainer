@@ -7,6 +7,17 @@
     android:background="@drawable/black_button_background">
 
     <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/dialog_new_training_title"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"/>
+
+    <TextView
         android:id="@+id/dialogText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
