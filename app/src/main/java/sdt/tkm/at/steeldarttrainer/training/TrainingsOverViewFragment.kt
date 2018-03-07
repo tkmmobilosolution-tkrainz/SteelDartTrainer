@@ -1,7 +1,6 @@
 package sdt.tkm.at.steeldarttrainer.training
 
 import android.app.Fragment
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -67,6 +66,18 @@ class TrainingsOverViewFragment : Fragment() {
             LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xx")
         }
 
+        val aroundClockButton = view.findViewById<Button>(R.id.aroundTheClockButton)
+        aroundClockButton.setOnClickListener {
+            replaceFragment(AroundTheClockTrainingsFragment())
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+        }
+
+        val randomButton = view.findViewById<Button>(R.id.randomTarget)
+        randomButton.setOnClickListener {
+            replaceFragment(RandomTrainingFragment())
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+        }
+
         return view
     }
 
@@ -127,7 +138,7 @@ class TrainingsOverViewFragment : Fragment() {
 
     private fun replaceFragment(fragment: Fragment) {
         val transaction = fragmentManager.beginTransaction()
-        transaction.add(R.id.content_frame, fragment)
+        transaction.replace(R.id.content_frame, fragment, "Detail_Training")
         transaction.addToBackStack(null)
         transaction.commit()
         oververviewActivity.showUpButton(true)

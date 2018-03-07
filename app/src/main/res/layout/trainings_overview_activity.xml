@@ -6,58 +6,98 @@
     android:background="@android:color/black"
     tools:context="sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/trainingsOverviewBanner"
-        android:background="@android:color/black"
-        android:orientation="vertical">
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp">
 
-        <Button
-            android:id="@+id/xoiButton"
-            android:textStyle="bold"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/main_item_background"
-            android:text="@string/excercise_xoi"
-            android:textColor="@drawable/black_button_text_color"
-            android:textSize="25sp" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/trainingsOverviewBanner"
+            android:background="@android:color/black"
+            android:weightSum="4"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/highscoreButton"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/main_item_background"
-            android:text="@string/excercise_highscore"
-            android:textColor="@drawable/black_button_text_color"
-            android:textSize="25sp" />
+            <Button
+                android:id="@+id/xoiButton"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="@string/excercise_xoi"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/dartsToXButton"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/main_item_background"
-            android:text="@string/excercise_dart_to_X"
-            android:textColor="@drawable/black_button_text_color"
-            android:textSize="25sp" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/highscoreButton"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="@string/excercise_highscore"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/dartsToXButton"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="@string/excercise_dart_to_X"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/aroundTheClockButton"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="Around the Clock"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/randomTarget"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="Random Target"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </ScrollView>
+
+
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/trainingsOverviewBanner"

@@ -73,4 +73,17 @@ class LogEventsHelper(val context: Context = Application().applicationContext) {
         bundle.putString("button", text)
         logEvent(name, bundle)
     }
+
+    fun logMenuClick(text: String) {
+        val name = "menu_tap"
+        val bundle = Bundle()
+        bundle.putString("menu", text)
+        logEvent(name, bundle)
+    }
+
+    fun logCount(name: String, count: Int) {
+        val bundle = Bundle()
+        bundle.putInt("count", count)
+        logEvent(name, bundle)
+    }
 }

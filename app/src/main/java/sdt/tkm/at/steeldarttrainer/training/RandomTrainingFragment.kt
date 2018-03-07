@@ -18,17 +18,19 @@ import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
 import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
 import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment
+import sdt.tkm.at.steeldarttrainer.models.RandomTraining
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
+import java.util.Random
 
 /**
  * [Add class description here]
  *
- * Created 22.02.18
+ * Created 07.03.18
  *
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class XXTrainingsFragment() : Fragment() {
+class RandomTrainingFragment: Fragment() {
 
     private lateinit var singleButton: Button
     private lateinit var doubleButton: Button
@@ -72,7 +74,7 @@ class XXTrainingsFragment() : Fragment() {
     var xxTarget = -1
 
     private lateinit var bannerAdView: AdView
-    private val className = "xx_training"
+    private val className = "random_training"
 
     private var gameCount: Int = 0
     private lateinit var dataholder: DataHolder
@@ -84,7 +86,6 @@ class XXTrainingsFragment() : Fragment() {
         val view = inflater.inflate(R.layout.xx_trainings_activity, container, false)
 
         oververviewActivity = activity as OverviewActivity
-        showChooserDialog()
 
         dataholder = DataHolder(oververviewActivity)
         initIntersital()
@@ -108,7 +109,6 @@ class XXTrainingsFragment() : Fragment() {
 
         resetButton = view.findViewById(R.id.xxResetButton)
         resetButton.setOnClickListener {
-            animateIntegerValue(score, previousScore, scoreView)
             score = previousScore
 
             singleCount = previousSingleCount
@@ -154,9 +154,9 @@ class XXTrainingsFragment() : Fragment() {
             increaseRound()
             resetDartViews()
 
-            if (dartAmount == 99) {
-                val training = XXTraining(xxTarget, score, singleCount, doubleCount, tripleCount)
-                dataholder.addXXTraining(training)
+            if (dartAmount == 30) {
+                val training = RandomTraining(score, singleCount, doubleCount, tripleCount)
+                dataholder.addRandomTraining(training)
 
                 oververviewActivity.isDialogShown = true
                 val inflater = oververviewActivity.layoutInflater
@@ -170,16 +170,16 @@ class XXTrainingsFragment() : Fragment() {
                 val finishDialog = dialogHintBuilder.create()
 
                 replayButton.setOnClickListener {
-                    showChooserDialog()
                     finishDialog.dismiss()
-                    LogEventsHelper(oververviewActivity).logButtonTap("xx_new_dialog_new")
+                    newLeg()
+                    LogEventsHelper(oververviewActivity).logButtonTap("random_new_dialog_new")
                     oververviewActivity.isDialogShown = false
                 }
 
                 closeButton.setOnClickListener {
                     oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
-                    LogEventsHelper(oververviewActivity).logButtonTap("xx_new_dialog_close")
+                    LogEventsHelper(oververviewActivity).logButtonTap("random_new_dialog_close")
                     oververviewActivity.isDialogBackPressed = true
                     oververviewActivity.onBackPressed()
                 }
@@ -187,6 +187,8 @@ class XXTrainingsFragment() : Fragment() {
                 finishDialog.setCancelable(false)
                 finishDialog.setCanceledOnTouchOutside(false)
                 finishDialog.show()
+            } else {
+                scoreView.text = randomTarget()
             }
         }
 
@@ -202,7 +204,7 @@ class XXTrainingsFragment() : Fragment() {
         doubleView = view.findViewById(R.id.xxDoubleAmount)
         tripleView = view.findViewById(R.id.xxTripleAmount)
 
-        setupView()
+        newLeg()
 
         return view
     }
@@ -283,7 +285,7 @@ class XXTrainingsFragment() : Fragment() {
 
     private fun newLeg() {
 
-        animateIntegerValue(score, 0, scoreView)
+        scoreView.text = randomTarget()
         score = 0
         previousScore = score
 
@@ -311,7 +313,6 @@ class XXTrainingsFragment() : Fragment() {
             dartsThrowCount += 1
             dartAmount += 1
             setDartViewText(dartAmount)
-            animateIntegerValue(score, score + value, scoreView)
             score += value
             setCurrentDart(value)
             setCountViews(value)
@@ -381,36 +382,14 @@ class XXTrainingsFragment() : Fragment() {
         roundView.text = "${getString(R.string.general_round)}: $roundAmount"
     }
 
-    private fun showChooserDialog() {
+    private fun randomTarget(): String {
+        val randomizer = Random()
+        val value = randomizer.nextInt(21) + 1
 
-        val xxArray = arrayOf("15", "16", "17", "18", "19", "20", "Bull")
-        val pickerDialog = PickerDialogFragment.Companion.newPickerDialog(
-            getString(R.string.xx_chooser_title),
-            xxArray,
-            getString(R.string.xx_chooser_title)
-        )
-
-        pickerDialog.listener = object : PickerDialogFragment.PickerDialogListener {
-            override fun buttonClicked(value: Int) {
-                when (value) {
-                    0 -> xxTarget = 15
-                    1 -> xxTarget = 16
-                    2 -> xxTarget = 17
-                    3 -> xxTarget = 18
-                    4 -> xxTarget = 19
-                    5 -> xxTarget = 20
-                    6 -> xxTarget = 25
-                }
-
-                LogEventsHelper(oververviewActivity).logButtonTap("chooser_dialog")
-                pickerDialog.dismiss()
-                oververviewActivity.isDialogShown = false
-                newLeg()
-            }
-
+        if (value == 21) {
+            return "Bull"
         }
 
-        pickerDialog.show(fragmentManager, null)
-        oververviewActivity.isDialogShown = true
+        return value.toString()
     }
 }
