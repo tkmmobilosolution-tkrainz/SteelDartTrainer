@@ -4,6 +4,7 @@
     <string name="general_reset">Reset</string>
     <string name="general_miss">Miss</string>
     <string name="general_next">Next</string>
+    <string name="general_hit">Hit</string>
     <string name="general_exercises">Exercises</string>
     <string name="general_statistics">Statistics</string>
     <string name="general_no_score">No score</string>

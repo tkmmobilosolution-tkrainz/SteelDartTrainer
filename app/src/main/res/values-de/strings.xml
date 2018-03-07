@@ -5,6 +5,7 @@
     <string name="general_reset">Rückgängig</string>
     <string name="general_miss">Verfehlt</string>
     <string name="general_next">OK</string>
+    <string name="general_hit">Treffer</string>
     <string name="general_exercises">Übungen</string>
     <string name="general_statistics">Statistiken</string>
     <string name="general_no_score">Überworfen</string>
