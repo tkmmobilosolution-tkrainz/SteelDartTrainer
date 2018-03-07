@@ -27,6 +27,7 @@ class OverviewFragment : Fragment() {
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private var currentIndex = 0
+    private var textShowCount = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.overview_fragment, container, false)
@@ -69,6 +70,7 @@ class OverviewFragment : Fragment() {
 
                 textSwitcher.setText(strings[currentIndex])
 
+                textShowCount += 1
                 currentIndex += 1
                 handler.postDelayed(this, interval)
             }
@@ -79,6 +81,7 @@ class OverviewFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        LogEventsHelper(activity).logCount("overview_text", textShowCount)
         handler.removeCallbacks(runnable)
     }
 }
