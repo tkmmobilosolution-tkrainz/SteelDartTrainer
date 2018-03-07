@@ -66,6 +66,12 @@ class TrainingsOverViewFragment : Fragment() {
             LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xx")
         }
 
+        val aroundClockButton = view.findViewById<Button>(R.id.aroundTheClockButton)
+        aroundClockButton.setOnClickListener {
+            replaceFragment(AroundTheClockTrainingsFragment())
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+        }
+
         return view
     }
 
