@@ -33,6 +33,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var mActionBar: ActionBar
     open var isDialogShown = false
+    open var isDialogBackPressed = false
     var mToolBarNavigationListenerIsRegistered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,52 +69,54 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         if (count != 0 && !isDialogShown) {
 
             if (fragmentManager.findFragmentByTag("Detail_Training") != null) {
-                isDialogShown = true
-                val inflater = this.layoutInflater
-                val dialogHintBuilder = AlertDialog.Builder(
-                    this)
-                val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
 
-                val dialogTitle = finishDialogView.findViewById<TextView>(R.id.dialogTitle)
-                dialogTitle.text = this.getString(R.string.general_hint)
-                val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
-                dialogText.text = this.getString(R.string.dialog_finish_training_text)
-                val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
-                exitButton.text = this.getString(R.string.dialog_finish_training_finish)
-                val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
-                closeButton.text = this.getString(R.string.dialog_finish_training_close)
+                if (!isDialogBackPressed) {
+                    isDialogShown = true
+                    val inflater = this.layoutInflater
+                    val dialogHintBuilder = AlertDialog.Builder(
+                        this)
+                    val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
 
-                dialogHintBuilder.setView(finishDialogView)
-                val finishDialog = dialogHintBuilder.create()
+                    val dialogTitle = finishDialogView.findViewById<TextView>(R.id.dialogTitle)
+                    dialogTitle.text = this.getString(R.string.general_hint)
+                    val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
+                    dialogText.text = this.getString(R.string.dialog_finish_training_text)
+                    val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
+                    exitButton.text = this.getString(R.string.dialog_finish_training_finish)
+                    val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
+                    closeButton.text = this.getString(R.string.dialog_finish_training_close)
 
-                exitButton.setOnClickListener {
-                    finishDialog.dismiss()
-                    isDialogShown = false
-                    LogEventsHelper(this).logButtonTap("training_dialog_exit")
+                    dialogHintBuilder.setView(finishDialogView)
+                    val finishDialog = dialogHintBuilder.create()
+
+                    exitButton.setOnClickListener {
+                        finishDialog.dismiss()
+                        isDialogShown = false
+                        LogEventsHelper(this).logButtonTap("training_dialog_exit")
+                        showUpButton(false)
+                        fragmentManager.popBackStack("Training", 0)
+                    }
+
+                    closeButton.setOnClickListener {
+                        finishDialog.dismiss()
+                        LogEventsHelper(this).logButtonTap("training_dialog_close")
+                        isDialogShown = false
+                    }
+
+                    finishDialog.setCancelable(false)
+                    finishDialog.setCanceledOnTouchOutside(false)
+                    finishDialog.show()
+                    return
+                } else {
+                    showUpButton(false)
                     fragmentManager.popBackStack("Training", 0)
+                    isDialogBackPressed = false
                 }
 
-                closeButton.setOnClickListener {
-                    finishDialog.dismiss()
-                    LogEventsHelper(this).logButtonTap("training_dialog_close")
-                    isDialogShown = false
-                }
-
-                finishDialog.setCancelable(false)
-                finishDialog.setCanceledOnTouchOutside(false)
-                finishDialog.show()
-                return
             } else if (fragmentManager.findFragmentByTag("Statistics") != null) {
                 // Do nothing
             } else {
                 fragmentManager.popBackStack()
-            }
-
-            count -= 1
-            if (count > 2) {
-                showUpButton(true)
-            } else {
-                showUpButton(false)
             }
         }
     }

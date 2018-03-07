@@ -208,6 +208,7 @@ class HighscoreTrainingsFragment : Fragment() {
                     oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
                     LogEventsHelper(activity).logButtonTap("hs_new_dialog_close")
+                    oververviewActivity.isDialogBackPressed = true
                     oververviewActivity.onBackPressed()
                 }
 

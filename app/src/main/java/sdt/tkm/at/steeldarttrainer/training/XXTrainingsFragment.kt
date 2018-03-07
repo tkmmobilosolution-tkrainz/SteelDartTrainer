@@ -180,6 +180,7 @@ class XXTrainingsFragment() : Fragment() {
                     oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
                     LogEventsHelper(oververviewActivity).logButtonTap("xx_new_dialog_close")
+                    oververviewActivity.isDialogBackPressed = true
                     oververviewActivity.onBackPressed()
                 }
 
