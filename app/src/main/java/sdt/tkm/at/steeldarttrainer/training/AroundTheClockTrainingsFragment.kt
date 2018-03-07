@@ -264,6 +264,7 @@ class AroundTheClockTrainingsFragment: Fragment() {
                     oververviewActivity.isDialogShown = false
                     finishDialog.dismiss()
                     LogEventsHelper(oververviewActivity).logButtonTap("atc_new_dialog_close")
+                    oververviewActivity.isDialogBackPressed = true
                     oververviewActivity.onBackPressed()
                 }
 

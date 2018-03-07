@@ -492,6 +492,7 @@ class XOITrainingsFragment : Fragment() {
             oververviewActivity.isDialogShown = false
             finishDialog.dismiss()
             LogEventsHelper(oververviewActivity).logButtonTap("xoi_new_dialog_close")
+            oververviewActivity.isDialogBackPressed = true
             oververviewActivity.onBackPressed()
 
         }
