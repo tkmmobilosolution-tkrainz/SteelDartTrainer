@@ -3,7 +3,6 @@ package sdt.tkm.at.steeldarttrainer.training
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,11 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
-import com.shawnlin.numberpicker.NumberPicker
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
 import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
-import sdt.tkm.at.steeldarttrainer.base.animateValue
 import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 
@@ -218,7 +215,7 @@ class XXTrainingsFragment() : Fragment() {
         val adRequest = AdRequest.Builder().build()
         bannerAdView.loadAd(adRequest)
 
-        bannerAdView.adListener = object: AdListener() {
+        bannerAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 if (oververviewActivity != null) {
                     LogEventsHelper(oververviewActivity).logBannerLoaded(className)
@@ -250,7 +247,7 @@ class XXTrainingsFragment() : Fragment() {
         intersitalAd = InterstitialAd(oververviewActivity)
         intersitalAd.adUnitId = getString(R.string.interistal_id)
         intersitalAd.loadAd(AdRequest.Builder().build())
-        intersitalAd.adListener = object: AdListener() {
+        intersitalAd.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 LogEventsHelper(oververviewActivity).logIntersitalLoaded(className)
             }
@@ -282,47 +279,6 @@ class XXTrainingsFragment() : Fragment() {
             intersitalAd.show()
         }
     }
-
-    /** override fun onBackPressed() {
-
-        if (!dialogShown) {
-            dialogShown = true
-            val inflater = oververviewActivity.layoutInflater
-            val dialogHintBuilder = AlertDialog.Builder(
-                this)
-            val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
-
-            val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
-            dialogText.text = this.getString(R.string.dialog_finish_training_text)
-            val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
-            exitButton.text = this.getString(R.string.dialog_finish_training_finish)
-            val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
-            closeButton.text = this.getString(R.string.dialog_finish_training_close)
-
-            dialogHintBuilder.setView(finishDialogView)
-            val finishDialog = dialogHintBuilder.create()
-
-            exitButton.setOnClickListener {
-                finishDialog.dismiss()
-                dialogShown = false
-                LogEventsHelper(oververviewActivity).logButtonTap("xx_finish_dialog_close")
-                super.onBackPressed()
-            }
-
-            closeButton.setOnClickListener {
-                finishDialog.dismiss()
-                LogEventsHelper(oververviewActivity).logButtonTap("xx_finish_dialog_continue")
-                dialogShown = false
-            }
-
-            finishDialog.setCancelable(false)
-            finishDialog.setCanceledOnTouchOutside(false)
-            finishDialog.show()
-            return
-        }
-
-        super.onBackPressed()
-    } */
 
     private fun newLeg() {
 
