@@ -72,6 +72,12 @@ class TrainingsOverViewFragment : Fragment() {
             LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
         }
 
+        val randomButton = view.findViewById<Button>(R.id.randomTarget)
+        randomButton.setOnClickListener {
+            replaceFragment(RandomTrainingFragment())
+            LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+        }
+
         return view
     }
 

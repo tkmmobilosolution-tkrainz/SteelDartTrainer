@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import sdt.tkm.at.steeldarttrainer.models.AroundTheClockTraining
 import sdt.tkm.at.steeldarttrainer.models.HighscoreTraining
+import sdt.tkm.at.steeldarttrainer.models.RandomTraining
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 
@@ -23,6 +24,7 @@ class DataHolder(val context: Context = Application().baseContext) {
     var xoiList: ArrayList<XOITraining>? = null
     var hsList: ArrayList<HighscoreTraining>? = null
     var xxList: ArrayList<XXTraining>? = null
+    var randomList: ArrayList<RandomTraining>? = null
     var atcList: ArrayList<AroundTheClockTraining>? = null
 
     fun addXOITraining(training: XOITraining) {
@@ -120,6 +122,31 @@ class DataHolder(val context: Context = Application().baseContext) {
             if (json != null) {
                 val turnsType = object : TypeToken<List<XXTraining>>() {}.type
                 return Gson().fromJson<ArrayList<AroundTheClockTraining>>(json, turnsType)
+            }
+        }
+        return ArrayList()
+    }
+
+    fun addRandomTraining(training: RandomTraining) {
+        val list = getRandomTrainingsList()
+        list.add(training)
+        saveRandomTrainingsList(list)
+    }
+
+    private fun saveRandomTrainingsList(list: ArrayList<RandomTraining>) {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val jsonString = Gson().toJson(list)
+        preferences.edit().putString("xx-training", jsonString).apply()
+        randomList = list
+    }
+
+    fun getRandomTrainingsList(): ArrayList<RandomTraining> {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (preferences != null) {
+            val json = preferences.getString("xx-training", null)
+            if (json != null) {
+                val turnsType = object : TypeToken<List<XXTraining>>() {}.type
+                return Gson().fromJson<ArrayList<RandomTraining>>(json, turnsType)
             }
         }
         return ArrayList()
