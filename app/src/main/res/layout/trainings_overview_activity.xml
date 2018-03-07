@@ -81,6 +81,19 @@
                 android:textColor="@drawable/black_button_text_color"
                 android:textSize="25sp" />
 
+            <Button
+                android:id="@+id/randomTarget"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/main_item_background"
+                android:text="Random Target"
+                android:textColor="@drawable/black_button_text_color"
+                android:textSize="25sp" />
         </LinearLayout>
     </ScrollView>
 
