@@ -289,43 +289,6 @@ class XOITrainingsFragment : Fragment() {
         }
     }
 
-    /**
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.getItemId()) {
-    android.R.id.home -> {
-    if (!oververviewActivity.isDialogShown) {
-    oververviewActivity.isDialogShown = true
-    val chooserDialog = ChooserDialogFragment.Companion.newChooserDialog(
-    getString(R.string.general_hint),
-    getString(R.string.dialog_finish_training_text),
-    getString(R.string.dialog_finish_training_finish),
-    getString(R.string.dialog_finish_training_close)
-    )
-
-    chooserDialog.listener = object : ChooserDialogFragment.ChooserDialogListener {
-    override fun positivButtonClicked() {
-    chooserDialog.dismiss()
-    oververviewActivity.isDialogShown = false
-    LogEventsHelper(oververviewActivity).logButtonTap("xoi_finish_dialog_close")
-    activity.onBackPressed()
-    }
-
-    override fun negativeButtonClicked() {
-    chooserDialog.dismiss()
-    LogEventsHelper(oververviewActivity).logButtonTap("xoi_finish_dialog_continue")
-    oververviewActivity.isDialogShown = false
-    }
-
-    }
-    return true
-    }
-
-    return false
-    }
-    else -> return super.onOptionsItemSelected(item)
-    }
-    }
-     */
     private fun defaultDarts() {
         firstDart.text = "-"
         secondDart.text = "-"

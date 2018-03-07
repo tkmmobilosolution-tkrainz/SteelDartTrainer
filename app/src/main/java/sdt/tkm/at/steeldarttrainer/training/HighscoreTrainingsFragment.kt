@@ -5,7 +5,6 @@ import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -318,49 +317,6 @@ class HighscoreTrainingsFragment : Fragment() {
             }
         }
     }
-
-    /**
-    override fun onBackPressed() {
-
-    if (!dialogShown) {
-    dialogShown = true
-    val inflater = activity.layoutInflater
-    val dialogHintBuilder = AlertDialog.Builder(
-    activity)
-    val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
-
-    val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
-    dialogText.text = this.getString(R.string.dialog_finish_training_text)
-    val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
-    exitButton.text = this.getString(R.string.dialog_finish_training_finish)
-    val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
-    closeButton.text = this.getString(R.string.dialog_finish_training_close)
-
-    dialogHintBuilder.setView(finishDialogView)
-    val finishDialog = dialogHintBuilder.create()
-
-    exitButton.setOnClickListener {
-    finishDialog.dismiss()
-    dialogShown = false
-    LogEventsHelper(activity).logButtonTap("hs_finish_dialog_close")
-    //super.onBackPressed()
-    }
-
-    closeButton.setOnClickListener {
-    LogEventsHelper(this).logButtonTap("hs_finish_dialog_continue")
-    finishDialog.dismiss()
-    dialogShown = false
-    }
-
-    finishDialog.setCancelable(false)
-    finishDialog.setCanceledOnTouchOutside(false)
-    finishDialog.show()
-    return
-    }
-
-    super.onBackPressed()
-    }
-     */
 
     private fun defaultDarts() {
         firstDart.text = "-"

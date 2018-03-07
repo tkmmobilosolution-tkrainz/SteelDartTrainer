@@ -1,5 +1,6 @@
 package sdt.tkm.at.steeldarttrainer.base
 
+import android.app.AlertDialog
 import android.app.Fragment
 import android.content.Intent
 import android.net.Uri
@@ -13,6 +14,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
@@ -63,7 +66,48 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         var count = fragmentManager.backStackEntryCount
 
         if (count != 0 && !isDialogShown) {
-            fragmentManager.popBackStack()
+
+            if (fragmentManager.findFragmentByTag("Detail_Training") != null) {
+                isDialogShown = true
+                val inflater = this.layoutInflater
+                val dialogHintBuilder = AlertDialog.Builder(
+                    this)
+                val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
+
+                val dialogTitle = finishDialogView.findViewById<TextView>(R.id.dialogTitle)
+                dialogTitle.text = this.getString(R.string.general_hint)
+                val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
+                dialogText.text = this.getString(R.string.dialog_finish_training_text)
+                val exitButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
+                exitButton.text = this.getString(R.string.dialog_finish_training_finish)
+                val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
+                closeButton.text = this.getString(R.string.dialog_finish_training_close)
+
+                dialogHintBuilder.setView(finishDialogView)
+                val finishDialog = dialogHintBuilder.create()
+
+                exitButton.setOnClickListener {
+                    finishDialog.dismiss()
+                    isDialogShown = false
+                    LogEventsHelper(this).logButtonTap("training_dialog_exit")
+                    fragmentManager.popBackStack("Training", 0)
+                }
+
+                closeButton.setOnClickListener {
+                    finishDialog.dismiss()
+                    LogEventsHelper(this).logButtonTap("training_dialog_close")
+                    isDialogShown = false
+                }
+
+                finishDialog.setCancelable(false)
+                finishDialog.setCanceledOnTouchOutside(false)
+                finishDialog.show()
+                return
+            } else if (fragmentManager.findFragmentByTag("Statistics") != null) {
+                // Do nothing
+            } else {
+                fragmentManager.popBackStack()
+            }
 
             count -= 1
             if (count > 2) {
@@ -96,7 +140,16 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private fun replaceFragment(fragment: Fragment) {
         val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.content_frame, fragment)
+
+        if (fragment is TrainingsOverViewFragment) {
+            transaction.addToBackStack("Training")
+            transaction.replace(R.id.content_frame, fragment)
+        } else if (fragment is StatisticsActivity) {
+            transaction.replace(R.id.content_frame, fragment, "Statistics")
+        } else {
+            transaction.replace(R.id.content_frame, fragment)
+        }
+
         transaction.commit()
         showUpButton(false)
     }
