@@ -53,7 +53,6 @@ class HomeActivity : AppCompatActivity() {
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                bannerAdView.loadAd(adRequest)
                 LogEventsHelper(this@HomeActivity).logBannerFailed(className, errorCode)
             }
 

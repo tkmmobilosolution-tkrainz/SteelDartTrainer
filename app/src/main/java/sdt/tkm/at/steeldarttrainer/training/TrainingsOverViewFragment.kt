@@ -95,7 +95,6 @@ class TrainingsOverViewFragment : Fragment() {
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                bannerAdView.loadAd(adRequest)
                 LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
