@@ -233,7 +233,6 @@ class XOITrainingsFragment : Fragment() {
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                bannerAdView.loadAd(adRequest)
                 LogEventsHelper(oververviewActivity).logBannerFailed(className, errorCode)
             }
 
@@ -264,10 +263,10 @@ class XOITrainingsFragment : Fragment() {
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 LogEventsHelper(oververviewActivity).logIntersitalFailed(className, errorCode)
-                intersitalAd.loadAd(AdRequest.Builder().build())
             }
 
             override fun onAdOpened() {
+                intersitalAd.loadAd(AdRequest.Builder().build())
                 LogEventsHelper(oververviewActivity).logIntersitalOpened(className)
             }
 
