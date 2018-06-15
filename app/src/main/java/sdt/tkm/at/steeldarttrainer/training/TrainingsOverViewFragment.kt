@@ -73,7 +73,7 @@ class TrainingsOverViewFragment : Fragment() {
   override fun onResume() {
     super.onResume()
     val adRequest = AdRequest.Builder().build()
-    //bannerAdView.loadAd(adRequest)
+    bannerAdView.loadAd(adRequest)
 
     bannerAdView.adListener = object : AdListener() {
       override fun onAdLoaded() {
