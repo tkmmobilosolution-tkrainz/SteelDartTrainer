@@ -10,7 +10,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 
 /**
  * [Add class description here]
@@ -21,91 +20,81 @@ import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
  * @version %I%, %G%
  */
 class ChooserDialogFragment : DialogFragment() {
+  var title: String? = null
+    private set
+  var message: String? = null
+    private set
+  var postiveButtonTitle: String? = null
+    private set
+  var negativeButtonTitle: String? = null
+    private set
+  var listener: ChooserDialogListener? = null
 
-    var title: String? = null
-        private set
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val arguments = arguments
 
-    var message: String? = null
-        private set
+    title = arguments?.getString(ARG_TITLE)
+    message = arguments?.getString(ARG_MESSAGE)
+    postiveButtonTitle = arguments?.getString(ARG_POSITIVE)
+    negativeButtonTitle = arguments?.getString(ARG_NEGATIVE)
+  }
 
-    var postiveButtonTitle: String? = null
-        private set
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    val dialog = super.onCreateDialog(savedInstanceState)
 
-    var negativeButtonTitle: String? = null
-        private set
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCanceledOnTouchOutside(false)
+    isCancelable = false
 
-    var listener: ChooserDialogListener? = null
+    return dialog
+  }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+      inflater.inflate(R.layout.multiple_button_dialog, container)
 
-        val arguments = arguments
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val dialogText = view.findViewById<TextView>(R.id.dialogText)
+    dialogText.text = message
+    val exitButton = view.findViewById<Button>(R.id.newGameButton)
+    exitButton.text = negativeButtonTitle
+    val closeButton = view.findViewById<Button>(R.id.closeButton)
+    closeButton.text = postiveButtonTitle
 
-        title = arguments?.getString(ARG_TITLE)
-        message = arguments?.getString(ARG_MESSAGE)
-        postiveButtonTitle = arguments?.getString(ARG_POSITIVE)
-        negativeButtonTitle = arguments?.getString(ARG_NEGATIVE)
+
+    exitButton.setOnClickListener {
+      listener!!.negativeButtonClicked()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        val dialog = super.onCreateDialog(savedInstanceState)
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(false)
-        isCancelable = false
-
-        return dialog
+    closeButton.setOnClickListener {
+      listener!!.positivButtonClicked()
     }
+  }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.multiple_button_dialog, container)
+  interface ChooserDialogListener {
+    fun positivButtonClicked()
+    fun negativeButtonClicked()
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  companion object {
+    private val ARG_TITLE = "title"
+    private val ARG_MESSAGE = "mesage"
+    private val ARG_POSITIVE = "positive"
+    private val ARG_NEGATIVE = "items"
 
-        val dialogText = view.findViewById<TextView>(R.id.dialogText)
-        dialogText.text = message
-        val exitButton = view.findViewById<Button>(R.id.newGameButton)
-        exitButton.text = negativeButtonTitle
-        val closeButton = view.findViewById<Button>(R.id.closeButton)
-        closeButton.text = postiveButtonTitle
+    fun newChooserDialog(title: String, message: String,
+                         posText: String, negText: String): ChooserDialogFragment {
+      val chooserDialog = ChooserDialogFragment()
+      val arguments = Bundle()
+      arguments.putString(ARG_TITLE, title)
+      arguments.putString(ARG_MESSAGE, message)
+      arguments.putString(ARG_POSITIVE, posText)
+      arguments.putString(ARG_NEGATIVE, negText)
 
+      chooserDialog.arguments = arguments
 
-        exitButton.setOnClickListener {
-            listener!!.negativeButtonClicked()
-        }
-
-        closeButton.setOnClickListener {
-            listener!!.positivButtonClicked()
-        }
+      return chooserDialog
     }
-
-    interface ChooserDialogListener {
-        fun positivButtonClicked()
-        fun negativeButtonClicked()
-    }
-
-    companion object {
-        private val ARG_TITLE = "title"
-        private val ARG_MESSAGE = "mesage"
-        private val ARG_POSITIVE = "positive"
-        private val ARG_NEGATIVE = "items"
-
-        fun newChooserDialog(title: String, message: String,
-                             posText: String, negText: String): ChooserDialogFragment {
-
-            val chooserDialog = ChooserDialogFragment()
-
-            val arguments = Bundle()
-            arguments.putString(ARG_TITLE, title)
-            arguments.putString(ARG_MESSAGE, message)
-            arguments.putString(ARG_POSITIVE, posText)
-            arguments.putString(ARG_NEGATIVE, negText)
-
-            chooserDialog.arguments = arguments
-
-            return chooserDialog
-        }
-    }
+  }
 }

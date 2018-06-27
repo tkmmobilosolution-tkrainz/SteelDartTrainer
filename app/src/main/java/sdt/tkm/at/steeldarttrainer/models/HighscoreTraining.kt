@@ -14,12 +14,11 @@ data class HighscoreTraining(val score: Int,
                              val hundretPlus: Int,
                              val hundretFourtyPlus: Int,
                              val hundretEighty: Int) {
+  fun ppdAvarage(): Double {
+    return score.toDouble() / 30
+  }
 
-    fun ppdAvarage(): Double {
-        return score.toDouble() / 30
-    }
-
-    fun pptdAvarage(): Double {
-        return ppdAvarage() * 3
-    }
+  fun pptdAvarage(): Double {
+    return ppdAvarage() * 3
+  }
 }

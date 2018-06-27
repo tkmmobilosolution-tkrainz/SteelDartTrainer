@@ -19,82 +19,71 @@ import sdt.tkm.at.steeldarttrainer.R
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class NeutralDialogFragment: DialogFragment() {
+class NeutralDialogFragment : DialogFragment() {
+  var title: String? = null
+    private set
+  var message: String? = null
+    private set
+  var buttonTitleString: String? = null
+    private set
+  var listener: NeutralListener? = null
 
-    var title: String? = null
-        private set
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val arguments = arguments
 
-    var message: String? = null
-        private set
+    message = arguments?.getString(ARG_MESSAGE)
+    title = arguments?.getString(ARG_TITLE)
+    buttonTitleString = arguments?.getString(ARG_POSITIVE)
+  }
 
-    var buttonTitleString: String? = null
-        private set
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    val dialog = super.onCreateDialog(savedInstanceState)
 
-    var listener: NeutralListener? = null
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCanceledOnTouchOutside(false)
+    isCancelable = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    return dialog
+  }
 
-        val arguments = arguments
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+      inflater.inflate(R.layout.neutral_dialog, container)
 
-        message = arguments?.getString(ARG_MESSAGE)
-        title = arguments?.getString(ARG_TITLE)
-        buttonTitleString = arguments?.getString(ARG_POSITIVE)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val hintDialogTitle = view.findViewById<TextView>(R.id.hintDialogTitle)
+    hintDialogTitle.text = title
+    val hintDialogMessage = view.findViewById<TextView>(R.id.hintDialogMessage)
+    hintDialogMessage.text = message
+    val hintButton = view.findViewById<Button>(R.id.hintDialogButton)
+    hintButton.text = buttonTitleString
+    hintButton.setOnClickListener {
+      val listener = listener ?: return@setOnClickListener
+      listener.buttonClicked()
     }
+  }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+  interface NeutralListener {
+    fun buttonClicked()
+  }
 
-        val dialog = super.onCreateDialog(savedInstanceState)
+  companion object {
+    private val ARG_TITLE = "title"
+    private val ARG_MESSAGE = "message"
+    private val ARG_POSITIVE = "positive"
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(false)
-        isCancelable = false
+    fun newNeutralDialog(title: String, message: String,
+                         buttonText: String): NeutralDialogFragment {
+      val neutralDialog = NeutralDialogFragment()
+      val arguments = Bundle()
+      arguments.putString(ARG_MESSAGE, message)
+      arguments.putString(ARG_TITLE, title)
+      arguments.putString(ARG_POSITIVE, buttonText)
 
-        return dialog
+      neutralDialog.arguments = arguments
+
+      return neutralDialog
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.neutral_dialog, container)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val hintDialogTitle = view.findViewById<TextView>(R.id.hintDialogTitle)
-        hintDialogTitle.text = title
-
-        val hintDialogMessage = view.findViewById<TextView>(R.id.hintDialogMessage)
-        hintDialogMessage.text = message
-
-        val hintButton = view.findViewById<Button>(R.id.hintDialogButton)
-        hintButton.text = buttonTitleString
-        hintButton.setOnClickListener {
-
-            val listener = listener ?: return@setOnClickListener
-            listener.buttonClicked()
-        }
-    }
-
-    interface NeutralListener {
-        fun buttonClicked()
-    }
-    companion object {
-        private val ARG_TITLE = "title"
-        private val ARG_MESSAGE = "message"
-        private val ARG_POSITIVE = "positive"
-
-        fun newNeutralDialog(title: String, message: String,
-                             buttonText: String): NeutralDialogFragment {
-
-            val neutralDialog = NeutralDialogFragment()
-
-            val arguments = Bundle()
-            arguments.putString(ARG_MESSAGE, message)
-            arguments.putString(ARG_TITLE, title)
-            arguments.putString(ARG_POSITIVE, buttonText)
-
-            neutralDialog.arguments = arguments
-
-            return neutralDialog
-        }
-    }
+  }
 }

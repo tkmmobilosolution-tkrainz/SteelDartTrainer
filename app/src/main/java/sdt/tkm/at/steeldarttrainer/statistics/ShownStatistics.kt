@@ -9,7 +9,7 @@ package sdt.tkm.at.steeldarttrainer.statistics
  * @version %I%, %G%
  */
 enum class ShownStatistics {
-    XOI,
-    HIGHSCORE,
-    XX_DARTS
+  XOI,
+  HIGHSCORE,
+  XX_DARTS
 }

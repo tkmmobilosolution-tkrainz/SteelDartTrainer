@@ -13,12 +13,11 @@ data class XXTraining(val value: Int,
                       val single: Int,
                       val double: Int,
                       val triple: Int) {
+  fun hits(): Int {
+    return single + double + triple
+  }
 
-    fun hits(): Int {
-        return single + double + triple
-    }
-
-    fun hitPercentage(): Double {
-        return hits().toDouble() / 99
-    }
+  fun hitPercentage(): Double {
+    return hits().toDouble() / 99
+  }
 }

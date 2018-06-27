@@ -9,9 +9,8 @@ package sdt.tkm.at.steeldarttrainer.models
  * @version %I%, %G%
  */
 class AroundTheClockTraining(val darts: Int) {
-
-    fun hitRate(): Double {
-        val rate: Double = (21 / darts).toDouble()
-        return rate * 100.0
-    }
+  fun hitRate(): Double {
+    val rate: Double = (21 / darts).toDouble()
+    return rate * 100.0
+  }
 }

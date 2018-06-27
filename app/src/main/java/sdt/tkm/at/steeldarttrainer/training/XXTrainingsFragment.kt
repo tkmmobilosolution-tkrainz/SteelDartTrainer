@@ -401,7 +401,7 @@ class XXTrainingsFragment() : Fragment() {
                     6 -> xxTarget = 25
                 }
 
-                LogEventsHelper(oververviewActivity).logButtonTap("chooser_dialog")
+                LogEventsHelper(oververviewActivity).logButtonTap("xx_chooser_dialog")
                 pickerDialog.dismiss()
                 oververviewActivity.isDialogShown = false
                 newLeg()

@@ -21,90 +21,78 @@ import sdt.tkm.at.steeldarttrainer.R
  * @version %I%, %G%
  */
 class PickerDialogFragment : DialogFragment() {
+  var title: String? = null
+    private set
+  var buttonTitleString: String? = null
+    private set
+  var stringArrays: Array<String>? = null
+    private set
+  var listener: PickerDialogListener? = null
 
-    var title: String? = null
-        private set
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val arguments = arguments
 
-    var buttonTitleString: String? = null
-        private set
+    title = arguments?.getString(ARG_TITLE)
+    buttonTitleString = arguments?.getString(ARG_POSITIVE)
+    stringArrays = arguments?.getStringArray(ARG_ITEMS)
+  }
 
-    var stringArrays: Array<String>? = null
-        private set
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    val dialog = super.onCreateDialog(savedInstanceState)
 
-    var listener: PickerDialogListener? = null
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCanceledOnTouchOutside(false)
+    isCancelable = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    return dialog
+  }
 
-        val arguments = arguments
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+      inflater.inflate(R.layout.chooser_dialog, container)
 
-        title = arguments?.getString(ARG_TITLE)
-        buttonTitleString = arguments?.getString(ARG_POSITIVE)
-        stringArrays = arguments?.getStringArray(ARG_ITEMS)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    var pickerValue = 1
+    val targetTitle = view.findViewById<TextView>(R.id.xxChooserTitle)
+    targetTitle.text = title
+    val targetPicker = view.findViewById<NumberPicker>(R.id.xxChooserPicker)
+    targetPicker.minValue = 0
+    targetPicker.maxValue = stringArrays!!.size - 1
+    targetPicker.displayedValues = stringArrays
+
+    targetPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+      pickerValue = newVal
     }
+    val chooserButton = view.findViewById<Button>(R.id.xxChooserButton)
+    chooserButton.text = this.getString(R.string.xoi_chooser_button_title)
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        val dialog = super.onCreateDialog(savedInstanceState)
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(false)
-        isCancelable = false
-
-        return dialog
+    chooserButton.setOnClickListener {
+      val listener = listener ?: return@setOnClickListener
+      listener.buttonClicked(pickerValue)
     }
+  }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.chooser_dialog, container)
+  interface PickerDialogListener {
+    fun buttonClicked(value: Int)
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  companion object {
+    private val ARG_TITLE = "title"
+    private val ARG_POSITIVE = "positive"
+    private val ARG_ITEMS = "items"
 
-        var pickerValue = 1
-        val targetTitle = view.findViewById<TextView>(R.id.xxChooserTitle)
-        targetTitle.text = title
+    fun newPickerDialog(title: String, items: Array<String>,
+                        buttonText: String): PickerDialogFragment {
+      val pickerDialog = PickerDialogFragment()
+      val arguments = Bundle()
+      arguments.putString(ARG_TITLE, title)
+      arguments.putString(ARG_POSITIVE, buttonText)
+      arguments.putStringArray(ARG_ITEMS, items)
 
-        val targetPicker = view.findViewById<NumberPicker>(R.id.xxChooserPicker)
-        targetPicker.minValue = 0
-        targetPicker.maxValue = stringArrays!!.size - 1
-        targetPicker.displayedValues = stringArrays
+      pickerDialog.arguments = arguments
 
-        targetPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-            pickerValue = newVal
-        }
-
-        val chooserButton = view.findViewById<Button>(R.id.xxChooserButton)
-        chooserButton.text = this.getString(R.string.xoi_chooser_button_title)
-
-        chooserButton.setOnClickListener {
-            val listener = listener ?: return@setOnClickListener
-            listener.buttonClicked(pickerValue)
-        }
+      return pickerDialog
     }
-
-    interface PickerDialogListener {
-        fun buttonClicked(value: Int)
-    }
-
-    companion object {
-        private val ARG_TITLE = "title"
-        private val ARG_POSITIVE = "positive"
-        private val ARG_ITEMS = "items"
-
-        fun newPickerDialog(title: String, items: Array<String>,
-                             buttonText: String): PickerDialogFragment {
-
-            val pickerDialog = PickerDialogFragment()
-
-            val arguments = Bundle()
-            arguments.putString(ARG_TITLE, title)
-            arguments.putString(ARG_POSITIVE, buttonText)
-            arguments.putStringArray(ARG_ITEMS, items)
-
-            pickerDialog.arguments = arguments
-
-            return pickerDialog
-        }
-    }
-
+  }
 }

@@ -12,10 +12,9 @@ import android.widget.TextView
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-
 fun AppCompatActivity.animateValue(from: Int, to: Int, textView: TextView) {
-    val animator = ValueAnimator.ofInt(from, to)
-    animator.duration = 650
-    animator.addUpdateListener { animation -> textView.text = animation.animatedValue.toString() }
-    animator.start()
+  val animator = ValueAnimator.ofInt(from, to)
+  animator.duration = 650
+  animator.addUpdateListener { animation -> textView.text = animation.animatedValue.toString() }
+  animator.start()
 }

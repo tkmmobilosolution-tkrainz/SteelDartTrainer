@@ -44,27 +44,27 @@ class TrainingsOverViewFragment : Fragment() {
       } else {
         replaceFragment(XOITrainingsFragment())
       }
-      LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xoi")
+      LogEventsHelper(oververviewActivity).logButtonTap("xoi_trainings_overview")
     }
     val hsButton = view.findViewById<Button>(R.id.highscoreButton)
     hsButton.setOnClickListener {
       replaceFragment(HighscoreTrainingsFragment())
-      LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_hs")
+      LogEventsHelper(oververviewActivity).logButtonTap("hs_trainings_overview")
     }
     val xxButton = view.findViewById<Button>(R.id.dartsToXButton)
     xxButton.setOnClickListener {
       replaceFragment(XXTrainingsFragment())
-      LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_xx")
+      LogEventsHelper(oververviewActivity).logButtonTap("xx_trainings_overview")
     }
     val aroundClockButton = view.findViewById<Button>(R.id.aroundTheClockButton)
     aroundClockButton.setOnClickListener {
       replaceFragment(AroundTheClockTrainingsFragment())
-      LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+      LogEventsHelper(oververviewActivity).logButtonTap("atc_trainings_overview")
     }
     val randomButton = view.findViewById<Button>(R.id.randomTarget)
     randomButton.setOnClickListener {
       replaceFragment(RandomTrainingFragment())
-      LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_random")
+      LogEventsHelper(oververviewActivity).logButtonTap("random_trainings_overview")
     }
 
     return view
@@ -113,7 +113,7 @@ class TrainingsOverViewFragment : Fragment() {
       override fun buttonClicked() {
         oververviewActivity.isDialogShown = false
         replaceFragment(XOITrainingsFragment())
-        LogEventsHelper(oververviewActivity).logButtonTap("trainings_overview_dialog")
+        LogEventsHelper(oververviewActivity).logButtonTap("xoi_trainings_overview_dialog")
         neutralDialog.dismiss()
       }
     }
