@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.shawnlin:number-picker:2.4.6'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 }
 repositories {
     mavenCentral()

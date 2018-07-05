@@ -17,6 +17,7 @@ data class XOITraining(
     val hundretPlus: Int,
     val hundretFourtyPlus: Int,
     val hundretEighty: Int) {
+
   fun ppdAvarage(): Double {
     return xoi.toDouble() / dartAmount.toDouble()
   }

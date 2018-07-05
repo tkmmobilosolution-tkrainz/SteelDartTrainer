@@ -38,6 +38,9 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.nav_drawer)
+
+    DataHolder(this).checkPlayedGames()
+
     val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
     setSupportActionBar(toolbar)
     mActionBar = supportActionBar!!

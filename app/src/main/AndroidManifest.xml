@@ -21,6 +21,8 @@
         <activity android:name=".statistics.StatisticsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
+
+        <service android:name=".models.FirebaseTokenReceiver"/>
     </application>
 
 </manifest>

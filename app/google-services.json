@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "161763933759-iibg1vjd86utnmti3r4agc0smtf4u5m7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sdt.tkm.at.steeldarttrainer",
+            "certificate_hash": "fc6a140565a7efa909c0385b5829ab7c1c3b4a9b"
+          }
+        },
+        {
           "client_id": "161763933759-3m53pdn5sbc382hhdbgdij5ush293p22.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161763933759-3m53pdn5sbc382hhdbgdij5ush293p22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -2,6 +2,7 @@ package sdt.tkm.at.steeldarttrainer.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.google.android.gms.ads.AdListener
@@ -20,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_home)
 
+    DataHolder(this).checkPlayedGames()
     MobileAds.initialize(this, getString(R.string.admob_id))
 
     supportActionBar?.title = getString(R.string.actionbar_title_main)

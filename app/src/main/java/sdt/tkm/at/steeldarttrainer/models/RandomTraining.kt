@@ -17,6 +17,6 @@ class RandomTraining(val score: Int,
   }
 
   fun hitPercentage(): Double {
-    return hits().toDouble() / 99
+    return hits().toDouble() / 30
   }
 }
