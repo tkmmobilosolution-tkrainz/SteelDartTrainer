@@ -107,4 +107,9 @@
 <p>Our app employs Google AdSense. Google AdSense is a service of Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043 USA, for incorporating advertisements. Google-AdSense uses so-called “cookies“, text files, that are stored to your computer and which provide analysis of the use of our app. Furthermore, Google AdSense uses so-called “web beacons“. Web beacons allow Google to analyze information, such as visitor traffic to our app. This information, along with your IP address and the ad format displayed, is transmitted to Google in the US where it is stored and may be transferred by Google to contracting partners. However, Google does not merge your IP-address with other stored data on you. You can prevent cookies from being installed by adjusting the settings on your browser software accordingly. You should be aware, however, that by doing so you may not be able to make full use of all the functions of our app. By using our app you declare that you agree to the processing of data collected about you by Google in the manner previously described and for the purposes there specified.</p>
 ]]>
 </string>
+
+    <string name="like_dialog_title">Do you like the app?</string>
+    <string name="like_dialog_text">If you like the app, give us a rating</string>
+    <string name="like_dialog_rate">Rate</string>
+    <string name="like_dialog_cancel">Cancel</string>
 </resources>

@@ -9,6 +9,6 @@ class FirebaseTokenReceiver: FirebaseInstanceIdService() {
     override fun onTokenRefresh() {
         super.onTokenRefresh()
 
-        DataHolder().setFirebaseToken(FirebaseInstanceId.getInstance().token)
+        DataHolder(applicationContext).setFirebaseToken(FirebaseInstanceId.getInstance().token)
     }
 }

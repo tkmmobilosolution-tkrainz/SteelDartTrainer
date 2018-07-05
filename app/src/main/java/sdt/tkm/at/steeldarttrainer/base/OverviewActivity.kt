@@ -34,12 +34,55 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
   var isDialogShown = false
   var isDialogBackPressed = false
   private var mToolBarNavigationListenerIsRegistered = false
+  private lateinit var dataholder: DataHolder
+  private lateinit var logHelper: LogEventsHelper
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.nav_drawer)
 
-    DataHolder(this).checkPlayedGames()
+    dataholder = DataHolder(this)
+    logHelper = LogEventsHelper(this)
+
+    dataholder.checkPlayedGames()
+
+      if (dataholder.shouldShowRatingDialog() && !dataholder.hasRated()) {
+          val inflater = this.layoutInflater
+          val dialogHintBuilder = AlertDialog.Builder(
+                  this)
+          val finishDialogView = inflater.inflate(R.layout.multiple_button_dialog, null)
+          val dialogTitle = finishDialogView.findViewById<TextView>(R.id.dialogTitle)
+          dialogTitle.text = this.getString(R.string.like_dialog_title)
+          val dialogText = finishDialogView.findViewById<TextView>(R.id.dialogText)
+          dialogText.text = this.getString(R.string.like_dialog_text)
+          val rateButton = finishDialogView.findViewById<Button>(R.id.newGameButton)
+          rateButton.text = this.getString(R.string.like_dialog_rate)
+          val closeButton = finishDialogView.findViewById<Button>(R.id.closeButton)
+          closeButton.text = this.getString(R.string.like_dialog_cancel)
+
+          dialogHintBuilder.setView(finishDialogView)
+          val finishDialog = dialogHintBuilder.create()
+
+          rateButton.setOnClickListener {
+              finishDialog.dismiss()
+              dataholder.hadRated()
+              this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sdt.tkm.at.steeldarttrainer")))
+              logHelper.logButtonTap("like_dialog_rate")
+          }
+
+          closeButton.setOnClickListener {
+              finishDialog.dismiss()
+              logHelper.logButtonTap("like_dialog_cancel")
+              isDialogShown = false
+          }
+
+          finishDialog.setCancelable(false)
+          finishDialog.setCanceledOnTouchOutside(false)
+
+          logHelper.logButtonTap("like_dialog_show")
+          isDialogShown = true
+          finishDialog.show()
+      }
 
     val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
     setSupportActionBar(toolbar)
@@ -88,14 +131,14 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
           exitButton.setOnClickListener {
             finishDialog.dismiss()
             isDialogShown = false
-            LogEventsHelper(this).logButtonTap("training_dialog_exit")
+            logHelper.logButtonTap("training_dialog_exit")
             showUpButton(false)
             fragmentManager.popBackStack("Training", 0)
           }
 
           closeButton.setOnClickListener {
             finishDialog.dismiss()
-            LogEventsHelper(this).logButtonTap("training_dialog_close")
+            logHelper.logButtonTap("training_dialog_close")
             isDialogShown = false
           }
 
@@ -122,23 +165,23 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     when (id) {
       R.id.nav_home -> {
         replaceFragment(OverviewFragment())
-        LogEventsHelper(this).logMenuClick("home")
+        logHelper.logMenuClick("home")
       }
       R.id.nav_exercises -> {
         replaceFragment(TrainingsOverViewFragment())
-        LogEventsHelper(this).logMenuClick("exercises")
+        logHelper.logMenuClick("exercises")
       }
       R.id.nav_statistics -> {
         replaceFragment(StatisticsActivity())
-        LogEventsHelper(this).logMenuClick("statistics")
+        logHelper.logMenuClick("statistics")
       }
       R.id.nav_rate -> {
         this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sdt.tkm.at.steeldarttrainer")))
-        LogEventsHelper(this).logMenuClick("rate")
+        logHelper.logMenuClick("rate")
       }
       R.id.nav_tos -> {
         replaceFragment(PrivacyPolicyFragment())
-        LogEventsHelper(this).logMenuClick("privacy_policy")
+        logHelper.logMenuClick("privacy_policy")
       }
     }
     val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout

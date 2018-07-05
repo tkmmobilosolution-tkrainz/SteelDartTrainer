@@ -114,4 +114,9 @@
          erklären Sie sich mit der Bearbeitung der über sie erhobenen Daten durch Google in der zuvor beschriebenen Art und Weise und zu dem zuvor benannten Zweck einverstanden.</p>
 ]]>
 </string>
+
+    <string name="like_dialog_title">Gefällt dir die App?</string>
+    <string name="like_dialog_text">Wenn dir die App gefällt, dann gib uns eine Bewertung</string>
+    <string name="like_dialog_rate">Bewerten</string>
+    <string name="like_dialog_cancel">Abbrechen</string>
 </resources>

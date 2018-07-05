@@ -2,6 +2,7 @@ package sdt.tkm.at.steeldarttrainer.base
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
 import com.google.android.gms.tasks.OnSuccessListener
@@ -35,6 +36,7 @@ class DataHolder(val context: Context = Application().baseContext) {
   var xxList: ArrayList<XXTraining>? = null
   var randomList: ArrayList<RandomTraining>? = null
   var atcList: ArrayList<AroundTheClockTraining>? = null
+  val preferences = PreferenceManager.getDefaultSharedPreferences(context) 
 
   fun addXOITraining(training: XOITraining) {
     val list = getXOITrainingsList()
@@ -44,7 +46,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   private fun saveXOITrainingsList(list: ArrayList<XOITraining>) {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     val jsonString = Gson().toJson(list)
     preferences.edit().putBoolean("xoi_checked", true).apply()
     preferences.edit().putString("xoi-training", jsonString).apply()
@@ -52,7 +53,7 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getXOITrainingsList(): ArrayList<XOITraining> {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+    
     if (preferences != null) {
       val json = preferences.getString("xoi-training", null)
       if (json != null) {
@@ -71,7 +72,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   private fun saveHighscoreTrainingsList(list: ArrayList<HighscoreTraining>) {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     val jsonString = Gson().toJson(list)
     preferences.edit().putBoolean("hs_checked", true).apply()
     preferences.edit().putString("hs-training", jsonString).apply()
@@ -79,7 +79,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getHighscoreTrainingsList(): ArrayList<HighscoreTraining> {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       val json = preferences.getString("hs-training", null)
       if (json != null) {
@@ -99,7 +98,7 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   private fun saveXXTrainingsList(list: ArrayList<XXTraining>) {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+    
     val jsonString = Gson().toJson(list)
     preferences.edit().putBoolean("xx_checked", true).apply()
     preferences.edit().putString("xx-training", jsonString).apply()
@@ -107,7 +106,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getXXTrainingsList(): ArrayList<XXTraining> {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       val json = preferences.getString("xx-training", null)
       if (json != null) {
@@ -126,7 +124,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   private fun saveATCTrainingsList(list: ArrayList<AroundTheClockTraining>) {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     val jsonString = Gson().toJson(list)
     preferences.edit().putBoolean("atc_checked", true).apply()
     preferences.edit().putString("atc-training", jsonString).apply()
@@ -134,7 +131,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getATCTrainingsList(): ArrayList<AroundTheClockTraining> {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       val json = preferences.getString("atc-training", null)
       if (json != null) {
@@ -154,7 +150,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   private fun saveRandomTrainingsList(list: ArrayList<RandomTraining>) {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     val jsonString = Gson().toJson(list)
     preferences.edit().putBoolean("random_checked", true).apply()
     preferences.edit().putString("random-training", jsonString).apply()
@@ -162,7 +157,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getRandomTrainingsList(): ArrayList<RandomTraining> {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       val json = preferences.getString("random-training", null)
       if (json != null) {
@@ -174,7 +168,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun getGameCount(): Int {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getInt("game_count", 0)
     }
@@ -183,12 +176,10 @@ class DataHolder(val context: Context = Application().baseContext) {
 
   fun increaseGameCount() {
     val newGameCount = getGameCount() + 1
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     preferences.edit().putInt("game_count", newGameCount).apply()
   }
 
   fun shouldShowXOIOverviewHint(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("show_xoi_overview", true)
     }
@@ -197,12 +188,10 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun xOIOverviewHintShown() {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     preferences.edit().putBoolean("show_xoi_overview", false).apply()
   }
 
   fun shouldShowXXOverviewHint(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("show_xx_overview", true)
     }
@@ -211,14 +200,12 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun xXOverviewHintShown() {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     preferences.edit().putBoolean("show_xx_overview", false).apply()
   }
 
   fun calculateGamePoints(additionalPoints: Float) {
     Log.e("Game points", "$additionalPoints")
 
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       var points = preferences.getFloat("game-points", 0.0f);
       points += additionalPoints
@@ -229,7 +216,6 @@ class DataHolder(val context: Context = Application().baseContext) {
       if (getFirebaseToken() != null) {
         val pointMap = mapOf<String, Double>(getFirebaseToken()!! to points.toDouble())
 
-        FirebaseDatabase.getInstance().getReference("rankings").setValue("test")
         FirebaseDatabase.getInstance().getReference("rankings").child("global").setValue(pointMap)
         FirebaseDatabase.getInstance().getReference("rankings").child(country).setValue(pointMap)
       }
@@ -237,7 +223,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun checkPlayedGames() {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     Log.e("Dataholder", "check")
 
@@ -284,7 +269,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun isXOIChecked(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("xoi_checked", false)
     }
@@ -293,7 +277,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun isXXChecked(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("xx_checked", false)
     }
@@ -302,7 +285,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun isATCChecked(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("atc_checked", false)
     }
@@ -311,7 +293,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun isHSChecked(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("hs_checked", false)
     }
@@ -320,7 +301,6 @@ class DataHolder(val context: Context = Application().baseContext) {
   }
 
   fun isRandomChecked(): Boolean {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       return preferences.getBoolean("random_checked", false)
     }
@@ -334,12 +314,10 @@ class DataHolder(val context: Context = Application().baseContext) {
       return
     }
 
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     preferences.edit().putString("firebase_token", token).apply()
   }
 
   fun getFirebaseToken(): String? {
-    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     if (preferences != null) {
       val token = preferences.getString("firebase_token", "empty_token")
       if (token.equals("empty_token")) {
@@ -351,5 +329,29 @@ class DataHolder(val context: Context = Application().baseContext) {
       return token
     }
     return null
+  }
+
+  fun shouldShowRatingDialog(): Boolean {
+    if (preferences != null) {
+      var starts = preferences.getInt("appStarts", 0)
+      starts += 1
+      preferences.edit().putInt("appStarts", starts).apply()
+
+      if (starts % 5 == 0) {
+        return true
+      }
+    }
+    return false
+  }
+
+  fun hasRated(): Boolean {
+    if (preferences != null) {
+      return preferences.getBoolean("has_rated", false)
+    }
+    return false
+  }
+
+  fun hadRated() {
+    preferences.edit().putBoolean("has_rated", true).apply()
   }
 }
