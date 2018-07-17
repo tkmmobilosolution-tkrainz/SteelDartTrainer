@@ -7,8 +7,8 @@ android {
         applicationId "sdt.tkm.at.steeldarttrainer"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 10
-        versionName "1.3.3.2"
+        versionCode 13
+        versionName "1.4.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
