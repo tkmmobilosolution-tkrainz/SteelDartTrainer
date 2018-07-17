@@ -214,12 +214,29 @@ class DataHolder(val context: Context = Application().baseContext) {
 
       val country = Locale.getDefault().country
       if (getFirebaseToken() != null) {
-        val pointMap = mapOf<String, Double>(getFirebaseToken()!! to points.toDouble())
 
-        FirebaseDatabase.getInstance().getReference("rankings").child("global").setValue(pointMap)
-        FirebaseDatabase.getInstance().getReference("rankings").child(country).setValue(pointMap)
+        var userId = getUUID()
+        if (userId == null) {
+          genereateUUID()
+          userId = getUUID()!!
+        }
+
+        val user = RankingsUser(userId, points.toDouble())
+
+        FirebaseDatabase.getInstance().getReference("user_rankings").child("global").child(userId).setValue(user)
+        FirebaseDatabase.getInstance().getReference("user_rankings").child(country).child(userId).setValue(user)
       }
     }
+  }
+
+  fun genereateUUID() {
+    if (getUUID() == null) {
+      preferences.edit().putString("generated_uuid", UUID.randomUUID().toString()).apply()
+    }
+  }
+
+  fun getUUID(): String? {
+    return preferences.getString("generated_uuid", null)
   }
 
   fun checkPlayedGames() {

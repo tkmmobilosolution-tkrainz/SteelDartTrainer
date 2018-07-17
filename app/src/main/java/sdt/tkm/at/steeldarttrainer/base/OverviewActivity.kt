@@ -42,6 +42,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     setContentView(R.layout.nav_drawer)
 
     dataholder = DataHolder(this)
+    dataholder.genereateUUID()
+    dataholder.calculateGamePoints(2.5f)
     logHelper = LogEventsHelper(this)
 
     dataholder.checkPlayedGames()
