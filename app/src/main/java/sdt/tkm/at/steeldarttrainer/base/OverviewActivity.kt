@@ -81,7 +81,9 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
           finishDialog.setCancelable(false)
           finishDialog.setCanceledOnTouchOutside(false)
 
-          logHelper.logButtonTap("like_dialog_show")
+          val bundle = Bundle()
+          bundle.putString("like_dialog", "show")
+          logHelper.logEvent("like_dialog_show", bundle)
           isDialogShown = true
           finishDialog.show()
       }

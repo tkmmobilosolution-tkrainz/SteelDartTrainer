@@ -15,7 +15,7 @@ import sdt.tkm.at.steeldarttrainer.BuildConfig
  * @version %I%, %G%
  */
 class LogEventsHelper(val context: Context = Application().applicationContext) {
-  private fun logEvent(name: String, bundle: Bundle) {
+    fun logEvent(name: String, bundle: Bundle) {
     if (!BuildConfig.DEBUG) {
       val analytics = FirebaseAnalytics.getInstance(context)
       analytics.logEvent(name, bundle)

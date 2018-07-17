@@ -3,6 +3,7 @@ package sdt.tkm.at.steeldarttrainer.base
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import com.google.android.gms.tasks.OnSuccessListener
@@ -43,6 +44,10 @@ class DataHolder(val context: Context = Application().baseContext) {
     list.add(training)
     saveXOITrainingsList(list)
     calculateGamePoints(training.ppdAvarage().toFloat())
+
+    val bundle = Bundle()
+    bundle.putString("finished_training", "xoi")
+    LogEventsHelper(context).logEvent("training_finished_xoi", bundle)
   }
 
   private fun saveXOITrainingsList(list: ArrayList<XOITraining>) {
@@ -69,6 +74,9 @@ class DataHolder(val context: Context = Application().baseContext) {
     list.add(training)
     saveHighscoreTrainingsList(list)
     calculateGamePoints(training.ppdAvarage().toFloat())
+    val bundle = Bundle()
+    bundle.putString("finished_training", "hs")
+    LogEventsHelper(context).logEvent("training_finished_hs", bundle)
   }
 
   private fun saveHighscoreTrainingsList(list: ArrayList<HighscoreTraining>) {
@@ -95,6 +103,9 @@ class DataHolder(val context: Context = Application().baseContext) {
     saveXXTrainingsList(list)
     val points = training.hitPercentage() * 55.67
     calculateGamePoints(points.toFloat())
+    val bundle = Bundle()
+    bundle.putString("finished_training", "xx")
+    LogEventsHelper(context).logEvent("training_finished_xx", bundle)
   }
 
   private fun saveXXTrainingsList(list: ArrayList<XXTraining>) {
@@ -121,6 +132,9 @@ class DataHolder(val context: Context = Application().baseContext) {
     list.add(training)
     saveATCTrainingsList(list)
     calculateGamePoints((training.hitRate() * 55.67).toFloat())
+    val bundle = Bundle()
+    bundle.putString("finished_training", "atc")
+    LogEventsHelper(context).logEvent("training_finished_atc", bundle)
   }
 
   private fun saveATCTrainingsList(list: ArrayList<AroundTheClockTraining>) {
@@ -147,6 +161,9 @@ class DataHolder(val context: Context = Application().baseContext) {
     saveRandomTrainingsList(list)
     val points = training.hitPercentage() * 55.67
     calculateGamePoints(points.toFloat())
+    val bundle = Bundle()
+    bundle.putString("finished_training", "random")
+    LogEventsHelper(context).logEvent("training_finished_random", bundle)
   }
 
   private fun saveRandomTrainingsList(list: ArrayList<RandomTraining>) {
