@@ -4,4 +4,5 @@
     <string name="banner_id" translatable="false">ca-app-pub-9184630521515163/1721960570</string>
     <string name="interistal_id" translatable="false">ca-app-pub-9184630521515163/4765327823</string>
     <string name="app_name" translatable="false">SteelDartTrainer</string>
+    <bool name="orientation_portrait">true</bool>
 </resources>

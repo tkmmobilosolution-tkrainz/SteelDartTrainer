@@ -108,8 +108,12 @@ class XOIStatsFragment : Fragment() {
   }
 
   private fun drawGraph(minY: Double, maxY: Double, dataPoints: Array<DataPoint>, title: String) {
+
+    val portrait = resources.getBoolean(R.bool.orientation_portrait)
     graph.title = title
-    graph.titleTextSize = 40F
+
+    val textSize = if (portrait) 40F else 30F
+    graph.titleTextSize = textSize
     graph.titleColor = Color.WHITE
     graph.gridLabelRenderer.gridColor = Color.WHITE
     graph.gridLabelRenderer.horizontalLabelsColor = Color.WHITE
@@ -125,9 +129,11 @@ class XOIStatsFragment : Fragment() {
     val series = LineGraphSeries<DataPoint>(dataPoints)
     series.setColor(Color.WHITE)
     series.setDrawDataPoints(true)
-    series.setDataPointsRadius(8F)
+
+    val dataPointRadius = if (resources.getBoolean(R.bool.orientation_portrait)) 8F else 4F
+    series.dataPointsRadius = dataPointRadius
     series.isDrawBackground = true
-    series.setThickness(6)
+    series.thickness = if (portrait) 6 else 3
     graph.addSeries(series)
   }
 

@@ -238,7 +238,7 @@ class DataHolder(val context: Context = Application().baseContext) {
           userId = getUUID()!!
         }
 
-        val user = RankingsUser(userId, points.toDouble())
+        val user = RankingsUser(userId, points.toDouble(), country)
 
         FirebaseDatabase.getInstance().getReference("user_rankings").child("global").child(userId).setValue(user)
         FirebaseDatabase.getInstance().getReference("user_rankings").child(country).child(userId).setValue(user)

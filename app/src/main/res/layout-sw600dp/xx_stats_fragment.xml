@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+            <LinearLayout
+                android:id="@+id/xxStatsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="2dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/xxHitAvaregaeStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:text="Hits"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+
+                        <TextView
+                            android:id="@+id/xxHitAvaregaeStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/xxHitAvaregaeStatsText"
+                            android:text="22,55"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/xxHitPercentageStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:layout_alignParentTop="true"
+                            android:text="Hits %"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+
+                        <TextView
+                            android:id="@+id/xxHitPercentageStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/xxHitPercentageStatsText"
+                            android:text="22,55"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/corLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/xxScoreStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:layout_alignParentTop="true"
+                            android:text="Score"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+
+                        <TextView
+                            android:id="@+id/xxScoreStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/xxScoreStatsText"
+                            android:text="20,51"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/singleCountStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/singleCountStatsText"
+                            android:text="10"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/singleCountStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:text="Single"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/doubleCountStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/doubleCountStatsText"
+                            android:text="10"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/doubleCountStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:text="Double"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/black_button_background"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tripleCountStats"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tripleCountStatsText"
+                            android:text="10"
+                            android:textColor="@android:color/white"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/tripleCountStatsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="-10dp"
+                            android:text="Triple"
+                            android:textColor="@android:color/white"
+                            android:textSize="9sp" />
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/xx_graph"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/statsInfoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/black"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/statistics_no_data"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -22,6 +22,13 @@ class LogEventsHelper(val context: Context = Application().applicationContext) {
     }
   }
 
+  fun logOrientation(isPortrait: Boolean) {
+    var name = if (isPortrait) "phone" else "tablet"
+    val bundle = Bundle()
+    bundle.putString("orientation", name)
+    logEvent(name, bundle)
+  }
+
   fun logBannerOpened(className: String) {
     val name = "banner_opened_$className"
     val bundle = Bundle()

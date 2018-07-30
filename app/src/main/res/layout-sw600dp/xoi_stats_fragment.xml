@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="6dp"
     android:background="@android:color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="4">
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/xxStatsLayout"
+            android:id="@+id/xoiStatsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="0.5"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -37,21 +39,21 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/xxHitAvaregaeStatsText"
+                        android:id="@+id/ppdText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
-                        android:text="Hits"
+                        android:text="PPD"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
 
                     <TextView
-                        android:id="@+id/xxHitAvaregaeStats"
+                        android:id="@+id/ppdAmount"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/xxHitAvaregaeStatsText"
+                        android:layout_below="@+id/ppdText"
                         android:text="22,55"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
@@ -68,22 +70,22 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/xxHitPercentageStatsText"
+                        android:id="@+id/pptdText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
                         android:layout_alignParentTop="true"
-                        android:text="Hits %"
+                        android:text="PPTD"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
 
                     <TextView
-                        android:id="@+id/xxHitPercentageStats"
+                        android:id="@+id/pptdAmount"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/xxHitPercentageStatsText"
+                        android:layout_below="@+id/pptdText"
                         android:text="22,55"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
@@ -101,26 +103,56 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/xxScoreStatsText"
+                        android:id="@+id/corText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
                         android:layout_alignParentTop="true"
-                        android:text="Score"
+                        android:text="COR %"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
 
                     <TextView
-                        android:id="@+id/xxScoreStats"
+                        android:id="@+id/checkoutAmount"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/xxScoreStatsText"
+                        android:layout_below="@+id/corText"
                         android:text="20,51"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/black_button_background"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/dartsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="-10dp"
+                        android:text="Darts"
+                        android:textColor="@android:color/white"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:id="@+id/darts"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/dartsText"
+                        android:text="1000"
+                        android:textColor="@android:color/white"
+                        android:textSize="28sp" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -144,22 +176,22 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/singleCountStats"
+                        android:id="@+id/sixtyPlus"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/singleCountStatsText"
+                        android:layout_below="@+id/sixtyText"
                         android:text="10"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
 
                     <TextView
-                        android:id="@+id/singleCountStatsText"
+                        android:id="@+id/sixtyText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
-                        android:text="Single"
+                        android:text="60+"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
                 </RelativeLayout>
@@ -175,22 +207,22 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/doubleCountStats"
+                        android:id="@+id/hundretPlus"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/doubleCountStatsText"
+                        android:layout_below="@+id/hundretText"
                         android:text="10"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
 
                     <TextView
-                        android:id="@+id/doubleCountStatsText"
+                        android:id="@+id/hundretText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
-                        android:text="Double"
+                        android:text="100+"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
                 </RelativeLayout>
@@ -206,51 +238,84 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/tripleCountStats"
+                        android:id="@+id/hundretFourtyPlus"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tripleCountStatsText"
+                        android:layout_below="@+id/hundretFourtyText"
                         android:text="10"
                         android:textColor="@android:color/white"
                         android:textSize="28sp" />
 
                     <TextView
-                        android:id="@+id/tripleCountStatsText"
+                        android:id="@+id/hundretFourtyText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="-10dp"
-                        android:text="Triple"
+                        android:text="140+"
                         android:textColor="@android:color/white"
                         android:textSize="9sp" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/black_button_background"
+                    android:gravity="center">
 
+                    <TextView
+                        android:id="@+id/hundretEighty"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hundretEightyText"
+                        android:text="10"
+                        android:textColor="@android:color/white"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:id="@+id/hundretEightyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="-10dp"
+                        android:text="180"
+                        android:textColor="@android:color/white"
+                        android:textSize="9sp" />
+                </RelativeLayout>
 
             </LinearLayout>
         </LinearLayout>
 
         <com.jjoe64.graphview.GraphView
-            android:id="@+id/xx_graph"
+            android:id="@+id/xoi_graph"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp" />
+            android:layout_weight="0.5"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
+
     <TextView
-        android:id="@+id/statsInfoTextView"
+        android:id="@+id/xoiStatsInfoTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/black"
-        android:gravity="center"
-        android:text="@string/statistics_no_data"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="@string/statistics_no_data"/>
+
 
 </RelativeLayout>

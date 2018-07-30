@@ -88,7 +88,7 @@ class HighscoreTrainingsFragment : Fragment() {
 
     bannerAdView = view.findViewById(R.id.trainingBanner)
 
-    gridView = view.findViewById<GridView>(R.id.gridView)
+    gridView = view.findViewById(R.id.gridView)
     gridAdapter = GridAdapter(oververviewActivity)
     gridView.adapter = gridAdapter
     gridView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->

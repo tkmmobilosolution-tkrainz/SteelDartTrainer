@@ -3,6 +3,7 @@ package sdt.tkm.at.steeldarttrainer.base
 import android.app.AlertDialog
 import android.app.Fragment
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -39,12 +40,16 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    requestedOrientation = if (resources.getBoolean(R.bool.orientation_portrait)) ActivityInfo.SCREEN_ORIENTATION_PORTRAIT else ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+
     setContentView(R.layout.nav_drawer)
 
     dataholder = DataHolder(this)
     dataholder.genereateUUID()
     dataholder.calculateGamePoints(2.5f)
     logHelper = LogEventsHelper(this)
+    logHelper.logOrientation(resources.getBoolean(R.bool.orientation_portrait))
 
     dataholder.checkPlayedGames()
 
