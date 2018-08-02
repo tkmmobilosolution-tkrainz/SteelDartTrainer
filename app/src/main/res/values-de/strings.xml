@@ -119,4 +119,6 @@
     <string name="like_dialog_text">Wenn dir die App gefällt, dann gib uns eine Bewertung</string>
     <string name="like_dialog_rate">Bewerten</string>
     <string name="like_dialog_cancel">Abbrechen</string>
+
+    <string name="recommended_checkout">Vorgeschlagener Checkout</string>
 </resources>

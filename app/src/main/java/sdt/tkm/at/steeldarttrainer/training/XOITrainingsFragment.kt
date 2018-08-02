@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +20,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.InterstitialAd
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.base.DataHolder
-import sdt.tkm.at.steeldarttrainer.base.GridAdapter
-import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
-import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
-import sdt.tkm.at.steeldarttrainer.base.animateIntegerValue
+import sdt.tkm.at.steeldarttrainer.base.*
 import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment
 import sdt.tkm.at.steeldarttrainer.dialog.PickerDialogFragment.PickerDialogListener
 import sdt.tkm.at.steeldarttrainer.models.Dart
@@ -53,6 +50,9 @@ class XOITrainingsFragment : Fragment() {
   private lateinit var thirdDart: TextView
   private lateinit var gridAdapter: GridAdapter
   private lateinit var gridView: GridView
+  private lateinit var recommendTitle: TextView
+  private lateinit var recommendDarts: TextView
+  private lateinit var recommendView: View
   private lateinit var dataholder: DataHolder
   private lateinit var intersitalAd: InterstitialAd
   private lateinit var bannerAdView: AdView
@@ -114,6 +114,10 @@ class XOITrainingsFragment : Fragment() {
     roundView = view.findViewById(R.id.roundCount)
     scoreView = view.findViewById(R.id.score)
 
+    recommendDarts = view.findViewById(R.id.xoi_recommended)
+    recommendTitle = view.findViewById(R.id.xoi_recommended_title)
+    recommendView = view.findViewById(R.id.recommended_divider)
+
     doubleButton = view.findViewById<Button>(R.id.doubleButton)
     doubleButton.setOnClickListener {
       setMultiplierButton(doubleButton)
@@ -159,6 +163,12 @@ class XOITrainingsFragment : Fragment() {
       }
 
       increaseRound()
+
+      if (previousDartAmount <= 170) {
+        val checkoutString: String? = CheckoutHelper().recommendedCheckoutThreeDarts(previousScore)
+        showRecommended(checkoutString)
+      }
+
       dartsCount = 0
       throwCount = 0
       defaultDarts()
@@ -198,6 +208,27 @@ class XOITrainingsFragment : Fragment() {
   override fun onResume() {
     super.onResume()
     initBanner()
+  }
+
+  private fun showRecommended(string: String?) {
+
+    if (string == null) {
+      hideRecommeded()
+      return
+    }
+
+    val newString = string
+    recommendView.visibility = View.VISIBLE
+    recommendTitle.visibility = View.VISIBLE
+
+    recommendDarts.text = newString
+    recommendDarts.visibility = View.VISIBLE
+  }
+
+  private fun hideRecommeded() {
+    recommendView.visibility = View.GONE
+    recommendTitle.visibility = View.GONE
+    recommendDarts.visibility = View.GONE
   }
 
   private fun initBanner() {
@@ -306,6 +337,25 @@ class XOITrainingsFragment : Fragment() {
     throwCount += 1
     increaseDartAmount(1)
 
+    var checkoutString: String? = null
+    when (throwCount) {
+      1 -> {
+        val pointsToFinish = (score - res)
+        if (pointsToFinish <= 110 && pointsToFinish != 0) {
+          checkoutString = CheckoutHelper().recommendedCheckoutTwoDarts(pointsToFinish)
+        }
+      }
+      2 -> {
+        val pointsToFinish = (score - res)
+
+        if (pointsToFinish % 2 == 0 && pointsToFinish <= 40 && pointsToFinish != 0) {
+          checkoutString = "D" + pointsToFinish / 2
+        } else if (pointsToFinish == 50) {
+          checkoutString = "D-Bull"
+        }
+      }
+    }
+
     if (multiplier == 2 && res == score) {
       dartResultArrayList.add(res)
       checkoutTries += 1
@@ -324,6 +374,7 @@ class XOITrainingsFragment : Fragment() {
       }
 
       Toast.makeText(oververviewActivity, getString(R.string.general_no_score), Toast.LENGTH_SHORT).show()
+      checkoutString = null
       if (throwCount == 1) {
         increaseDartAmount(2)
       } else if (throwCount == 2) {
@@ -340,6 +391,8 @@ class XOITrainingsFragment : Fragment() {
       animateIntegerValue(score, score - res, scoreView)
       score -= res
     }
+
+    showRecommended(checkoutString)
 
     currentDart(result)
     resetThrow()

@@ -112,4 +112,6 @@
     <string name="like_dialog_text">If you like the app, give us a rating</string>
     <string name="like_dialog_rate">Rate</string>
     <string name="like_dialog_cancel">Cancel</string>
+
+    <string name="recommended_checkout">Recommended Checkout</string>
 </resources>

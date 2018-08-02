@@ -123,6 +123,39 @@
             android:layout_marginTop="10dp"
             android:layout_below="@+id/dartAmountLayout"
             android:background="@android:color/white" />
+
+        <TextView
+            android:id="@+id/xoi_recommended_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/lastDartsDivider"
+            android:layout_centerHorizontal="true"
+            android:text="@string/recommended_checkout"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:id="@+id/xoi_recommended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/xoi_recommended_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            android:textSize="22sp"
+            />
+        <View
+            android:id="@+id/recommended_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/xoi_recommended"
+            android:visibility="gone"
+            android:background="@android:color/white" />
     </RelativeLayout>
 
     <LinearLayout
