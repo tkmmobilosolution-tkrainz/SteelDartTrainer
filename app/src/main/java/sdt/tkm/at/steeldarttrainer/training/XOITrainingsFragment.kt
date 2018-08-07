@@ -181,6 +181,9 @@ class XOITrainingsFragment : Fragment() {
     resetButton.setOnClickListener {
       animateIntegerValue(score, previousScore, scoreView)
       score = previousScore
+      val checkoutString: String? = CheckoutHelper().recommendedCheckoutThreeDarts(score)
+      showRecommended(checkoutString)
+      
       dartAmount = previousDartAmount
 
       dartView.text = "Darts: " + dartAmount
