@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -46,6 +47,28 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     setContentView(R.layout.nav_drawer)
 
     dataholder = DataHolder(this)
+
+    val sortListener: DataHolder.SortingListener = object : DataHolder.SortingListener {
+      override fun success(users: MutableList<RankingsUser>) {
+        Log.e("Databse Users: ", "" + users.size)
+
+        var count = 0
+        for (user in users) {
+          count++
+          if (user.uid.equals(dataholder.getUUID())) {
+            break
+          }
+        }
+
+        Log.e("position: ", "" + count)
+      }
+
+      override fun canceled() {
+        Log.e("Databse Users: ", "Error")
+      }
+    }
+
+    dataholder.orderedUsers(sortListener)
     dataholder.genereateUUID()
     dataholder.calculateGamePoints(2.5f)
     logHelper = LogEventsHelper(this)

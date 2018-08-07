@@ -20,7 +20,12 @@ import sdt.tkm.at.steeldarttrainer.models.XXTraining
 import java.util.*
 import android.support.annotation.NonNull
 import com.google.android.gms.tasks.OnFailureListener
-
+import android.widget.Toast
+import com.google.firebase.database.DatabaseError
+import android.R.attr.author
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+import kotlin.collections.HashMap
 
 
 /**
@@ -245,6 +250,52 @@ class DataHolder(val context: Context = Application().baseContext) {
       }
     }
   }
+  inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
+
+  private fun getDatabaseEntries(listener: DatabaseListener) {
+
+    var users: MutableList<RankingsUser> = mutableListOf()
+    val dbReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("user_rankings").child("global")
+    dbReference.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        dataSnapshot.children.mapNotNullTo(users) {
+          it.getValue(RankingsUser::class.java)
+        }
+
+        listener.success(users)
+        Log.w("Finish", "Database")
+
+      }
+
+      override fun onCancelled(databaseError: DatabaseError) {
+        // Getting Post failed, log a message
+        listener.canceled()
+        Log.w("database", "loadPost:onCancelled", databaseError.toException())
+        // [END_EXCLUDE]
+      }
+    })
+
+    Log.w("Finish", "Database")
+  }
+
+  fun orderedUsers(sortingListener: SortingListener) {
+
+    val listener = object : DataHolder.DatabaseListener {
+      override fun success(users: MutableList<RankingsUser>) {
+        users.sortByDescending {
+          it.rankingPoints
+        }
+
+        sortingListener.success(users)
+      }
+
+      override fun canceled() {
+        sortingListener.canceled()
+      }
+    }
+
+    getDatabaseEntries(listener)
+  }
 
   fun genereateUUID() {
     if (getUUID() == null) {
@@ -387,5 +438,15 @@ class DataHolder(val context: Context = Application().baseContext) {
 
   fun hadRated() {
     preferences.edit().putBoolean("has_rated", true).apply()
+  }
+
+  interface DatabaseListener {
+    fun success(users: MutableList<RankingsUser>)
+    fun canceled()
+  }
+
+  interface SortingListener {
+    fun success(users: MutableList<RankingsUser>)
+    fun canceled()
   }
 }
