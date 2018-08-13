@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="150dp"
-    android:background="@drawable/achivement_item_background">
+    android:background="@drawable/achivement_successful_item_background">
 
     <TextView
         android:id="@+id/success_achivement_title"
@@ -11,7 +11,7 @@
         android:textAlignment="center"
         android:textSize="19sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_green_light"
         android:text="Throw 1000 Darts"
         android:layout_alignParentTop="true"/>
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_green_light"
         android:textSize="17sp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -35,19 +35,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="16sp"
         android:text="419 / 1000"
-        android:layout_marginBottom="0dp"
-        android:textColor="@android:color/white"
-        android:layout_above="@+id/success_achivement_progress"/>
-
-    <ProgressBar
-        android:id="@+id/success_achivement_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="8dp"
-        android:max="1000"
-        android:progress="419"
+        android:layout_marginBottom="24dp"
+        android:textColor="@android:color/holo_green_light"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

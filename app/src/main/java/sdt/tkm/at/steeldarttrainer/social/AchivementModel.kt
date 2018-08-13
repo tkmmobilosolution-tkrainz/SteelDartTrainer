@@ -2,51 +2,82 @@ package sdt.tkm.at.steeldarttrainer.social
 
 import android.content.Context
 import sdt.tkm.at.steeldarttrainer.base.DataHolder
+import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 
 class AchivementModel(val context: Context) {
 
     private fun achivementList(): ArrayList<Achivement> {
         val achivements: ArrayList<Achivement> = arrayListOf()
-        val hundretEigthyAchievment = Achivement("First 180", "Throw your first 180 in XOI or Highscore exercises", AchivementType.HUNDRET_EIGHTIES, 1, false)
-        val tausendThronDarts = Achivement("Throw 1000 Darts", "Throw 1000 Darts in all exercises", AchivementType.DART_AMOUNT, 1000, false)
-        val twentyPlayedGames = Achivement("20 Exercises", "Play 20 exercises", AchivementType.EXERCISES_DONE, 20, false)
+        val hundretEigthyAchievment = Achivement(1, "First 180", "Throw your first 180 in XOI or Highscore exercises", AchivementType.HUNDRET_EIGHTIES, 1, false)
+
+        val hundretThronDarts = Achivement(2, "Throw 100 Darts", "Throw 100 Darts in all exercises", AchivementType.DART_AMOUNT, 100, false)
+        val fivehundretThronDarts = Achivement(3, "Throw 500 Darts", "Throw 500 Darts in all exercises", AchivementType.DART_AMOUNT, 500, false)
+        val tausendThronDarts = Achivement(4, "Throw 1000 Darts", "Throw 1000 Darts in all exercises", AchivementType.DART_AMOUNT, 1000, false)
+
+        val twentyPlayedGames = Achivement(5, "20 Exercises", "Play 20 exercises", AchivementType.EXERCISES_DONE, 20, false)
         achivements.add(hundretEigthyAchievment)
+
+        achivements.add(hundretThronDarts)
+        achivements.add(fivehundretThronDarts)
         achivements.add(tausendThronDarts)
+
         achivements.add(twentyPlayedGames)
         return achivements
     }
 
     fun checkAchevements(): ArrayList<Achivement> {
-        val achivements: ArrayList<Achivement> = achivementList()
+        var achivements: ArrayList<Achivement> = achivementList()
+        val dataholderAchivements = DataHolder(context).getAchivements()
+        if (dataholderAchivements.size == 0 || achivements.size > dataholderAchivements.size) {
+            DataHolder(context).updateAchivements(achivements)
+        } else {
+            achivements = dataholderAchivements
+        }
+
+        val logEventHelper = LogEventsHelper(context)
+        var isAchivemntModiefied = false
 
         for (achivement in achivements) {
 
-            when (achivement.type) {
-                AchivementType.DART_AMOUNT -> {
-                    val amount = achivement.amount
-                    if (amount <= getDartsFromTrainings()) {
-                        achivement.successful = true
+            if (!achivement.successful) {
+                when (achivement.type) {
+                    AchivementType.DART_AMOUNT -> {
+                        val amount = achivement.amount
+                        if (amount <= getDartsFromTrainings()) {
+                            achivement.successful = true
+                            isAchivemntModiefied = true
+                            logEventHelper.logAchivementSuccess(achivement.id)
+                        }
+                        achivement.currentAmount = getDartsFromTrainings()
                     }
-                    achivement.currentAmount = getDartsFromTrainings()
-                }
-                AchivementType.HUNDRET_EIGHTIES -> {
-                    val amount = achivement.amount
-                    if (amount <= countHundretEighties()) {
-                        achivement.successful = true
+                    AchivementType.HUNDRET_EIGHTIES -> {
+                        val amount = achivement.amount
+                        if (amount <= countHundretEighties()) {
+                            achivement.successful = true
+                            isAchivemntModiefied = true
+                            logEventHelper.logAchivementSuccess(achivement.id)
+                        }
+                        achivement.currentAmount = countHundretEighties()
                     }
-                    achivement.currentAmount = countHundretEighties()
-                }
-                AchivementType.EXERCISES_DONE -> {
-                    val amount = achivement.amount
-                    if (amount <= countExcersices()) {
-                        achivement.successful = true
+                    AchivementType.EXERCISES_DONE -> {
+                        val amount = achivement.amount
+                        if (amount <= countExcersices()) {
+                            achivement.successful = true
+                            isAchivemntModiefied = true
+                            logEventHelper.logAchivementSuccess(achivement.id)
+                        }
+                        achivement.currentAmount = countExcersices()
                     }
-                    achivement.currentAmount = countExcersices()
                 }
             }
+
         }
 
-        return sortSuccessAchivements((achivements))
+        val newAchivementList = sortSuccessAchivements((achivements))
+        if (isAchivemntModiefied) {
+            DataHolder(context).updateAchivements(newAchivementList)
+        }
+        return newAchivementList
     }
 
     private fun sortSuccessAchivements(achivements: ArrayList<Achivement>): ArrayList<Achivement> {

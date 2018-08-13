@@ -2,11 +2,9 @@ package sdt.tkm.at.steeldarttrainer.base
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
@@ -18,14 +16,10 @@ import sdt.tkm.at.steeldarttrainer.models.RandomTraining
 import sdt.tkm.at.steeldarttrainer.models.XOITraining
 import sdt.tkm.at.steeldarttrainer.models.XXTraining
 import java.util.*
-import android.support.annotation.NonNull
-import com.google.android.gms.tasks.OnFailureListener
-import android.widget.Toast
 import com.google.firebase.database.DatabaseError
-import android.R.attr.author
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
-import kotlin.collections.HashMap
+import sdt.tkm.at.steeldarttrainer.social.Achivement
 
 
 /**
@@ -438,6 +432,22 @@ class DataHolder(val context: Context = Application().baseContext) {
 
   fun hadRated() {
     preferences.edit().putBoolean("has_rated", true).apply()
+  }
+
+  fun updateAchivements(achivements: ArrayList<Achivement>) {
+      val jsonString = Gson().toJson(achivements)
+      preferences.edit().putString("save_achivements", jsonString).apply()
+  }
+
+  fun getAchivements(): ArrayList<Achivement> {
+    if (preferences != null) {
+      val json = preferences.getString("save_achivements", null)
+      if (json != null) {
+        val turnsType = object : TypeToken<List<Achivement>>() {}.type
+        return Gson().fromJson<ArrayList<Achivement>>(json, turnsType)
+      }
+    }
+    return ArrayList()
   }
 
   interface DatabaseListener {

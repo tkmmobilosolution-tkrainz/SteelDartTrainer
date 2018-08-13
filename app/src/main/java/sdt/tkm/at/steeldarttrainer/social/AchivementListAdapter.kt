@@ -2,7 +2,6 @@ package sdt.tkm.at.steeldarttrainer.social
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,6 @@ import android.widget.BaseAdapter
 import android.widget.ProgressBar
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.base.DataHolder
-import sdt.tkm.at.steeldarttrainer.base.RankingsUser
-import kotlin.math.max
 
 class AchivementListAdapter(val context: Context, val achivements: ArrayList<Achivement>): BaseAdapter() {
 
@@ -20,27 +16,37 @@ class AchivementListAdapter(val context: Context, val achivements: ArrayList<Ach
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val inflater: LayoutInflater
                 = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val item = inflater.inflate(R.layout.achivement_sucess_item, parent, false)
-        val title = item.findViewById<TextView>(R.id.success_achivement_title)
-        val description = item.findViewById<TextView>(R.id.success_achivement_desc)
-        val amountView = item.findViewById<TextView>(R.id.success_achivement_amount)
-        val progressBar = item.findViewById<ProgressBar>(R.id.success_achivement_progress)
+
+        var item: View
         val achivement = achivements[position]
+        if (!achivement.successful) {
+            item = inflater.inflate(R.layout.achivement_item, parent, false)
+            val title = item.findViewById<TextView>(R.id.achivement_title)
+            val description = item.findViewById<TextView>(R.id.achivement_desc)
+            val amountView = item.findViewById<TextView>(R.id.success_achivement_amount)
+            val progressBar = item.findViewById<ProgressBar>(R.id.achivement_progress)
 
-        title.text = achivement.title
-        description.text = achivement.description
+            title.text = achivement.title
+            description.text = achivement.description
 
-        var progress = achivement.currentAmount
-        var maxProgress = achivement.amount
+            var progress = achivement.currentAmount
+            var maxProgress = achivement.amount
 
-        if (progress > maxProgress) {
-            progress = maxProgress
+            progressBar.progress = progress
+            progressBar.max = maxProgress
+
+            amountView.text = String.format("%d / %d", achivement.currentAmount, achivement.amount)
+        } else {
+            item = inflater.inflate(R.layout.achivement_success_item, parent, false)
+            val title = item.findViewById<TextView>(R.id.success_achivement_title)
+            val description = item.findViewById<TextView>(R.id.success_achivement_desc)
+            val amountView = item.findViewById<TextView>(R.id.success_achivement_amount)
+
+            title.text = achivement.title
+            description.text = achivement.description
+
+            amountView.text = String.format("%d / %d", achivement.currentAmount, achivement.amount)
         }
-
-        progressBar.progress = progress
-        progressBar.max = maxProgress
-
-        amountView.text = String.format("%d / %d", achivement.currentAmount, achivement.amount)
 
         return item
     }

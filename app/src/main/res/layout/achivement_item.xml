@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="150dp"
+    android:background="@drawable/achivement_item_background">
+
+    <TextView
+        android:id="@+id/achivement_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:text="Throw 1000 Darts"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/achivement_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Throw 1000 Darts in any exercise"
+        android:layout_below="@+id/achivement_title"/>
+
+    <TextView
+        android:id="@+id/success_achivement_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:text="419 / 1000"
+        android:layout_marginBottom="0dp"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/achivement_progress"/>
+
+    <ProgressBar
+        android:id="@+id/achivement_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:max="1000"
+        android:progress="419"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

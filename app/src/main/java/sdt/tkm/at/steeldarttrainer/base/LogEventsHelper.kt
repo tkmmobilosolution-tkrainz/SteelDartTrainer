@@ -93,4 +93,11 @@ class LogEventsHelper(val context: Context = Application().applicationContext) {
     bundle.putInt("count", count)
     logEvent(name, bundle)
   }
+
+  fun logAchivementSuccess(id: Int) {
+    val name = "achivement_success_$id"
+    val bundle = Bundle()
+    bundle.putInt("achicvement_id", id)
+    logEvent(name, bundle)
+  }
 }
