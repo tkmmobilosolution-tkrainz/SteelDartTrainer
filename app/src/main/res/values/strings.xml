@@ -12,12 +12,14 @@
 
     <string name="menu_title_general">General</string>
     <string name="menu_title_training">Training</string>
+    <string name="menu_title_social">Social</string>
     <string name="menu_item_home">Home</string>
     <string name="menu_item_exercises">Exercises</string>
     <string name="menu_item_statistics">Statistics</string>
     <string name="menu_item_rate">Rate the app</string>
     <string name="menu_item_privacy_policy">Privacy Policy</string>
     <string name="menu_item_imprint">Imprint</string>
+    <string name="menu_item_ranking">Ranking</string>
 
     <string name="actionbar_title_main">Home</string>
     <string name="actionbar_title_trainings_overview">Sessions</string>
@@ -114,4 +116,7 @@
     <string name="like_dialog_cancel">Cancel</string>
 
     <string name="recommended_checkout">Recommended Checkout</string>
+
+    <string name="rankings_worldwide">You are ranked %1$d worldwide\n\nYour score is %2$.2f</string>
+    <string name="rankings_no_score">You must complete at least one exercise before you can be ranked.</string>
 </resources>

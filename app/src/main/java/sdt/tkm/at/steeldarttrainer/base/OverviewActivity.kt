@@ -19,6 +19,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.social.*
 import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
 
@@ -47,30 +48,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     setContentView(R.layout.nav_drawer)
 
     dataholder = DataHolder(this)
-
-    val sortListener: DataHolder.SortingListener = object : DataHolder.SortingListener {
-      override fun success(users: MutableList<RankingsUser>) {
-        Log.e("Databse Users: ", "" + users.size)
-
-        var count = 0
-        for (user in users) {
-          count++
-          if (user.uid.equals(dataholder.getUUID())) {
-            break
-          }
-        }
-
-        Log.e("position: ", "" + count)
-      }
-
-      override fun canceled() {
-        Log.e("Databse Users: ", "Error")
-      }
-    }
-
-    dataholder.orderedUsers(sortListener)
     dataholder.genereateUUID()
-    dataholder.calculateGamePoints(2.5f)
     logHelper = LogEventsHelper(this)
     logHelper.logOrientation(resources.getBoolean(R.bool.orientation_portrait))
 
@@ -206,6 +184,14 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
       R.id.nav_statistics -> {
         replaceFragment(StatisticsActivity())
         logHelper.logMenuClick("statistics")
+      }
+      R.id.nav_rankings -> {
+        replaceFragment(RankingsFragment())
+        logHelper.logMenuClick("rankings")
+      }
+      R.id.nav_achivement -> {
+        replaceFragment(AchivementsFragment())
+        logHelper.logMenuClick("achievement")
       }
       R.id.nav_rate -> {
         this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=sdt.tkm.at.steeldarttrainer")))
