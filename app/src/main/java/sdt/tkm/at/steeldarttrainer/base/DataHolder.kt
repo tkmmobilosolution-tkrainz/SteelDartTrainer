@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 import sdt.tkm.at.steeldarttrainer.social.Achivement
+import sdt.tkm.at.steeldarttrainer.social.AchivementModel
 
 
 /**
@@ -221,6 +223,10 @@ class DataHolder(val context: Context = Application().baseContext) {
 
   fun calculateGamePoints(additionalPoints: Float) {
     Log.e("Game points", "$additionalPoints")
+
+    if (AchivementModel(context).checkAchivmentModiefied()) {
+      Toast.makeText(context, "New Achivement unlocked", Toast.LENGTH_LONG).show()
+    }
 
     if (preferences != null) {
       var points = preferences.getFloat("game-points", 0.0f);

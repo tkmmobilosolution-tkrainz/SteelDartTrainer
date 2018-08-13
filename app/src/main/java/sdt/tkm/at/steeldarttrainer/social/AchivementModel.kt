@@ -14,28 +14,36 @@ class AchivementModel(val context: Context) {
         val fivehundretThronDarts = Achivement(3, "Throw 500 Darts", "Throw 500 Darts in all exercises", AchivementType.DART_AMOUNT, 500, false)
         val tausendThronDarts = Achivement(4, "Throw 1000 Darts", "Throw 1000 Darts in all exercises", AchivementType.DART_AMOUNT, 1000, false)
 
-        val twentyPlayedGames = Achivement(5, "20 Exercises", "Play 20 exercises", AchivementType.EXERCISES_DONE, 20, false)
+        val fivePlayedGames = Achivement(5, "5 Exercises", "Play 5 exercises", AchivementType.EXERCISES_DONE, 5, false)
+        val twentyPlayedGames = Achivement(6, "20 Exercises", "Play 20 exercises", AchivementType.EXERCISES_DONE, 20, false)
+
         achivements.add(hundretEigthyAchievment)
 
         achivements.add(hundretThronDarts)
         achivements.add(fivehundretThronDarts)
         achivements.add(tausendThronDarts)
 
+        achivements.add(fivePlayedGames)
         achivements.add(twentyPlayedGames)
         return achivements
     }
 
     fun checkAchevements(): ArrayList<Achivement> {
         var achivements: ArrayList<Achivement> = achivementList()
-        val dataholderAchivements = DataHolder(context).getAchivements()
+        var dataholderAchivements = DataHolder(context).getAchivements()
         if (dataholderAchivements.size == 0 || achivements.size > dataholderAchivements.size) {
             DataHolder(context).updateAchivements(achivements)
-        } else {
-            achivements = dataholderAchivements
+            dataholderAchivements = DataHolder(context).getAchivements()
         }
 
+        checkAchivmentModiefied()
+        return sortSuccessAchivements(dataholderAchivements)
+    }
+
+    fun checkAchivmentModiefied(): Boolean {
         val logEventHelper = LogEventsHelper(context)
-        var isAchivemntModiefied = false
+        val achivements = DataHolder(context).getAchivements()
+        var modiefied = false
 
         for (achivement in achivements) {
 
@@ -45,8 +53,8 @@ class AchivementModel(val context: Context) {
                         val amount = achivement.amount
                         if (amount <= getDartsFromTrainings()) {
                             achivement.successful = true
-                            isAchivemntModiefied = true
                             logEventHelper.logAchivementSuccess(achivement.id)
+                            modiefied = true
                         }
                         achivement.currentAmount = getDartsFromTrainings()
                     }
@@ -54,8 +62,8 @@ class AchivementModel(val context: Context) {
                         val amount = achivement.amount
                         if (amount <= countHundretEighties()) {
                             achivement.successful = true
-                            isAchivemntModiefied = true
                             logEventHelper.logAchivementSuccess(achivement.id)
+                            modiefied = true
                         }
                         achivement.currentAmount = countHundretEighties()
                     }
@@ -63,21 +71,20 @@ class AchivementModel(val context: Context) {
                         val amount = achivement.amount
                         if (amount <= countExcersices()) {
                             achivement.successful = true
-                            isAchivemntModiefied = true
                             logEventHelper.logAchivementSuccess(achivement.id)
+                            modiefied = true
                         }
                         achivement.currentAmount = countExcersices()
                     }
                 }
             }
-
         }
 
-        val newAchivementList = sortSuccessAchivements((achivements))
-        if (isAchivemntModiefied) {
-            DataHolder(context).updateAchivements(newAchivementList)
+        if (modiefied) {
+            DataHolder(context).updateAchivements(achivements)
         }
-        return newAchivementList
+
+        return modiefied
     }
 
     private fun sortSuccessAchivements(achivements: ArrayList<Achivement>): ArrayList<Achivement> {
