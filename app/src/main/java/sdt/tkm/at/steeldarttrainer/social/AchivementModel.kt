@@ -92,9 +92,9 @@ class AchivementModel(val context: Context) {
         var newList: ArrayList<Achivement> = arrayListOf()
         for (achivement in achivements) {
             if (achivement.successful) {
-                newList.add(0, achivement)
-            } else {
                 newList.add(newList.size, achivement)
+            } else {
+                newList.add(0, achivement)
             }
         }
 
