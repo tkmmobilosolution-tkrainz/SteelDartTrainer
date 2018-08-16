@@ -19,8 +19,8 @@
                 android:id="@+id/nav_rankings"
                 android:title="@string/menu_item_ranking" />
             <item
-                android:id="@+id/nav_achivement"
-                android:title="Achivement" />
+                android:id="@+id/nav_achievement"
+                android:title="@string/menu_item_achievement" />
         </menu>
     </item>
 

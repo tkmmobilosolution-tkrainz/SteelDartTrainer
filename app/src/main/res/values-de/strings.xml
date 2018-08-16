@@ -21,6 +21,7 @@
     <string name="menu_item_privacy_policy">Datenschutz-Bestimmungen</string>
     <string name="menu_item_imprint">Impressum</string>
     <string name="menu_item_ranking">Rangliste</string>
+    <string name="menu_item_achievement">Erfolge</string>
 
     <string name="actionbar_title_main">Übersicht</string>
     <string name="actionbar_title_trainings_overview">Übungen</string>
@@ -126,4 +127,31 @@
 
     <string name="rankings_worldwide">Du bist weltweit auf dem %1$d Rang.\n\nDein Punktestand ist %2$.2f</string>
     <string name="rankings_no_score">Du musst mindestens ein Training absolvieren bevor du gereiht werden kannst.</string>
+
+    <string name="achievment_exercise_done_title_one">Die erste Übung</string>
+    <string name="achievment_exercise_done_title_multiple">%d Übungen</string>
+    <string name="achievment_exercise_done_description_one">Schließe deine erste Übung erfolgreich ab</string>
+    <string name="achievment_exercise_done_description_multiple">Schließe %d Übungen erfolgreich ab</string>
+
+    <string name="achievment_darts_title">%d Darts</string>
+    <string name="achievment_darts_description">Wirf insgesamt %d Darts</string>
+
+    <string name="achievment_hundret_eighty_title_first">Die erste 180</string>
+    <string name="achievment_hundret_eighty_title_multiple">Zum %d Mal 180</string>
+    <string name="achievment_hundret_eighty_description_first">Wirf deine erste 180 in XOI oder Highscore Übungen</string>
+    <string name="achievment_hundret_eighty_description_multiple">Wirf zum %d Mal eine 180 in XOI oder Highscore Übungen</string>
+
+    <string name="achievment_hundret_fourty_title">%d mal 140+</string>
+    <string name="achievment_hundret_fourty_description">Wirf zum %d mal eine 140+ in XOI oder Highscore Übungen</string>
+
+    <string name="achievment_hundret_title">%d mal 100+</string>
+    <string name="achievment_hundret_description">Wirf zum %d mal eine 100+ in XOI oder Highscore Übungen</string>
+
+    <string name="achievment_sixty_title">%d mal 60+</string>
+    <string name="achievment_sixty_description">Wirf zum %d mal eine 60+ in XOI oder Highscore Übungen</string>
+
+    <string name="achievment_open_day_title">%d Tage</string>
+    <string name="achievment_open_day_description">Öffne die App %d Tage in folge</string>
+
+    <string name="achievement_unlocked">Neuer Erfolg freigeschaltet</string>
 </resources>

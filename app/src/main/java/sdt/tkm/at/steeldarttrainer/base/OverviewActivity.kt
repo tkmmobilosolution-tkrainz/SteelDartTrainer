@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -51,6 +50,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     dataholder.genereateUUID()
     logHelper = LogEventsHelper(this)
     logHelper.logOrientation(resources.getBoolean(R.bool.orientation_portrait))
+
+    dataholder.checkOpenDate()
 
     dataholder.checkPlayedGames()
 
@@ -163,6 +164,9 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
       } else if (fragmentManager.findFragmentByTag("Statistics") != null) {
         // Do nothing
+      } else if (fragmentManager.findFragmentByTag("Detail_Achievement") != null) {
+        showUpButton(false)
+        fragmentManager.popBackStack("Achievement", 0)
       } else {
         fragmentManager.popBackStack()
       }
@@ -189,8 +193,8 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         replaceFragment(RankingsFragment())
         logHelper.logMenuClick("rankings")
       }
-      R.id.nav_achivement -> {
-        replaceFragment(AchivementsFragment())
+      R.id.nav_achievement -> {
+        replaceFragment(AchievementsFragment())
         logHelper.logMenuClick("achievement")
       }
       R.id.nav_rate -> {
@@ -215,6 +219,9 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
       transaction.replace(R.id.content_frame, fragment)
     } else if (fragment is StatisticsActivity) {
       transaction.replace(R.id.content_frame, fragment, "Statistics")
+    } else if (fragment is AchievementsFragment) {
+      transaction.addToBackStack("Achievement")
+      transaction.replace(R.id.content_frame, fragment)
     } else {
       transaction.replace(R.id.content_frame, fragment)
     }

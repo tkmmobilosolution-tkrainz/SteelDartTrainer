@@ -1,6 +1,9 @@
 package sdt.tkm.at.steeldarttrainer.social
 
 import android.app.Fragment
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,6 +40,8 @@ class RankingsFragment: Fragment() {
         rankingsList = view.findViewById(R.id.rankingsList)
         bannerAdView = view.findViewById(R.id.rankingsBanner)
 
+        rankingsTextView.text = "Loading ..."
+
         dataholder = DataHolder(activity)
 
         val sortListener: DataHolder.SortingListener = object : DataHolder.SortingListener {
@@ -69,7 +74,15 @@ class RankingsFragment: Fragment() {
             }
         }
 
-        dataholder.orderedUsers(sortListener)
+        val cm = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnected == true
+
+        if (isConnected) {
+            dataholder.orderedUsers(sortListener)
+        } else {
+            rankingsTextView.text = "No internet connection"
+        }
     }
 
     override fun onResume() {
@@ -110,7 +123,6 @@ class RankingsFragment: Fragment() {
     }
 
     private fun setUserRankings(position: Int, score: Double) {
-        rankingsTextView.visibility = View.VISIBLE
         rankingsList.visibility = View.VISIBLE
         rankingsTextView.text = String.format(getString(R.string.rankings_worldwide), position, score)
 

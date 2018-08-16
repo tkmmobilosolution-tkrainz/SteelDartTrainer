@@ -2,6 +2,8 @@ package sdt.tkm.at.steeldarttrainer.base
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
@@ -20,8 +22,12 @@ import java.util.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
-import sdt.tkm.at.steeldarttrainer.social.Achivement
-import sdt.tkm.at.steeldarttrainer.social.AchivementModel
+import sdt.tkm.at.steeldarttrainer.R
+import sdt.tkm.at.steeldarttrainer.social.Achievement
+import sdt.tkm.at.steeldarttrainer.social.AchievementModel
+import java.text.SimpleDateFormat
+
+
 
 
 /**
@@ -224,29 +230,35 @@ class DataHolder(val context: Context = Application().baseContext) {
   fun calculateGamePoints(additionalPoints: Float) {
     Log.e("Game points", "$additionalPoints")
 
-    if (AchivementModel(context).checkAchivmentModiefied()) {
-      Toast.makeText(context, "New Achivement unlocked", Toast.LENGTH_LONG).show()
+    if (AchievementModel(context).checkAchievmentModiefied()) {
+      Toast.makeText(context, context.getString(R.string.achievement_unlocked), Toast.LENGTH_LONG).show()
     }
 
     if (preferences != null) {
-      var points = preferences.getFloat("game-points", 0.0f);
+      var points = preferences.getFloat("game-points", 0.0f)
       points += additionalPoints
       Log.e("Game points", "$points")
       preferences.edit().putFloat("game-points", points).apply()
 
-      val country = Locale.getDefault().country
-      if (getFirebaseToken() != null) {
+      val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+      val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+      val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
 
-        var userId = getUUID()
-        if (userId == null) {
-          genereateUUID()
-          userId = getUUID()!!
+      if (isConnected) {
+        val country = Locale.getDefault().country
+        if (getFirebaseToken() != null) {
+
+          var userId = getUUID()
+          if (userId == null) {
+            genereateUUID()
+            userId = getUUID()!!
+          }
+
+          val user = RankingsUser(userId, points.toDouble(), country)
+
+          FirebaseDatabase.getInstance().getReference("user_rankings").child("global").child(userId).setValue(user)
+          FirebaseDatabase.getInstance().getReference("user_rankings").child(country).child(userId).setValue(user)
         }
-
-        val user = RankingsUser(userId, points.toDouble(), country)
-
-        FirebaseDatabase.getInstance().getReference("user_rankings").child("global").child(userId).setValue(user)
-        FirebaseDatabase.getInstance().getReference("user_rankings").child(country).child(userId).setValue(user)
       }
     }
   }
@@ -440,20 +452,86 @@ class DataHolder(val context: Context = Application().baseContext) {
     preferences.edit().putBoolean("has_rated", true).apply()
   }
 
-  fun updateAchivements(achivements: ArrayList<Achivement>) {
-      val jsonString = Gson().toJson(achivements)
-      preferences.edit().putString("save_achivements", jsonString).apply()
+  fun updateAchievements(achievements: ArrayList<Achievement>) {
+      val jsonString = Gson().toJson(achievements)
+      preferences.edit().putString("achievement_list", jsonString).apply()
   }
 
-  fun getAchivements(): ArrayList<Achivement> {
+  fun getAchievements(): ArrayList<Achievement> {
     if (preferences != null) {
-      val json = preferences.getString("save_achivements", null)
+      val json = preferences.getString("achievement_list", null)
       if (json != null) {
-        val turnsType = object : TypeToken<List<Achivement>>() {}.type
-        return Gson().fromJson<ArrayList<Achivement>>(json, turnsType)
+        val turnsType = object : TypeToken<List<Achievement>>() {}.type
+        return Gson().fromJson<ArrayList<Achievement>>(json, turnsType)
       }
     }
     return ArrayList()
+  }
+
+  fun checkOpenDate() {
+    val date = Date()
+    val formatter = SimpleDateFormat("dd/MM/yyyy")
+
+    val cal = Calendar.getInstance()
+    cal.time = date
+    cal.add(Calendar.DATE, -1)
+    val yesterdayString = formatter.format(cal.time)
+    val yesterday = formatter.parse(yesterdayString)
+
+    val todayString = formatter.format(date)
+
+    val lastOpen = getLastOpenDate()
+    if (lastOpen == null) {
+      // never opened
+      saveLastAppOpen(todayString)
+      resetOpenCount()
+      // openCount = 1
+    } else if (lastOpen.compareTo(formatter.parse(todayString)) == 0) {
+      // Last open is today
+    } else if (lastOpen.compareTo(yesterday) == 0) {
+      // Last open was yesterday
+      saveLastAppOpen(formatter.format(date))
+      increaseOpenCount()
+      // openCount += 1
+    } else {
+      saveLastAppOpen(todayString)
+      resetOpenCount()
+    }
+  }
+
+  fun getLastOpenDate(): Date? {
+    val json = preferences.getString("last-open", null)
+
+    if (json == null) {
+      return null
+    }
+    val formatter = SimpleDateFormat("dd/MM/yyyy")
+
+    return formatter.parse(json)
+  }
+
+  fun saveLastAppOpen(date: String) {
+    preferences.edit().putString("last-open", date).apply()
+  }
+
+  fun resetOpenCount() {
+    preferences.edit().putInt("daily_open", 1).apply()
+  }
+
+  fun increaseOpenCount() {
+    val newGameCount = getOpenCount() + 1
+    preferences.edit().putInt("daily_open", newGameCount).apply()
+    LogEventsHelper(context).logDailyCount(newGameCount)
+    if (AchievementModel(context).checkAchievmentModiefied()) {
+      Toast.makeText(context, context.getString(R.string.achievement_unlocked), Toast.LENGTH_LONG).show()
+    }
+  }
+
+  fun getOpenCount(): Int {
+    if (preferences != null) {
+      return preferences.getInt("daily_open", 0)
+    }
+    return 0
   }
 
   interface DatabaseListener {

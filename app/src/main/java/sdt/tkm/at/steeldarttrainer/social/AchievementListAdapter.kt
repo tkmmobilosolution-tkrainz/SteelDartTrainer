@@ -10,7 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
 
-class AchivementListAdapter(val context: Context, val achivements: ArrayList<Achivement>): BaseAdapter() {
+class AchievementListAdapter(val context: Context, val achievements: ArrayList<Achievement>): BaseAdapter() {
 
     @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -18,7 +18,7 @@ class AchivementListAdapter(val context: Context, val achivements: ArrayList<Ach
                 = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         var item: View
-        val achivement = achivements[position]
+        val achivement = achievements[position]
         if (!achivement.successful) {
             item = inflater.inflate(R.layout.achivement_item, parent, false)
             val title = item.findViewById<TextView>(R.id.achivement_title)
@@ -52,7 +52,7 @@ class AchivementListAdapter(val context: Context, val achivements: ArrayList<Ach
     }
 
     override fun getItem(position: Int): Any {
-        return achivements[position]
+        return achievements[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -60,6 +60,6 @@ class AchivementListAdapter(val context: Context, val achivements: ArrayList<Ach
     }
 
     override fun getCount(): Int {
-        return achivements.size //To change body of created functions use File | Settings | File Templates.
+        return achievements.size //To change body of created functions use File | Settings | File Templates.
     }
 }

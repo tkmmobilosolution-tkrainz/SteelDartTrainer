@@ -20,6 +20,7 @@
     <string name="menu_item_privacy_policy">Privacy Policy</string>
     <string name="menu_item_imprint">Imprint</string>
     <string name="menu_item_ranking">Ranking</string>
+    <string name="menu_item_achievement">Achievement</string>
 
     <string name="actionbar_title_main">Home</string>
     <string name="actionbar_title_trainings_overview">Sessions</string>
@@ -119,4 +120,31 @@
 
     <string name="rankings_worldwide">You are ranked %1$d worldwide\n\nYour score is %2$.2f</string>
     <string name="rankings_no_score">You must complete at least one exercise before you can be ranked.</string>
+
+    <string name="achievment_exercise_done_title_one">First exercise</string>
+    <string name="achievment_exercise_done_title_multiple">Finish %d exercises</string>
+    <string name="achievment_exercise_done_description_one">Finish your first exercise successful</string>
+    <string name="achievment_exercise_done_description_multiple">Finish %d exercises successful</string>
+
+    <string name="achievment_darts_title">%d Darts</string>
+    <string name="achievment_darts_description">Throw a total of %d darts</string>
+
+    <string name="achievment_hundret_eighty_title_first">First 180</string>
+    <string name="achievment_hundret_eighty_title_multiple">%d times 180</string>
+    <string name="achievment_hundret_eighty_description_first">Throw your first 180 in XOI or Highscore exercises</string>
+    <string name="achievment_hundret_eighty_description_multiple">Throw %d times a 180 in XOI or Highscore exercises</string>
+
+    <string name="achievment_hundret_fourty_title">%d times 140+</string>
+    <string name="achievment_hundret_fourty_description">Throw %d times a 140+ in XOI or Highscore exercises</string>
+
+    <string name="achievment_hundret_title">%d times 100+</string>
+    <string name="achievment_hundret_description">Throw %d times a 100+ in XOI or Highscore exercises</string>
+
+    <string name="achievment_sixty_title">%d times 60+</string>
+    <string name="achievment_sixty_description">Throw %d times a 60+ in XOI or Highscore exercises</string>
+
+    <string name="achievment_open_day_title">%d Days</string>
+    <string name="achievment_open_day_description">Open the app %d days in a row</string>
+
+    <string name="achievement_unlocked">New Achievement unlocked</string>
 </resources>

@@ -17,7 +17,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:textAlignment="center"
-            android:visibility="gone"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:text="You are in 10th place worldwide"/>
@@ -37,6 +36,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_id"></com.google.android.gms.ads.AdView>
 </RelativeLayout>
