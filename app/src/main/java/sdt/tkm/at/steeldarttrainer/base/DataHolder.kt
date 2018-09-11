@@ -155,7 +155,7 @@ class DataHolder(val context: Context = Application().baseContext) {
     if (preferences != null) {
       val json = preferences.getString("atc-training", null)
       if (json != null) {
-        val turnsType = object : TypeToken<List<XXTraining>>() {}.type
+        val turnsType = object : TypeToken<List<AroundTheClockTraining>>() {}.type
         return Gson().fromJson<ArrayList<AroundTheClockTraining>>(json, turnsType)
       }
     }
@@ -184,7 +184,7 @@ class DataHolder(val context: Context = Application().baseContext) {
     if (preferences != null) {
       val json = preferences.getString("random-training", null)
       if (json != null) {
-        val turnsType = object : TypeToken<List<XXTraining>>() {}.type
+        val turnsType = object : TypeToken<List<RandomTraining>>() {}.type
         return Gson().fromJson<ArrayList<RandomTraining>>(json, turnsType)
       }
     }
