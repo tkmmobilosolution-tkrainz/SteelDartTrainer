@@ -46,14 +46,14 @@ class HighscoreStatsFragment : Fragment() {
 
     if (hsTrainingsList.isEmpty()) {
       layout.visibility = View.GONE
-      /** if (activity is StatisticsActivity) {
-      val currentActivity = activity as StatisticsActivity
+      /** if (activity is StatisticsFragment) {
+      val currentActivity = activity as StatisticsFragment
       currentActivity.shouldShowInfoButton(false)
       }*/
     } else {
       statsinfoTextView.visibility = View.GONE
-      /**if (activity is StatisticsActivity) {
-      val currentActivity = activity as StatisticsActivity
+      /**if (activity is StatisticsFragment) {
+      val currentActivity = activity as StatisticsFragment
       currentActivity.shouldShowInfoButton(true)
       }*/
     }

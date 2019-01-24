@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import com.crashlytics.android.Crashlytics
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import io.fabric.sdk.android.Fabric
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.base.LogEventsHelper
 import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
@@ -25,13 +27,14 @@ import sdt.tkm.at.steeldarttrainer.base.OverviewActivity
  * @author Thomas Krainz-Mischitz (Level1 GmbH)
  * @version %I%, %G%
  */
-class StatisticsActivity : Fragment() {
+class StatisticsFragment : Fragment() {
   private lateinit var bannerAdView: AdView
   private val className = "statistics"
   private lateinit var infoButton: ImageButton
   private lateinit var oververviewActivity: OverviewActivity
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
+
     oververviewActivity = activity as OverviewActivity
     val view = inflater.inflate(R.layout.statistics_activity, container, false)
     var currentStatistics: ShownStatistics = ShownStatistics.XOI

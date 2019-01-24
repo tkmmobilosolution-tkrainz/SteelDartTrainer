@@ -19,8 +19,12 @@ import android.widget.Button
 import android.widget.TextView
 import sdt.tkm.at.steeldarttrainer.R
 import sdt.tkm.at.steeldarttrainer.social.*
-import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
+import sdt.tkm.at.steeldarttrainer.statistics.StatisticsFragment
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 /**
  * [Add class description here]
@@ -42,6 +46,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    Fabric.with(this, Crashlytics())
     requestedOrientation = if (resources.getBoolean(R.bool.orientation_portrait)) ActivityInfo.SCREEN_ORIENTATION_PORTRAIT else ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
     setContentView(R.layout.nav_drawer)
@@ -186,7 +191,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         logHelper.logMenuClick("exercises")
       }
       R.id.nav_statistics -> {
-        replaceFragment(StatisticsActivity())
+        replaceFragment(StatisticsFragment())
         logHelper.logMenuClick("statistics")
       }
       R.id.nav_rankings -> {
@@ -217,7 +222,7 @@ class OverviewActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     if (fragment is TrainingsOverViewFragment) {
       transaction.addToBackStack("Training")
       transaction.replace(R.id.content_frame, fragment)
-    } else if (fragment is StatisticsActivity) {
+    } else if (fragment is StatisticsFragment) {
       transaction.replace(R.id.content_frame, fragment, "Statistics")
     } else if (fragment is AchievementsFragment) {
       transaction.addToBackStack("Achievement")

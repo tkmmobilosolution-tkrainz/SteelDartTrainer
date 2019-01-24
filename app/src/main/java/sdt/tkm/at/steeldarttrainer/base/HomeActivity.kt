@@ -2,7 +2,6 @@ package sdt.tkm.at.steeldarttrainer.base
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.google.android.gms.ads.AdListener
@@ -10,7 +9,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import sdt.tkm.at.steeldarttrainer.R
-import sdt.tkm.at.steeldarttrainer.statistics.StatisticsActivity
 import sdt.tkm.at.steeldarttrainer.training.TrainingsOverViewFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -33,8 +31,6 @@ class HomeActivity : AppCompatActivity() {
     }
     val showStats = findViewById<Button>(R.id.stats)
     showStats.setOnClickListener {
-      val intent = Intent(this, StatisticsActivity::class.java)
-      startActivity(intent)
       LogEventsHelper(this).logButtonTap("statistics")
     }
   }

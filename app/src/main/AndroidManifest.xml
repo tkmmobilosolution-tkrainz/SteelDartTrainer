@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sdt.tkm.at.steeldarttrainer">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,4 +25,8 @@
         <service android:name=".models.FirebaseTokenReceiver"/>
     </application>
 
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="ec7aba741163b4664b11b641c4c8b159784c9450"
+        />
 </manifest>
